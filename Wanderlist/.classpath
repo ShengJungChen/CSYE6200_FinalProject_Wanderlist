@@ -16,8 +16,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/anitachen/Downloads/bson-4.9.0.jar"/>
-	<classpathentry kind="lib" path="/Users/anitachen/Downloads/mongodb-driver-core-4.9.0.jar"/>
-	<classpathentry kind="lib" path="/Users/anitachen/Downloads/mongodb-driver-sync-4.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ariel/git/CSYE6200_FinalProject_Wanderlist/bson-4.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ariel/git/CSYE6200_FinalProject_Wanderlist/mongodb-driver-core-4.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ariel/git/CSYE6200_FinalProject_Wanderlist/mongodb-driver-sync-4.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
