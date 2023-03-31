@@ -1,65 +1,42 @@
 package model.Trip;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class Day {
-	private Trip trip;
-	private Date date;
-	private Integer weekDay;
+	private DayList days;
+	private Calendar date;
+	private String weekDay;
 	private ArrayList<Item> schedule;
-	
-	//constructor
-	public Day(Trip trip, Date date, Integer weekDay, ArrayList<Item> schedule) {
-		super();
-		this.trip = trip;
+
+	// constructor
+	public Day(DayList days, Calendar date) {
+		this.days = days;
 		this.date = date;
-		this.weekDay = weekDay;
-		this.schedule = schedule;
-	}
-	
-	
-
-	//getter and setter
-	public Trip getTrip() {
-		return trip;
+		this.weekDay = date.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+		this.schedule = new ArrayList<Item>();
 	}
 
-	public void setTrip(Trip trip) {
-		this.trip = trip;
+	// getter and setter
+	public DayList getDays() {
+		return days;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Integer getWeekDay() {
+	public String getWeekDay() {
 		return weekDay;
-	}
-
-	public void setWeekDay(Integer weekDay) {
-		this.weekDay = weekDay;
 	}
 
 	public ArrayList<Item> getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(ArrayList<Item> schedule) {
-		this.schedule = schedule;
-	}
-	
+	// remove the item from the day
 
-	//remove the item from the day
-	
-	//view item
-	
-	
-	
-	
+	// view item
 
 }
