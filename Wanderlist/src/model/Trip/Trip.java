@@ -52,20 +52,6 @@ public class Trip {
 		this.startDate = start;
 	}
 
-	public Calendar getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(int year, int month, int date) {
-
-		Calendar end = Calendar.getInstance();
-		end.set(year, month - 1, date, 0, 0, 0);
-
-		end.set(Calendar.MILLISECOND, 0);
-
-		this.endDate = end;
-	}
-
 	public String getCountry() {
 		return country;
 	}
@@ -94,6 +80,20 @@ public class Trip {
 		this.note = note;
 	}
 
+	public Calendar getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(int year, int month, int date) {
+
+		Calendar end = Calendar.getInstance();
+		end.set(year, month - 1, date, 0, 0, 0);
+
+		end.set(Calendar.MILLISECOND, 0);
+
+		this.endDate = end;
+	}
+
 	public Wishlist getWishlist() {
 		return wishlist;
 	}
@@ -118,12 +118,18 @@ public class Trip {
 //
 //	}
 
-	// delete a trip
+	// delete the trip
 	public void deleteTrip() {
 
 	}
 
 	// update the date
+	public void updateDate(int startYear, int startMonth, int startDate, int endYear, int endMonth, int endDate) {
+		setStartDate(startYear, startMonth, startDate);
+		setEndDate(endYear, endMonth, endDate);
+		days.createDays();
+
+	}
 
 	// calculate number of days
 	public Integer calculateNubmerOfDays() {
@@ -137,10 +143,14 @@ public class Trip {
 	}
 
 	// add item to wishlist
+	public void addItemToWishlist(Item.Type type, String itemName) {
+		wishlist.addItem(type, itemName);
+	}
 
 	// delete item from wishlist
-
-	// add item from wishlist
+	public void removeItemFromWishlist(Item item) {
+		wishlist.removeItem(item);
+	}
 
 	// view item
 
