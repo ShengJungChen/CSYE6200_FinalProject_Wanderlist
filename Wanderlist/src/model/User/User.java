@@ -12,7 +12,7 @@ public class User {
 		super();
 		this.email = email;
 		this.password = password;
-		this.Trips = new TripDirectory();
+		this.Trips = new TripDirectory(this);
 	}
 
 	// getter and setter

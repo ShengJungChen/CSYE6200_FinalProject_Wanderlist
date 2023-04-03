@@ -10,7 +10,8 @@ public class TripDirectory {
 	private ArrayList<Trip> trips;
 
 	// constructor
-	public TripDirectory() {
+	public TripDirectory(User user) {
+		this.user = user;
 		this.trips = new ArrayList<Trip>();
 	}
 

@@ -9,14 +9,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.Trip.Day;
+import model.Trip.Trip;
+import model.User.User;
 
 public class Controller_Trip implements Initializable {
 
 	@FXML
 	private TextArea InputNote;
+
+	@FXML
+	private Button btnAdd;
 
 	@FXML
 	private ComboBox<Integer> cmbEndDate;
@@ -25,10 +34,16 @@ public class Controller_Trip implements Initializable {
 	private ComboBox<Integer> cmbEndMonth;
 
 	@FXML
+	private ComboBox<Integer> cmbEndYear;
+
+	@FXML
 	private ComboBox<Integer> cmbStartDate;
 
 	@FXML
 	private ComboBox<Integer> cmbStartMonth;
+
+	@FXML
+	private ComboBox<Integer> cmbStartYear;
 
 	@FXML
 	private TextField inputCity;
@@ -37,44 +52,109 @@ public class Controller_Trip implements Initializable {
 	private TextField inputCountry;
 
 	@FXML
-	private TextField inputEndYear;
-
-	@FXML
-	private TextField inputStartYear;
-
-	@FXML
 	private TextField inputTripName;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		// TODO Auto-generated method stub
+
+		// populate year cmb
+		Calendar calendar = Calendar.getInstance();
+		int thisYear = calendar.get(Calendar.YEAR);
+
+		ObservableList<Integer> years = FXCollections.observableArrayList();
+		for (int i = thisYear - 5; i <= thisYear + 25; i++) {
+			years.add(i);
+		}
+
+		cmbStartYear.setItems(years);
+		cmbEndYear.setItems(years);
+
+		// populate month cmb
 		cmbStartMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 		cmbEndMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 	}
 
 	@FXML
 	public void startMonthSet(ActionEvent event) {
+		calculateDatesAndPopulateCmb(cmbStartYear, cmbStartMonth, cmbStartDate);
+	}
 
-		if (!inputStartYear.getText().isBlank()) {
+	@FXML
+	public void endMonthSet(ActionEvent event) {
+		calculateDatesAndPopulateCmb(cmbEndYear, cmbEndMonth, cmbEndDate);
+	}
 
-			int year = Integer.valueOf(inputStartYear.getText());
-			int month = cmbStartMonth.getValue() - 1;
+	public void calculateDatesAndPopulateCmb(ComboBox<Integer> yearCmb, ComboBox<Integer> monthCmb,
+			ComboBox<Integer> cmb) {
 
-			Calendar start = Calendar.getInstance();
+		int year = monthCmb.getValue();
+		int month = monthCmb.getValue() - 1;
 
-			start.set(year, month, 1);
-			int totalDays = start.getActualMaximum(Calendar.DAY_OF_MONTH);
+		Calendar cal = Calendar.getInstance();
 
-			ObservableList<Integer> dates = FXCollections.observableArrayList();
-			for (int i = 1; i <= totalDays; i++) {
-				dates.add(i);
+		cal.set(year, month, 1);
+		int totalDays = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+		ObservableList<Integer> dates = FXCollections.observableArrayList();
+		for (int i = 1; i <= totalDays; i++) {
+			dates.add(i);
+		}
+
+		cmb.setItems(dates);
+	}
+
+	@FXML
+	public void addTrip() {
+		// TEST FAKE USER, NEED TO CHANGE LATER
+		User user = new User("email", "pw");
+
+		// NEED TO VALIDATE FIELDS
+		String tripName = inputTripName.getText();
+		String country = inputCountry.getText();
+		String city = inputCity.getText();
+		String note = InputNote.getText();
+
+		int startYear = cmbStartYear.getValue();
+		int startMonth = cmbStartMonth.getValue();
+		int startDate = cmbStartDate.getValue();
+		int endYear = cmbEndYear.getValue();
+		int endMonth = cmbEndMonth.getValue();
+		int endDate = cmbEndDate.getValue();
+
+		// check if start date is before end date
+		Calendar start = Calendar.getInstance();
+
+		start.set(startYear, startMonth - 1, startDate, 0, 0, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		Calendar end = Calendar.getInstance();
+
+		end.set(endYear, endMonth - 1, endDate, 0, 0, 0);
+		end.set(Calendar.MILLISECOND, 0);
+
+		if (start.before(end) || start.equals(end)) {
+
+			user.getTrips().addNewTrip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
+					endDate, note);
+
+			// TEST PRINT
+			user.getTrips().addNewTrip("NYC trip", "USA", "NYC", 2023, 3, 31, 2023, 4, 2, null);
+			Trip trip = user.getTrips().getTrips().get(0);
+
+			for (Day d : trip.getDays().getDays()) {
+				System.out.println(d.getDate().getTime());
 			}
 
-			cmbStartDate.setItems(dates);
+			// display create message
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("SUCCESS");
+			alert.setHeaderText("New Trip Created");
+			alert.setContentText("Head back to dashboard to view all your trips.");
+			alert.showAndWait();
+
 		} else {
-			// ALERT FOR EMPTY YEAR INPUT
+			System.out.println("NO CREATE");
 		}
 
 	}
-
 }
