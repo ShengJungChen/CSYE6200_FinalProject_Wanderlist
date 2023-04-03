@@ -2,21 +2,18 @@ package model.Trip;
 
 import java.util.ArrayList;
 
-public class Buy  {
+public class Buy extends Item {
 	private ArrayList<Integer> operatingDays;
 	private Integer startHour;
 	private Integer endHour;
 	private ArrayList<String> shoppingList;
-	
-	//constructor
-	public Buy(ArrayList<Integer> operatingDays, Integer startHour, Integer endHour, ArrayList<String> shoppingList) {
-		this.operatingDays = operatingDays;
-		this.startHour = startHour;
-		this.endHour = endHour;
-		this.shoppingList = shoppingList;
+
+	// constructor
+	public Buy(Type type, Trip trip, String itemName) {
+		super(type, trip, itemName);
 	}
-	
-	//getter and setter
+
+	// getter and setter
 
 	public ArrayList<Integer> getOperatingDays() {
 		return operatingDays;
@@ -50,19 +47,22 @@ public class Buy  {
 		this.shoppingList = shoppingList;
 	}
 
-	
-	
-	//add shopping item
-	public ArrayList<String> addShoppingItem(Item item,ArrayList<String> shoppingList){
-		
-		return shoppingList;
-	}
-	
+	// add shopping item
+	public ArrayList<String> addShoppingItem(Item item, ArrayList<String> shoppingList) {
 
-	//delete shopping item
-	public ArrayList<String> deleteShoppingItem(Item item,ArrayList<String> shoppingList){
-		
 		return shoppingList;
 	}
-	
+
+	// delete shopping item
+	public ArrayList<String> deleteShoppingItem(Item item, ArrayList<String> shoppingList) {
+
+		return shoppingList;
+	}
+
+	@Override
+	public void updateItem() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -1,15 +1,14 @@
 package model.Trip;
 
-public class See {
+public class See extends Item {
 	private String trafficMean;
 
-	//constructor
-	public See(String trafficMean) {
-		super();
-		this.trafficMean = trafficMean;
+	// constructor
+	public See(Type type, Trip trip, String itemName) {
+		super(type, trip, itemName);
 	}
 
-	//getter and setter
+	// getter and setter
 	public String getTrafficMean() {
 		return trafficMean;
 	}
@@ -17,7 +16,11 @@ public class See {
 	public void setTrafficMean(String trafficMean) {
 		this.trafficMean = trafficMean;
 	}
-	
-	
+
+	@Override
+	public void updateItem() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

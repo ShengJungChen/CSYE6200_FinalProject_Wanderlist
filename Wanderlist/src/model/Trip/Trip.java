@@ -1,181 +1,157 @@
 package model.Trip;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import model.User.User;
+import java.util.Calendar;
 
 public class Trip {
-	private User user;
 	private String tripName;
-	private Date startDate;
-	private Date endDate;
+	private Calendar startDate;
+	private Calendar endDate;
 	private String country;
 	private String city;
-	private User people;
+	private People people;
 	private String note;
-	private ArrayList<Item> wishlist;
-	private ArrayList<Day> days;
-	
-	
-	//constructor
-	public Trip(User user, String tripName, Date startDate, Date endDate, String country, String city, User people,
-			String note, ArrayList<Item> wishlist, ArrayList<Day> days) {
-		super();
-		this.user = user;
+	private Wishlist wishlist;
+	private DayList days;
+
+	// constructor
+	public Trip(String tripName, String country, String city, int startYear, int startMonth, int startDate, int endYear,
+			int endMonth, int endDate) {
+
 		this.tripName = tripName;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.country = country;
 		this.city = city;
-		this.people = people;
-		this.wishlist = new ArrayList<Item>();
-		//this.days = days;
+
+		setStartDate(startYear, startMonth, startDate);
+		setEndDate(endYear, endMonth, endDate);
+
+		this.wishlist = new Wishlist(this);
+		this.days = new DayList(this);
 	}
 
-	
-	//getter and setter
-
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	// getter and setter
 
 	public String getTripName() {
 		return tripName;
 	}
 
-
 	public void setTripName(String tripName) {
 		this.tripName = tripName;
 	}
 
-
-	public Date getStartDate() {
+	public Calendar getStartDate() {
 		return startDate;
 	}
 
+	public void setStartDate(int year, int month, int date) {
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		Calendar start = Calendar.getInstance();
+
+		start.set(year, month - 1, date, 0, 0, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		this.startDate = start;
 	}
-
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 
 	public String getCountry() {
 		return country;
 	}
 
-
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
 
 	public String getCity() {
 		return city;
 	}
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-
-	public User getPeople() {
+	public People getPeople() {
 		return people;
 	}
-
-
-	public void setPeople(User people) {
-		this.people = people;
-	}
-
 
 	public String getNote() {
 		return note;
 	}
 
-
 	public void setNote(String note) {
 		this.note = note;
 	}
 
+	public Calendar getEndDate() {
+		return endDate;
+	}
 
-	public ArrayList<Item> getWishlist() {
+	public void setEndDate(int year, int month, int date) {
+
+		Calendar end = Calendar.getInstance();
+		end.set(year, month - 1, date, 0, 0, 0);
+
+		end.set(Calendar.MILLISECOND, 0);
+
+		this.endDate = end;
+	}
+
+	public Wishlist getWishlist() {
 		return wishlist;
 	}
 
-
-	public void setWishlist(ArrayList<Item> wishlist) {
-		this.wishlist = wishlist;
-	}
-
-
-	public ArrayList<Day> getDays() {
+	public DayList getDays() {
 		return days;
 	}
 
+	// update trip
+//	public void updateTrip(User user, String tripName, Calendar startDate, Calendar endDate, String country,
+//			String city, User people, String note, ArrayList<Item> wishlist, ArrayList<Day> days) {
+//		setUser(user);
+//		setTripName(tripName);
+//		setStartDate(startDate);
+//		setEndDate(endDate);
+//		setCountry(country);
+//		setCity(city);
+//		setPeople(people);
+//		setNote(note);
+//		setWishlist(wishlist);
+//		setDays(days);
+//
+//	}
 
-	public void setDays(ArrayList<Day> days) {
-		this.days = days;
-	}
-	
-	//update trip
-	public void updateTrip(User user, String tripName, Date startDate, Date endDate, String country, String city, User people,
-			String note, ArrayList<Item> wishlist, ArrayList<Day> days) {
-		setUser(user);
-		setTripName(tripName);
-		setStartDate(startDate);
-		setEndDate(endDate);
-		setCountry(country);
-		setCity(city);
-		setPeople(people);
-		setNote(note);
-		setWishlist(wishlist);
-		setDays(days);
-		
-		
-	}
-	
-	//delete a trip
+	// delete the trip
 	public void deleteTrip() {
-		
-		
+
 	}
-	
-	
-	//update the date
-	
-	
-	//calculate number of days
-	
-	
-	
-	//add item to wishlist
-	
-	
-	//delete item from wishlist
-	
-	//add item from wishlist
-	
-	//view item
-	
-	
-	
+
+	// update the date
+	public void updateDate(int startYear, int startMonth, int startDate, int endYear, int endMonth, int endDate) {
+		setStartDate(startYear, startMonth, startDate);
+		setEndDate(endYear, endMonth, endDate);
+		days.createDays();
+
+	}
+
+	// calculate number of days
+	public Integer calculateNubmerOfDays() {
+
+		long difference = this.getEndDate().getTimeInMillis() - this.getStartDate().getTimeInMillis();
+		double daysBetween = difference / (1000 * 60 * 60 * 24);
+
+		int num = (int) daysBetween + 1;
+
+		return num;
+	}
+
+	// add item to wishlist
+	public void addItemToWishlist(Item.Type type, String itemName) {
+		wishlist.addItem(type, itemName);
+	}
+
+	// delete item from wishlist
+	public void removeItemFromWishlist(Item item) {
+//		wishlist.removeItem(item);
+	}
+
+	// view item
 
 }

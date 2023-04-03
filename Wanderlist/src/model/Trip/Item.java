@@ -1,30 +1,32 @@
 package model.Trip;
 
-public abstract  class Item {
+public abstract class Item {
+
+	private Type type;
+
+	public enum Type {
+
+		Eat, Play, See, Buy
+
+	}
+
 	private Trip trip;
 	private String itemName;
 	private String url;
 	private String address;
 	private String itemNote;
-	
-	//constructor
-	public Item(Trip trip, String itemName, String url, String address, String itemNote) {
-		super();
+
+	// constructor
+	public Item(Type type, Trip trip, String itemName) {
+		this.type = type;
 		this.trip = trip;
 		this.itemName = itemName;
-		this.url = url;
-		this.address = address;
-		this.itemNote = itemNote;
 	}
-	
-	//getter and setter
+
+	// getter and setter
 
 	public Trip getTrip() {
 		return trip;
-	}
-
-	public void setTrip(Trip trip) {
-		this.trip = trip;
 	}
 
 	public String getItemName() {
@@ -43,12 +45,12 @@ public abstract  class Item {
 		this.url = url;
 	}
 
-	public String getQddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setQddress(String qddress) {
-		this.address = qddress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getItemNote() {
@@ -58,9 +60,8 @@ public abstract  class Item {
 	public void setItemNote(String itemNote) {
 		this.itemNote = itemNote;
 	}
-	
-	//update item
+
+	// update item
 	public abstract void updateItem();
-	
 
 }

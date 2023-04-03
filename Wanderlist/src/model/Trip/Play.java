@@ -2,24 +2,19 @@ package model.Trip;
 
 import java.util.ArrayList;
 
-public class Play {
+public class Play extends Item {
 	private ArrayList<Integer> operatingDays;
 	private Integer startHour;
 	private Integer endHour;
 	private boolean ticket;
 	private Double price;
-	
-	//constructor
-	public Play(ArrayList<Integer> operatingDays, Integer startHour, Integer endHour, boolean ticket, Double price) {
-		super();
-		this.operatingDays = operatingDays;
-		this.startHour = startHour;
-		this.endHour = endHour;
-		this.ticket = ticket;
-		this.price = price;
+
+	// constructor
+	public Play(Type type, Trip trip, String itemName) {
+		super(type, trip, itemName);
 	}
 
-	//getter and setter
+	// getter and setter
 	public ArrayList<Integer> getOperatingDays() {
 		return operatingDays;
 	}
@@ -59,6 +54,11 @@ public class Play {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-			
+
+	@Override
+	public void updateItem() {
+		// TODO Auto-generated method stub
+
+	}
 
 }
