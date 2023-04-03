@@ -149,7 +149,7 @@ public class Trip {
 
 	// delete item from wishlist
 	public void removeItemFromWishlist(Item item) {
-		wishlist.removeItem(item);
+//		wishlist.removeItem(item);
 	}
 
 	// view item
