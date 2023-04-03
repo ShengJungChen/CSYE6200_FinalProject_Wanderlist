@@ -114,47 +114,60 @@ public class Controller_Trip implements Initializable {
 		String city = inputCity.getText();
 		String note = InputNote.getText();
 
-		int startYear = cmbStartYear.getValue();
-		int startMonth = cmbStartMonth.getValue();
-		int startDate = cmbStartDate.getValue();
-		int endYear = cmbEndYear.getValue();
-		int endMonth = cmbEndMonth.getValue();
-		int endDate = cmbEndDate.getValue();
-
-		// check if start date is before end date
-		Calendar start = Calendar.getInstance();
-
-		start.set(startYear, startMonth - 1, startDate, 0, 0, 0);
-		start.set(Calendar.MILLISECOND, 0);
-
-		Calendar end = Calendar.getInstance();
-
-		end.set(endYear, endMonth - 1, endDate, 0, 0, 0);
-		end.set(Calendar.MILLISECOND, 0);
-
-		if (start.before(end) || start.equals(end)) {
-
-			user.getTrips().addNewTrip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
-					endDate, note);
-
-			// TEST PRINT
-			user.getTrips().addNewTrip("NYC trip", "USA", "NYC", 2023, 3, 31, 2023, 4, 2, null);
-			Trip trip = user.getTrips().getTrips().get(0);
-
-			for (Day d : trip.getDays().getDays()) {
-				System.out.println(d.getDate().getTime());
-			}
-
-			// display create message
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("SUCCESS");
-			alert.setHeaderText("New Trip Created");
-			alert.setContentText("Head back to dashboard to view all your trips.");
+		// check if dates has input
+		if (cmbStartYear.getSelectionModel().isEmpty() || cmbStartMonth.getSelectionModel().isEmpty()
+				|| cmbStartDate.getSelectionModel().isEmpty() || cmbEndYear.getSelectionModel().isEmpty()
+				|| cmbEndMonth.getSelectionModel().isEmpty() || cmbEndDate.getSelectionModel().isEmpty()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("INVALID");
+			alert.setHeaderText("Invalid Trip Date");
+			alert.setContentText("Trip date cannot be empty.");
 			alert.showAndWait();
-
 		} else {
-			System.out.println("NO CREATE");
-		}
+			int startYear = cmbStartYear.getValue();
+			int startMonth = cmbStartMonth.getValue();
+			int startDate = cmbStartDate.getValue();
+			int endYear = cmbEndYear.getValue();
+			int endMonth = cmbEndMonth.getValue();
+			int endDate = cmbEndDate.getValue();
 
+			Calendar start = Calendar.getInstance();
+
+			start.set(startYear, startMonth - 1, startDate, 0, 0, 0);
+			start.set(Calendar.MILLISECOND, 0);
+
+			Calendar end = Calendar.getInstance();
+
+			end.set(endYear, endMonth - 1, endDate, 0, 0, 0);
+			end.set(Calendar.MILLISECOND, 0);
+
+			// check if start date is before end date
+			if (start.after(end) || start.equals(end)) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("INVALID");
+				alert.setHeaderText("Invalid Trip Value");
+				alert.setContentText("Trip start time has to be before end time.");
+				alert.showAndWait();
+
+			} else {
+				user.getTrips().addNewTrip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
+						endDate, note);
+
+				// TEST PRINT
+				Trip trip = user.getTrips().getTrips().get(0);
+
+				System.out.println(trip.getTripName() + trip.getCountry() + trip.getCity() + trip.getNote());
+				for (Day d : trip.getDays().getDays()) {
+					System.out.println(d.getDate().getTime());
+				}
+
+				// display create message
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("SUCCESS");
+				alert.setHeaderText("New Trip Created");
+				alert.setContentText("Head back to dashboard to view all your trips.");
+				alert.showAndWait();
+			}
+		}
 	}
 }
