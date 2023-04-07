@@ -1,4 +1,4 @@
-package application;
+package application.Trip;
 
 import java.net.URL;
 import java.util.Calendar;
@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -19,13 +18,10 @@ import model.Trip.Day;
 import model.Trip.Trip;
 import model.User.User;
 
-public class Controller_Trip implements Initializable {
+public class EditTripController implements Initializable {
 
 	@FXML
 	private TextArea InputNote;
-
-	@FXML
-	private Button btnAdd;
 
 	@FXML
 	private ComboBox<Integer> cmbEndDate;
@@ -55,7 +51,8 @@ public class Controller_Trip implements Initializable {
 	private TextField inputTripName;
 
 	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
 
 		// populate year cmb
 		Calendar calendar = Calendar.getInstance();
@@ -72,16 +69,46 @@ public class Controller_Trip implements Initializable {
 		// populate month cmb
 		cmbStartMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 		cmbEndMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
+
 	}
 
 	@FXML
-	public void startMonthSet(ActionEvent event) {
-		calculateDatesAndPopulateCmb(cmbStartYear, cmbStartMonth, cmbStartDate);
+	void startMonthSet(ActionEvent event) {
+
+		if (cmbStartYear.getValue() == null) {
+			event.consume();
+		} else {
+			calculateDatesAndPopulateCmb(cmbStartYear, cmbStartMonth, cmbStartDate);
+		}
 	}
 
 	@FXML
-	public void endMonthSet(ActionEvent event) {
-		calculateDatesAndPopulateCmb(cmbEndYear, cmbEndMonth, cmbEndDate);
+	void endMonthSet(ActionEvent event) {
+		if (cmbEndYear.getValue() == null) {
+			event.consume();
+		} else {
+			calculateDatesAndPopulateCmb(cmbEndYear, cmbEndMonth, cmbEndDate);
+		}
+	}
+
+	@FXML
+	void startYearSet(ActionEvent event) {
+
+		if (cmbStartMonth.getValue() == null) {
+			event.consume();
+		} else {
+			calculateDatesAndPopulateCmb(cmbStartYear, cmbStartMonth, cmbStartDate);
+		}
+	}
+
+	@FXML
+	void endYearSet(ActionEvent event) {
+
+		if (cmbEndMonth.getValue() == null) {
+			event.consume();
+		} else {
+			calculateDatesAndPopulateCmb(cmbEndYear, cmbEndMonth, cmbEndDate);
+		}
 	}
 
 	public void calculateDatesAndPopulateCmb(ComboBox<Integer> yearCmb, ComboBox<Integer> monthCmb,
@@ -103,8 +130,12 @@ public class Controller_Trip implements Initializable {
 		cmb.setItems(dates);
 	}
 
-	@FXML
-	public void addTrip() {
+	public void saveUpdate() {
+		// GET CURRENT INFO AND UPDATE TRIP OBJECT
+		System.out.println("SAVED!");
+	}
+
+	public void addNew() {
 		// TEST FAKE USER, NEED TO CHANGE LATER
 		User user = new User("email", "pw");
 
@@ -167,7 +198,10 @@ public class Controller_Trip implements Initializable {
 				alert.setHeaderText("New Trip Created");
 				alert.setContentText("Head back to dashboard to view all your trips.");
 				alert.showAndWait();
+
+				// GO BACK TO DASHBOARD OR GO TO TRIP PAGE
 			}
 		}
 	}
+
 }

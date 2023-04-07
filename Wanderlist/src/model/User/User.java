@@ -5,14 +5,13 @@ import model.Trip.TripDirectory;
 public class User {
 	private String email;
 	private String password;
-	private TripDirectory Trips;
+	private TripDirectory trips;
 
 	// constructor
 	public User(String email, String password) {
-		super();
 		this.email = email;
 		this.password = password;
-		this.Trips = new TripDirectory(this);
+		this.trips = new TripDirectory(this);
 	}
 
 	// getter and setter
@@ -33,10 +32,11 @@ public class User {
 	}
 
 	public TripDirectory getTrips() {
-		return Trips;
+		return trips;
 	}
 
-	public void setTrips(TripDirectory Trips) {
-		this.Trips = Trips;
+	public void setTrips(TripDirectory trips) {
+		this.trips = trips;
 	}
+
 }
