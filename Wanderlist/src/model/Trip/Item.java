@@ -29,6 +29,10 @@ public abstract class Item {
 		return trip;
 	}
 
+	public String getType() {
+		return type.name();
+	}
+
 	public String getItemName() {
 		return itemName;
 	}
