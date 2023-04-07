@@ -15,11 +15,12 @@ public class Trip {
 
 	// constructor
 	public Trip(String tripName, String country, String city, int startYear, int startMonth, int startDate, int endYear,
-			int endMonth, int endDate) {
+			int endMonth, int endDate, String note) {
 
 		this.tripName = tripName;
 		this.country = country;
 		this.city = city;
+		this.note = note;
 
 		setStartDate(startYear, startMonth, startDate);
 		setEndDate(endYear, endMonth, endDate);
@@ -118,17 +119,11 @@ public class Trip {
 //
 //	}
 
-	// delete the trip
-	public void deleteTrip() {
-
-	}
-
 	// update the date
 	public void updateDate(int startYear, int startMonth, int startDate, int endYear, int endMonth, int endDate) {
 		setStartDate(startYear, startMonth, startDate);
 		setEndDate(endYear, endMonth, endDate);
 		days.createDays();
-
 	}
 
 	// calculate number of days
@@ -149,7 +144,7 @@ public class Trip {
 
 	// delete item from wishlist
 	public void removeItemFromWishlist(Item item) {
-//		wishlist.removeItem(item);
+		wishlist.removeItemFromWishlist(item);
 	}
 
 	// view item
