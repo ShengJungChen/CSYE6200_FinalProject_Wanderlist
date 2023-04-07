@@ -42,7 +42,6 @@ public class Wishlist {
 			this.wishlist.add(seeItem);
 			break;
 		}
-
 	}
 
 	public void removeItemFromWishlist(Item item) {
