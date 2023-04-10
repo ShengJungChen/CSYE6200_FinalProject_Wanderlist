@@ -10,7 +10,7 @@ public class UserDirectory {
 		this.users = new ArrayList<User>();
 	}
 
-	// getter
+	// getter users
 	public ArrayList<User> getUsers() {
 		return users;
 	}
@@ -20,7 +20,16 @@ public class UserDirectory {
 		User user = new User(email, password);
 		users.add(user);
 		return user;
+	}
 
+	// get user by email
+	public User getUserByEmail(String email) {
+		for (User user : users) {
+			if (user.getUserEmail().equals(email)) {
+				return user;
+			}
+		}
+		return null;
 	}
 
 }

@@ -1,4 +1,4 @@
-package application.item;
+package application.Item;
 
 import java.io.IOException;
 
@@ -23,7 +23,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ItemTypeController extends Application {
+public class ViewItemController extends Application {
+
+	// button
+	@FXML	private Button btn_back;
+	@FXML	private Button btn_edit;
+	@FXML	private Button btn_cancel;
+	@FXML	private Button btn_save;
 
 	// text
 	@FXML	private Label name;
@@ -34,10 +40,11 @@ public class ItemTypeController extends Application {
 
 	// pane
 	@FXML	private BorderPane rootPane;
+	@FXML   private VBox vBox;
 	@FXML	private Pane firstPane;
 	@FXML	private GridPane gridPane;
 	@FXML	private Pane secondPane;
-	
+
 	// type comboBox with 4 options
 	@FXML	private ComboBox<String> typeBox;
 	ObservableList<String> typeList = FXCollections.observableArrayList("Eat", "Buy", "Play", "See");
@@ -49,7 +56,7 @@ public class ItemTypeController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("AddNewItem_defaultPane.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ViewItemPage.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("WanderList");
 		primaryStage.setScene(scene);
@@ -85,6 +92,36 @@ public class ItemTypeController extends Application {
 			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_seePane.fxml"));
 			secondPane.getChildren().setAll(eatpane);
 		}
+	}
+
+	@FXML
+	private void backButtonAction(ActionEvent event) throws IOException {
+		// Code to navigate to the other FXML file
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("test_ariel.fxml"));
+		Parent root = loader.load();
+		Scene scene = btn_back.getScene();
+		scene.setRoot(root);
+	}
+
+	@FXML	private void editButtonAction(ActionEvent event) throws IOException {
+		btn_edit.setDisable(true);
+		btn_cancel.setDisable(false);
+		btn_save.setDisable(false);
+		Pane defaultPane = FXMLLoader.load(getClass().getResource("AddNewItem_defaultPane.fxml"));
+		vBox.getChildren().setAll(defaultPane);
+	}
+	
+	@FXML	private void cancelButtonAction(ActionEvent event) {
+		btn_edit.setDisable(false);
+		btn_cancel.setDisable(true);
+		btn_save.setDisable(true);
+		vBox.getChildren().setAll(firstPane,secondPane);
+	}
+	
+	@FXML	private void saveButtonAction(ActionEvent event) {
+		btn_edit.setDisable(false);
+		btn_cancel.setDisable(true);
+		btn_save.setDisable(true);
 	}
 
 }

@@ -93,7 +93,7 @@
       </ScrollPane>
    </center>
    <top>
-      <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Back">
+      <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="80.0" text="Back">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>

@@ -7,13 +7,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.System.ApplicationSystem;
+import model.User.User;
 
 public class DashboardScene extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("dashboardPage.fxml"));
+		ApplicationSystem database = ApplicationSystem.getInstance();
+		User user = database.getUserDirectory().getUserByEmail("anita@gmail.com");
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboardPage.fxml"));
+		Parent root = loader.load();
+		DashboardController dashboardController = loader.getController();
+		dashboardController.loadPage(user);
+
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Wanderlist");
 		primaryStage.setScene(scene);

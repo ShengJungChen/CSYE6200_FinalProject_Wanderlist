@@ -1,8 +1,6 @@
-package application;
+package model.System;
 
 import java.nio.file.Paths;
-
-import javax.swing.JOptionPane;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -10,14 +8,10 @@ import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.ta.TransparentPersistenceSupport;
 
-/**
- *
- * @author anitachen
- */
 public class DB4OUtils {
 
-	private static final String FILENAME = Paths.get("Database.db4o").toAbsolutePath().toString();// path to the data
-																									// store
+	// path to the data storage
+	private static final String FILENAME = Paths.get("Database.db4o").toAbsolutePath().toString();
 	private static DB4OUtils dB4OUtil;
 
 	public synchronized static DB4OUtils getInstance() {
@@ -42,13 +36,12 @@ public class DB4OUtils {
 			// Controls the depth/level of updation of Object
 			config.common().updateDepth(Integer.MAX_VALUE);
 			// Register your top most Class here
-			config.common().objectClass(ApplicationSystem.class).cascadeOnUpdate(true); // Change to the object you want
-																						// to save
+			config.common().objectClass(ApplicationSystem.class).cascadeOnUpdate(true);
+			// Change to the object you want to save
 			ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
 			return db;
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "NO CONNECTION", "WARNING", JOptionPane.WARNING_MESSAGE);
-//            System.out.print(ex.getMessage());
+			System.out.print(ex.getMessage());
 		}
 		return null;
 	}
@@ -63,12 +56,12 @@ public class DB4OUtils {
 	public ApplicationSystem retrieveSystem() {
 
 		ObjectContainer conn = createConnection();
-		ObjectSet<ApplicationSystem> systems = conn.query(ApplicationSystem.class); // Change to the object you want to
-																					// save
+		// Change to the object you want to save
+		ObjectSet<ApplicationSystem> systems = conn.query(ApplicationSystem.class);
 		ApplicationSystem system;
 		if (systems.size() == 0) {
+			// If there's no System in the record, create a new one
 			system = new ApplicationSystem();
-//			system = ConfigureASystem.configure(); // If there's no System in the record, create a new one
 		} else {
 			system = systems.get(systems.size() - 1);
 		}

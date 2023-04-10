@@ -21,20 +21,18 @@ public class DayList {
 
 		this.days.clear();
 
-		Calendar start = trip.getStartDate();
+		Calendar start = Calendar.getInstance();
+		start.setTime(trip.getStartDate());
 		int numberOfDays = trip.calculateNubmerOfDays();
 
 		Calendar current = (Calendar) start.clone();
 
 		for (int i = 0; i < numberOfDays; i++) {
-
 			Calendar clone = (Calendar) current.clone();
-			Day day = new Day(this, clone);
+			Day day = new Day(this, clone.getTime());
 			days.add(day);
 			current.add(Calendar.DATE, 1);
-
 		}
-
 	}
 
 	public Trip getTrip() {

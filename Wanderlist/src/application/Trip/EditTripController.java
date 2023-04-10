@@ -1,24 +1,31 @@
 package application.Trip;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import application.Dashboard.DashboardController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.Trip.Day;
-import model.Trip.Trip;
+import javafx.stage.Stage;
+import model.System.ApplicationSystem;
 import model.User.User;
 
 public class EditTripController implements Initializable {
+
+	ApplicationSystem database = ApplicationSystem.getInstance();
 
 	@FXML
 	private TextArea InputNote;
@@ -70,6 +77,10 @@ public class EditTripController implements Initializable {
 		cmbStartMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 		cmbEndMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 
+	}
+
+	public void setDatabase(ApplicationSystem database) {
+		this.database = database;
 	}
 
 	@FXML
@@ -135,9 +146,7 @@ public class EditTripController implements Initializable {
 		System.out.println("SAVED!");
 	}
 
-	public void addNew() {
-		// TEST FAKE USER, NEED TO CHANGE LATER
-		User user = new User("email", "pw");
+	public void addNew(ActionEvent event, User user) throws IOException {
 
 		// NEED TO VALIDATE FIELDS
 		String tripName = inputTripName.getText();
@@ -180,17 +189,11 @@ public class EditTripController implements Initializable {
 				alert.setContentText("Trip start time has to be before end time.");
 				alert.showAndWait();
 
+				event.consume();
+
 			} else {
 				user.getTrips().addNewTrip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
 						endDate, note);
-
-				// TEST PRINT
-				Trip trip = user.getTrips().getTrips().get(0);
-
-				System.out.println(trip.getTripName() + trip.getCountry() + trip.getCity() + trip.getNote());
-				for (Day d : trip.getDays().getDays()) {
-					System.out.println(d.getDate().getTime());
-				}
 
 				// display create message
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -199,9 +202,24 @@ public class EditTripController implements Initializable {
 				alert.setContentText("Head back to dashboard to view all your trips.");
 				alert.showAndWait();
 
-				// GO BACK TO DASHBOARD OR GO TO TRIP PAGE
+				// go back to dashboard
+				backToDashboard(user);
+
+				// save changes to database
+				database.store();
 			}
 		}
+	}
+
+	public void backToDashboard(User user) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Dashboard/dashboardPage.fxml"));
+
+		Parent root = loader.load();
+		DashboardController dashboardController = loader.getController();
+		dashboardController.loadPage(user);
+
+		Stage stage = (Stage) inputTripName.getScene().getWindow();
+		stage.setScene(new Scene(root));
 	}
 
 }
