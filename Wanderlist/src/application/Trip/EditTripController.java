@@ -3,6 +3,7 @@ package application.Trip;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Dashboard.DashboardController;
@@ -16,16 +17,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.System.ApplicationSystem;
+import model.Trip.Trip;
 import model.User.User;
 
 public class EditTripController implements Initializable {
 
 	ApplicationSystem database = ApplicationSystem.getInstance();
+
+	Trip trip;
 
 	@FXML
 	private TextArea InputNote;
@@ -66,12 +71,14 @@ public class EditTripController implements Initializable {
 		int thisYear = calendar.get(Calendar.YEAR);
 
 		ObservableList<Integer> years = FXCollections.observableArrayList();
-		for (int i = thisYear - 5; i <= thisYear + 25; i++) {
+		for (int i = 1900; i <= thisYear + 25; i++) {
 			years.add(i);
 		}
 
 		cmbStartYear.setItems(years);
+		cmbStartYear.getSelectionModel().select(thisYear - 1900);
 		cmbEndYear.setItems(years);
+		cmbEndYear.getSelectionModel().select(thisYear - 1900);
 
 		// populate month cmb
 		cmbStartMonth.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
@@ -79,8 +86,23 @@ public class EditTripController implements Initializable {
 
 	}
 
-	public void setDatabase(ApplicationSystem database) {
-		this.database = database;
+	public void setData(Trip trip) {
+		this.trip = trip;
+		inputTripName.setText(trip.getTripName());
+		inputCity.setText(trip.getCity());
+		inputCountry.setText(trip.getCountry());
+		InputNote.setText(trip.getNote());
+
+		int startYear = trip.getStartDate().getYear();
+		int startMonth = trip.getStartDate().getMonth();
+		int startDate = trip.getStartDate().getDate();
+
+		cmbStartYear.getSelectionModel().select(startYear);
+		cmbStartMonth.getSelectionModel().select(startMonth);
+		cmbStartDate.getSelectionModel().select(startDate);
+
+		// SETTING ORG DATA!!!!!!!
+
 	}
 
 	@FXML
@@ -141,57 +163,103 @@ public class EditTripController implements Initializable {
 		cmb.setItems(dates);
 	}
 
-	public void saveUpdate() {
+	public void saveUpdate(ActionEvent event, Trip trip) throws IOException {
 		// GET CURRENT INFO AND UPDATE TRIP OBJECT
-		System.out.println("SAVED!");
-	}
-
-	public void addNew(ActionEvent event, User user) throws IOException {
-
-		// NEED TO VALIDATE FIELDS
-		String tripName = inputTripName.getText();
-		String country = inputCountry.getText();
-		String city = inputCity.getText();
-		String note = InputNote.getText();
-
-		// check if dates has input
-		if (cmbStartYear.getSelectionModel().isEmpty() || cmbStartMonth.getSelectionModel().isEmpty()
-				|| cmbStartDate.getSelectionModel().isEmpty() || cmbEndYear.getSelectionModel().isEmpty()
-				|| cmbEndMonth.getSelectionModel().isEmpty() || cmbEndDate.getSelectionModel().isEmpty()) {
+		if (!validateInput()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("INVALID");
 			alert.setHeaderText("Invalid Trip Date");
 			alert.setContentText("Trip date cannot be empty.");
 			alert.showAndWait();
+			event.consume();
 		} else {
-			int startYear = cmbStartYear.getValue();
-			int startMonth = cmbStartMonth.getValue();
-			int startDate = cmbStartDate.getValue();
-			int endYear = cmbEndYear.getValue();
-			int endMonth = cmbEndMonth.getValue();
-			int endDate = cmbEndDate.getValue();
-
-			Calendar start = Calendar.getInstance();
-
-			start.set(startYear, startMonth - 1, startDate, 0, 0, 0);
-			start.set(Calendar.MILLISECOND, 0);
-
-			Calendar end = Calendar.getInstance();
-
-			end.set(endYear, endMonth - 1, endDate, 0, 0, 0);
-			end.set(Calendar.MILLISECOND, 0);
-
-			// check if start date is before end date
-			if (start.after(end) || start.equals(end)) {
+			if (!validateDate()) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("INVALID");
 				alert.setHeaderText("Invalid Trip Value");
 				alert.setContentText("Trip start time has to be before end time.");
 				alert.showAndWait();
-
 				event.consume();
-
 			} else {
+
+				String tripName = inputTripName.getText();
+				String country = inputCountry.getText();
+				String city = inputCity.getText();
+				String note = InputNote.getText();
+
+				int startYear = cmbStartYear.getValue();
+				int startMonth = cmbStartMonth.getValue();
+				int startDate = cmbStartDate.getValue();
+				int endYear = cmbEndYear.getValue();
+				int endMonth = cmbEndMonth.getValue();
+				int endDate = cmbEndDate.getValue();
+
+				// display edit message
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("CONFRIMATION");
+				alert.setHeaderText("Are you sure you want to update this trip?");
+				alert.setContentText("This action cannot be recovered.");
+				Optional<ButtonType> result = alert.showAndWait();
+
+				if (result.get() == ButtonType.OK) {
+					// update trip & save to database
+
+					trip.setTripName(tripName);
+					trip.setCountry(country);
+					trip.setCity(city);
+					trip.setNote(note);
+					trip.setStartDate(startYear, startMonth, startDate);
+					trip.setEndDate(endYear, endMonth, endDate);
+
+					database.store();
+
+					// refresh dashboard
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+
+					Parent root = loader.load();
+					TripPageController tripPageController = loader.getController();
+					tripPageController.setData(trip);
+
+					Stage stage = (Stage) inputTripName.getScene().getWindow();
+					stage.setScene(new Scene(root));
+				} else {
+					event.consume();
+				}
+			}
+		}
+	}
+
+	public void addNew(ActionEvent event, User user) throws IOException {
+
+		if (!validateInput()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("INVALID");
+			alert.setHeaderText("Invalid Trip Date");
+			alert.setContentText("Trip date cannot be empty.");
+			alert.showAndWait();
+			event.consume();
+		} else {
+			if (!validateDate()) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("INVALID");
+				alert.setHeaderText("Invalid Trip Value");
+				alert.setContentText("Trip start time has to be before end time.");
+				alert.showAndWait();
+				event.consume();
+			} else {
+
+				String tripName = inputTripName.getText();
+				String country = inputCountry.getText();
+				String city = inputCity.getText();
+				String note = InputNote.getText();
+
+				int startYear = cmbStartYear.getValue();
+				int startMonth = cmbStartMonth.getValue();
+				int startDate = cmbStartDate.getValue();
+				int endYear = cmbEndYear.getValue();
+				int endMonth = cmbEndMonth.getValue();
+				int endDate = cmbEndDate.getValue();
+
 				user.getTrips().addNewTrip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
 						endDate, note);
 
@@ -208,6 +276,45 @@ public class EditTripController implements Initializable {
 				// save changes to database
 				database.store();
 			}
+		}
+	}
+
+	public boolean validateInput() {
+		// check if dates has input
+		if (cmbStartYear.getSelectionModel().isEmpty() || cmbStartMonth.getSelectionModel().isEmpty()
+				|| cmbStartDate.getSelectionModel().isEmpty() || cmbEndYear.getSelectionModel().isEmpty()
+				|| cmbEndMonth.getSelectionModel().isEmpty() || cmbEndDate.getSelectionModel().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validateDate() {
+
+		int startYear = cmbStartYear.getValue();
+		int startMonth = cmbStartMonth.getValue();
+		int startDate = cmbStartDate.getValue();
+		int endYear = cmbEndYear.getValue();
+		int endMonth = cmbEndMonth.getValue();
+		int endDate = cmbEndDate.getValue();
+
+		Calendar start = Calendar.getInstance();
+
+		start.set(startYear, startMonth - 1, startDate, 0, 0, 0);
+		start.set(Calendar.MILLISECOND, 0);
+
+		Calendar end = Calendar.getInstance();
+
+		end.set(endYear, endMonth - 1, endDate, 0, 0, 0);
+		end.set(Calendar.MILLISECOND, 0);
+
+		// check if start date is before end date
+		if (start.after(end)) {
+			return false;
+		} else if (start.equals(end)) {
+			return true;
+		} else {
+			return true;
 		}
 	}
 

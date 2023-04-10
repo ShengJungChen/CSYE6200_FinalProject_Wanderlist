@@ -27,7 +27,6 @@ public class DashboardScene extends Application {
 		primaryStage.setTitle("Wanderlist");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
 	}
 
 	public static void main(String[] args) {

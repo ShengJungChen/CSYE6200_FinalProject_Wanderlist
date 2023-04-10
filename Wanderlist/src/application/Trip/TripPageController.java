@@ -82,16 +82,8 @@ public class TripPageController implements Initializable {
 	public void setData(Trip trip) {
 
 		this.trip = trip;
-
-//		lblName.setText(trip.getTripName());
-
-//		String pattern = "yyyy/MM/dd";
-//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//
-//		String start = simpleDateFormat.format(trip.getStartDate().getTime());
-//		String end = simpleDateFormat.format(trip.getEndDate().getTime());
-
-//		lblDate.setText(start + " - " + end);
+		gridShowController.setData(this.trip);
+		gridEditController.setData(this.trip);
 	}
 
 	@FXML
@@ -117,6 +109,8 @@ public class TripPageController implements Initializable {
 	@FXML
 	public void saveAction(ActionEvent event) throws IOException {
 
+		// FIX THIS ALERT!!!
+
 		// show alert to confirm save
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
@@ -127,7 +121,7 @@ public class TripPageController implements Initializable {
 		if (result.get() == ButtonType.OK) {
 			// GET DATA
 			// save data
-			gridEditController.saveUpdate();
+			gridEditController.saveUpdate(event, trip);
 			// show mode
 			gridShow.setVisible(true);
 			gridEdit.setVisible(false);
