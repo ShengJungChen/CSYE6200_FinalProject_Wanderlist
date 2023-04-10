@@ -93,15 +93,27 @@ public class EditTripController implements Initializable {
 		inputCountry.setText(trip.getCountry());
 		InputNote.setText(trip.getNote());
 
+		// set start month
 		int startYear = trip.getStartDate().getYear();
 		int startMonth = trip.getStartDate().getMonth();
 		int startDate = trip.getStartDate().getDate();
 
 		cmbStartYear.getSelectionModel().select(startYear);
 		cmbStartMonth.getSelectionModel().select(startMonth);
-		cmbStartDate.getSelectionModel().select(startDate);
 
-		// SETTING ORG DATA!!!!!!!
+		calculateDatesAndPopulateCmb(cmbStartYear, cmbStartMonth, cmbStartDate);
+		cmbStartDate.getSelectionModel().select(startDate - 1);
+
+		// set end month
+		int endYear = trip.getEndDate().getYear();
+		int endMonth = trip.getEndDate().getMonth();
+		int endDate = trip.getEndDate().getDate();
+
+		cmbEndYear.getSelectionModel().select(endYear);
+		cmbEndMonth.getSelectionModel().select(endMonth);
+
+		calculateDatesAndPopulateCmb(cmbEndYear, cmbEndMonth, cmbEndDate);
+		cmbEndDate.getSelectionModel().select(endDate - 1);
 
 	}
 

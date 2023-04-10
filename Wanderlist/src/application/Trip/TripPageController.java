@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -54,6 +55,9 @@ public class TripPageController implements Initializable {
 	private HBox paneDays;
 
 	@FXML
+	private VBox paneTripDetailHolder;
+
+	@FXML
 	private Pane paneTrip;
 
 	@FXML
@@ -73,34 +77,70 @@ public class TripPageController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		// set trip info to show mode
-		gridEdit.setVisible(false);
-
 	}
 
-	public void setData(Trip trip) {
+	public void setData(Trip trip) throws IOException {
+
+//		this.trip = trip;
+//		gridShowController.setData(this.trip);
+//		gridEditController.setData(this.trip);
+
+		// NEW
 
 		this.trip = trip;
-		gridShowController.setData(this.trip);
-		gridEditController.setData(this.trip);
+
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../../application/Trip/ShowTrip.fxml"));
+
+		GridPane pane = fxmlLoader.load();
+
+		ShowTripController showTripController = fxmlLoader.getController();
+		showTripController.setData(this.trip);
+
+		paneTripDetailHolder.getChildren().add(pane);
+
 	}
 
 	@FXML
 	public void backAction(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Dashboard/dashboardPage.fxml"));
-		Parent root = loader.load();
-		DashboardController dashboardController = loader.getController();
-		dashboardController.loadPage(trip.getUser());
 
-		Stage stage = (Stage) btnBack.getScene().getWindow();
-		stage.setScene(new Scene(root));
+		// ADD ALERT
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("CONFRIMATION");
+		alert.setHeaderText("Are you sure you want to cancel edit?");
+		alert.setContentText("All unsaved information will be lost.");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource("../../application/Dashboard/dashboardPage.fxml"));
+			Parent root = loader.load();
+			DashboardController dashboardController = loader.getController();
+			dashboardController.loadPage(trip.getUser());
+
+			Stage stage = (Stage) btnBack.getScene().getWindow();
+			stage.setScene(new Scene(root));
+
+		} else {
+			event.consume();
+		}
+
 	}
 
 	@FXML
-	public void editAction(ActionEvent event) {
-		gridEdit.setVisible(true);
-		gridShow.setVisible(false);
+	public void editAction(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../../application/Trip/EditTrip.fxml"));
+
+		GridPane pane = fxmlLoader.load();
+
+		EditTripController editTripController = fxmlLoader.getController();
+		editTripController.setData(this.trip);
+
+		paneTripDetailHolder.getChildren().clear();
+		paneTripDetailHolder.getChildren().add(pane);
+
 		btnEdit.setDisable(true);
 		btnSave.setDisable(false);
 		btnCancel.setDisable(false);
