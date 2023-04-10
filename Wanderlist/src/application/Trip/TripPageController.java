@@ -62,30 +62,23 @@ public class TripPageController implements Initializable {
 
 	@FXML
 	private VBox paneWishlist;
+//
+//	@FXML
+//	private Parent gridEdit;
 
-	@FXML
-	private Parent gridEdit;
+	private EditTripController editTripController;
+//
+//	@FXML
+//	private Parent gridShow;
 
-	@FXML
-	private EditTripController gridEditController;
-
-	@FXML
-	private Parent gridShow;
-
-	@FXML
-	private ShowTripController gridShowController;
+//	private ShowTripController showTripController;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 	}
 
 	public void setData(Trip trip) throws IOException {
-
-//		this.trip = trip;
-//		gridShowController.setData(this.trip);
-//		gridEditController.setData(this.trip);
-
-		// NEW
 
 		this.trip = trip;
 
@@ -95,6 +88,7 @@ public class TripPageController implements Initializable {
 		GridPane pane = fxmlLoader.load();
 
 		ShowTripController showTripController = fxmlLoader.getController();
+		showTripController.setData(this.trip);
 		showTripController.setData(this.trip);
 
 		paneTripDetailHolder.getChildren().add(pane);
@@ -124,7 +118,6 @@ public class TripPageController implements Initializable {
 		} else {
 			event.consume();
 		}
-
 	}
 
 	@FXML
@@ -137,6 +130,7 @@ public class TripPageController implements Initializable {
 
 		EditTripController editTripController = fxmlLoader.getController();
 		editTripController.setData(this.trip);
+		this.editTripController = editTripController;
 
 		paneTripDetailHolder.getChildren().clear();
 		paneTripDetailHolder.getChildren().add(pane);
@@ -149,33 +143,43 @@ public class TripPageController implements Initializable {
 	@FXML
 	public void saveAction(ActionEvent event) throws IOException {
 
+		this.editTripController.saveUpdate(event, trip);
+
+//		FXMLLoader fxmlLoader = new FXMLLoader();
+//		fxmlLoader.setLocation(getClass().getResource("../../application/Trip/EditTrip.fxml"));
+//
+//		GridPane pane = fxmlLoader.load();
+//
+//		EditTripController editTripController = fxmlLoader.getController();
+//		editTripController.saveUpdate(event, this.trip);
+
 		// FIX THIS ALERT!!!
 
 		// show alert to confirm save
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("CONFRIMATION");
-		alert.setHeaderText("Are you sure you want to save this edit?");
-		alert.setContentText("Old information will be overwritten.");
-		Optional<ButtonType> result = alert.showAndWait();
-
-		if (result.get() == ButtonType.OK) {
-			// GET DATA
-			// save data
-			gridEditController.saveUpdate(event, trip);
-			// show mode
-			gridShow.setVisible(true);
-			gridEdit.setVisible(false);
-			btnEdit.setDisable(false);
-			btnSave.setDisable(true);
-			// JUMP TO END?
-			btnCancel.setDisable(true);
-		} else {
-			event.consume();
-		}
+//		Alert alert = new Alert(AlertType.CONFIRMATION);
+//		alert.setTitle("CONFRIMATION");
+//		alert.setHeaderText("Are you sure you want to save this edit?");
+//		alert.setContentText("Old information will be overwritten.");
+//		Optional<ButtonType> result = alert.showAndWait();
+//
+//		if (result.get() == ButtonType.OK) {
+//			// GET DATA
+//			// save data
+//			gridEditController.saveUpdate(event, trip);
+//			// show mode
+//			gridShow.setVisible(true);
+//			gridEdit.setVisible(false);
+//			btnEdit.setDisable(false);
+//			btnSave.setDisable(true);
+//			// JUMP TO END?
+//			btnCancel.setDisable(true);
+//		} else {
+//			event.consume();
+//		}
 	}
 
 	@FXML
-	public void cancelAction(ActionEvent event) {
+	public void cancelAction(ActionEvent event) throws IOException {
 		// show alert for unsaved message
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
@@ -184,12 +188,16 @@ public class TripPageController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-			gridShow.setVisible(true);
-			gridEdit.setVisible(false);
-			btnEdit.setDisable(false);
-			btnSave.setDisable(true);
-			// JUMP TO END?
-			btnCancel.setDisable(true);
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+
+			Parent root = loader.load();
+			TripPageController tripPageController = loader.getController();
+			tripPageController.setData(trip);
+
+			Stage stage = (Stage) btnBack.getScene().getWindow();
+			stage.setScene(new Scene(root));
+
 		} else {
 			event.consume();
 		}

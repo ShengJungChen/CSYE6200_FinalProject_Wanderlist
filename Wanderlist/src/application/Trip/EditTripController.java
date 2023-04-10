@@ -176,7 +176,8 @@ public class EditTripController implements Initializable {
 	}
 
 	public void saveUpdate(ActionEvent event, Trip trip) throws IOException {
-		// GET CURRENT INFO AND UPDATE TRIP OBJECT
+
+		// check if the date field is empty
 		if (!validateInput()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("INVALID");
@@ -185,6 +186,7 @@ public class EditTripController implements Initializable {
 			alert.showAndWait();
 			event.consume();
 		} else {
+			// check if date is valid
 			if (!validateDate()) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("INVALID");
@@ -193,7 +195,7 @@ public class EditTripController implements Initializable {
 				alert.showAndWait();
 				event.consume();
 			} else {
-
+				// get data
 				String tripName = inputTripName.getText();
 				String country = inputCountry.getText();
 				String city = inputCity.getText();
@@ -206,16 +208,15 @@ public class EditTripController implements Initializable {
 				int endMonth = cmbEndMonth.getValue();
 				int endDate = cmbEndDate.getValue();
 
-				// display edit message
+				// display confirm edit message
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("CONFRIMATION");
 				alert.setHeaderText("Are you sure you want to update this trip?");
-				alert.setContentText("This action cannot be recovered.");
+				alert.setContentText("Old information will be overwritten.");
 				Optional<ButtonType> result = alert.showAndWait();
 
 				if (result.get() == ButtonType.OK) {
 					// update trip & save to database
-
 					trip.setTripName(tripName);
 					trip.setCountry(country);
 					trip.setCity(city);
@@ -225,7 +226,7 @@ public class EditTripController implements Initializable {
 
 					database.store();
 
-					// refresh dashboard
+					// refresh trip page
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
 
 					Parent root = loader.load();
@@ -234,6 +235,7 @@ public class EditTripController implements Initializable {
 
 					Stage stage = (Stage) inputTripName.getScene().getWindow();
 					stage.setScene(new Scene(root));
+
 				} else {
 					event.consume();
 				}
@@ -243,6 +245,7 @@ public class EditTripController implements Initializable {
 
 	public void addNew(ActionEvent event, User user) throws IOException {
 
+		// check if the date field is empty
 		if (!validateInput()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("INVALID");
@@ -251,6 +254,7 @@ public class EditTripController implements Initializable {
 			alert.showAndWait();
 			event.consume();
 		} else {
+			// check if date is valid
 			if (!validateDate()) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("INVALID");
@@ -259,7 +263,7 @@ public class EditTripController implements Initializable {
 				alert.showAndWait();
 				event.consume();
 			} else {
-
+				// get data
 				String tripName = inputTripName.getText();
 				String country = inputCountry.getText();
 				String city = inputCity.getText();
