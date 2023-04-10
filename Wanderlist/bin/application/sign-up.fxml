@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="272.0" style="-fx-background-color: #FED700;">
          <children>
@@ -45,7 +44,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="button_log_in" layoutX="334.0" layoutY="386.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Log in" textFill="#051fe1" underline="true">
+            <Button fx:id="button_log_in" layoutX="334.0" layoutY="386.0" mnemonicParsing="false" onAction="#switchToLoginPage" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Log in" textFill="#051fe1" underline="true">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
