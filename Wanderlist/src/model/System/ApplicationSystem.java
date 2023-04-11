@@ -6,7 +6,6 @@ public class ApplicationSystem {
 
 	private static final DB4OUtils db4oUtils = DB4OUtils.getInstance();
 	private static final ApplicationSystem database = db4oUtils.retrieveSystem();
-
 	private UserDirectory userDirectory;
 
 	public ApplicationSystem() {

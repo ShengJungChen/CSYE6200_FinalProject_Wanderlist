@@ -16,7 +16,9 @@ public class DashboardScene extends Application {
 	public void start(Stage primaryStage) throws IOException {
 
 		ApplicationSystem database = ApplicationSystem.getInstance();
-		User user = database.getUserDirectory().getUserByEmail("anita@gmail.com");
+		database.getUserDirectory().addNewUser("anita@gmail.com", "test");
+
+		User user = database.getUserDirectory().getUserByEmail("TEST");
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboardPage.fxml"));
 		Parent root = loader.load();
