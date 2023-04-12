@@ -175,6 +175,7 @@ public class TripPageController implements Initializable {
 		VBox pane = fxmlLoader.load();
 
 		WishlistController wishlistController = fxmlLoader.getController();
+		wishlistController.setTrip(this.trip);
 
 		wishlistHolder.getChildren().add(pane);
 	}
