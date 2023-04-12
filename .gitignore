@@ -3,4 +3,6 @@ Wanderlist/.classpath
 Wanderlist/.metadata
 Wanderlist/.project
 Wanderlist/.settings
+Wanderlist/Database.db4o
 Wanderlist/bin/.gitignore
+Wanderlist/bin/
