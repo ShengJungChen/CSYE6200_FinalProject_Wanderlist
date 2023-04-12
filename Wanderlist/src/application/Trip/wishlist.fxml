@@ -14,7 +14,7 @@
       <ListView fx:id="lvWishlist" prefHeight="200.0" prefWidth="200.0" />
       <HBox prefHeight="40.0" prefWidth="600.0">
          <children>
-            <Button fx:id="btnNewItem" mnemonicParsing="false" text="New Item" />
+            <Button fx:id="btnNewItem" mnemonicParsing="false" onAction="#newItemAction" text="New Item" />
             <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="View" />
             <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
          </children>
