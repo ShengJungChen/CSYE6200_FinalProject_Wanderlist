@@ -5,7 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
+<AnchorPane fx:id="button_logout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoggedInController">
+=======
 <AnchorPane fx:id="button_logout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+>>>>>>> 97749a300f161c81ff6a46a8e97f5a3c9ba67ef1
    <children>
       <Label fx:id="label_welcome" layoutX="372.0" layoutY="153.0" text="Welcome!">
          <font>

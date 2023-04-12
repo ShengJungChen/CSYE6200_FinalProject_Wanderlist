@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -24,11 +23,7 @@
                         <Font name="Arial Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="paneTrip" prefHeight="325.0" prefWidth="200.0">
-                     <children>
-                        <fx:include fx:id="gridEdit" source="EditTrip.fxml" />
-                        <fx:include fx:id="gridShow" source="ShowTrip.fxml" />
-                     </children></Pane>
+                  <VBox fx:id="paneTripDetailHolder" prefHeight="250.0" prefWidth="100.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editAction" prefHeight="30.0" prefWidth="80.0" text="Edit" />
@@ -93,7 +88,7 @@
       </ScrollPane>
    </center>
    <top>
-      <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Back">
+      <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="80.0" text="Back">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
