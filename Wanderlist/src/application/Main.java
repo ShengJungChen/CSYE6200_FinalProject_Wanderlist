@@ -16,7 +16,6 @@ public class Main extends Application {
 
 		ApplicationSystem database = ApplicationSystem.getInstance();
 
-
 		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Wanderlist");
