@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FED700;">
          <children>
@@ -44,11 +44,11 @@
             </Label>
             <TextField fx:id="tf_username" layoutX="295.0" layoutY="151.0" />
             <TextField fx:id="tf_password" layoutX="295.0" layoutY="223.0" />
-            <Button fx:id="button_login" layoutX="263.0" layoutY="291.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="157.0" style="-fx-background-color: #FED700;" text="Login">
+            <Button fx:id="button_login" layoutX="263.0" layoutY="291.0" mnemonicParsing="false" onAction="#logIn" prefHeight="39.0" prefWidth="157.0" style="-fx-background-color: #FED700;" text="Login">
                <font>
                   <Font name="Arial Black" size="18.0" />
                </font></Button>
-            <Button fx:id="button_sign_up" layoutX="392.0" layoutY="354.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#0619f2" underline="true">
+            <Button fx:id="button_sign_up" layoutX="392.0" layoutY="354.0" mnemonicParsing="false" onAction="#switchToSignUpPage" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#0619f2" underline="true">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font></Button>
