@@ -138,9 +138,7 @@ public class TripPageController implements Initializable {
 
 	@FXML
 	public void saveAction(ActionEvent event) throws IOException {
-
 		this.editTripController.saveUpdate(event, trip);
-
 	}
 
 	@FXML

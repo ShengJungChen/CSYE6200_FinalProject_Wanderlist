@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
    <children>
       <Label text="Wishlist" />
       <ListView fx:id="lvWishlist" prefHeight="200.0" prefWidth="200.0" />
@@ -19,7 +18,7 @@
             <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
          </children>
       </HBox>
-      <ScrollPane prefHeight="300.0" prefWidth="600.0">
+      <ScrollPane prefHeight="400.0" prefWidth="600.0">
          <content>
             <HBox fx:id="dayHolder" prefHeight="300.0" prefWidth="705.0" />
          </content>

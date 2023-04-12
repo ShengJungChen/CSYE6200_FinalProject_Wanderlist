@@ -224,6 +224,9 @@ public class EditTripController implements Initializable {
 					trip.setStartDate(startYear, startMonth, startDate);
 					trip.setEndDate(endYear, endMonth, endDate);
 
+					// UPDATE TRIP DAYLIST
+					trip.getDays().createDays();
+
 					database.store();
 
 					// refresh trip page
