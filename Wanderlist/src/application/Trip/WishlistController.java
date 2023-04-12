@@ -12,8 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import model.System.ApplicationSystem;
+import model.Trip.Trip;
 
 public class WishlistController {
+
+	ApplicationSystem database = ApplicationSystem.getInstance();
+
+	Trip trip;
 
 	@FXML
 	private Button btnDelete;
@@ -33,14 +39,6 @@ public class WishlistController {
 	@FXML
 	public void newItemAction(ActionEvent event) throws IOException {
 
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
-//
-//		Parent root = loader.load();
-//		AddNewItemController addNewItemController = loader.getController();
-//		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//		stage.setScene(new Scene(root));
-//		
-		//
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
 
 		Parent root = loader.load();
@@ -48,5 +46,13 @@ public class WishlistController {
 
 		Stage stage = (Stage) btnNewItem.getScene().getWindow();
 		stage.setScene(new Scene(root));
+
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+		// JUST FOR TEST
+		System.out.println("TRIP" + this.trip.getTripName());
+
 	}
 }
