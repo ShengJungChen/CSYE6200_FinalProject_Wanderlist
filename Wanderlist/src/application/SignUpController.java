@@ -52,6 +52,9 @@ public class SignUpController {
 		//validate whether the email or password is empty
 		if(email.isEmpty() || password.isEmpty()) {
 			showAlert("Invalid Information", "Please enter both an email and password.");
+	        //clear the textfield
+	        tf_username.clear();
+	        tf_password.clear();
 			return;
 		}
 		
@@ -63,7 +66,7 @@ public class SignUpController {
 	        tf_username.clear();
 	        tf_password.clear();
 	    } else {
-	        showAlert("Success", "Account created successfully.");
+	    	showSuccessfulAlert("Success", "Account created successfully.");
 	        //clear the textfield
 	        tf_username.clear();
 	        tf_password.clear();
@@ -78,11 +81,24 @@ public class SignUpController {
 		alert.setHeaderText(null);
 		alert.setContentText(message);
 		alert.showAndWait();
+	
+	}
+	private void showSuccessfulAlert(String title, String message) throws IOException {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
 		
 		// switch to login page
 	    if(alert.getResult() == ButtonType.OK){
-	        switchToLoginPage(new ActionEvent());
+	    	Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+	        Scene scene = new Scene(root);
+	        Stage stage = (Stage) button_signup.getScene().getWindow();
+	        stage.setScene(scene);
+	        stage.show();
 	    }
 	}
+
 
 }
