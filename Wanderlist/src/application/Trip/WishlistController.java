@@ -33,14 +33,6 @@ public class WishlistController {
 	@FXML
 	public void newItemAction(ActionEvent event) throws IOException {
 
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
-//
-//		Parent root = loader.load();
-//		AddNewItemController addNewItemController = loader.getController();
-//		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//		stage.setScene(new Scene(root));
-//		
-		//
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
 
 		Parent root = loader.load();
