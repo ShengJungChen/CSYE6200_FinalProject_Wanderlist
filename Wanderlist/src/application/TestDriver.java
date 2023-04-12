@@ -10,7 +10,7 @@ public class TestDriver {
 
 		ApplicationSystem database = ApplicationSystem.getInstance();
 
-		database.getUserDirectory().addNewUser("yifei@gmail.com", "test");
+		database.getUserDirectory().addNewUser("anita@gmail.com", "test");
 
 		User user = database.getUserDirectory().getUserByEmail("anita@gmail.com");
 		user.getTrips().addNewTrip("TRIP1", "HAHA", "HEY", 2023, 1, 1, 2023, 1, 4, null);

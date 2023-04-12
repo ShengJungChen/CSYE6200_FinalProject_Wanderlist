@@ -9,7 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.System.ApplicationSystem;
@@ -23,7 +26,7 @@ public class LoginController {
 	private TextField tf_username;
 
 	@FXML
-	private TextField tf_password;
+	private PasswordField pf_password;
 
 	@FXML
 	private Button button_login;
@@ -42,38 +45,54 @@ public class LoginController {
 	public void logIn(ActionEvent event) throws IOException {
 
 		String email = tf_username.getText();
-		String password = tf_password.getText();
-
+		String password = pf_password.getText();
+		
+		//if email or password is empty
+		if(email.isEmpty() || password.isEmpty()) {
+			showAlert("Error", "Please enter both email and password.");
+	        event.consume();
+	        return;
+		}
+		
 		// validate email & password
 		User user = database.getUserDirectory().getUserByEmail(email);
 
+
 		if (user == null) {
-			// USER NOT FOUND ALERT
-
-			System.out.println("no user");
-
-			event.consume();
+			showAlert("Error", "User not found.");
+			//System.out.println("no user");
+			//event.consume();
+		} else if (!user.getPassword().equals(password)) {
+				// PASSWORD INCORRECT ALERT
+			showAlert("Error", "Incorrect password.");
+				//System.out.println("wrong pw");
 		} else {
 
-			if (!user.getPassword().equals(password)) {
-				// PASSWORD INCORRECT ALERT
-
-				System.out.println("wrong pw");
-
-			} else {
-
-				// log into dashboard success
-				FXMLLoader loader = new FXMLLoader(
-						getClass().getResource("../application/Dashboard/dashboardPage.fxml"));
-				Parent root = loader.load();
-				DashboardController dashboardController = loader.getController();
-				dashboardController.loadPage(user);
-
-				Scene scene = new Scene(root);
-				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.setScene(scene);
-				stage.show();
-			}
+			// log into dashboard success
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource("../application/Dashboard/dashboardPage.fxml"));
+			Parent root = loader.load();
+			DashboardController dashboardController = loader.getController();	
+			dashboardController.loadPage(user);
+			
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
 		}
+	}
+		
+
+	private void showAlert(String title, String message) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+		
+        //clear the textfield
+        tf_username.clear();
+        pf_password.clear();
+		
 	}
 }

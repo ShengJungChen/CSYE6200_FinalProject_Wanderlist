@@ -69,7 +69,7 @@ public class DashboardController {
 
 	// FXML LOG OUT
 	public void handleButtonLogout(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../../application/login.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle("Login");
 		stage.setScene(new Scene(root));
