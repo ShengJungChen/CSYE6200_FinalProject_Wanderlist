@@ -75,7 +75,7 @@ public class TripItemController implements Initializable {
 
 	@FXML
 	public void deleteAction(ActionEvent event) throws IOException {
-		// ALERT
+		// alert
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
 		alert.setHeaderText("Are you sure you want to delete this trip?");

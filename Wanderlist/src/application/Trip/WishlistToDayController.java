@@ -115,10 +115,8 @@ public class WishlistToDayController extends Application {
 				String player = dragEvent.getDragboard().getString();
 				day1List.addAll(player);
 				leftList.remove(player);
-				day2List.remove(player);
 				day1ListView.setItems(day1List);
 				poolListView.setItems(leftList);
-				day2ListView.setItems(day2List);
 				dragEvent.setDropCompleted(true);
 			}
 		});
@@ -138,10 +136,8 @@ public class WishlistToDayController extends Application {
 				String player = dragEvent.getDragboard().getString();
 				day2List.addAll(player);
 				leftList.remove(player);
-				day1List.remove(player);
 				day2ListView.setItems(day2List);
 				poolListView.setItems(leftList);
-				day1ListView.setItems(day1List);
 				dragEvent.setDropCompleted(true);
 			}
 		});
