@@ -52,6 +52,7 @@ public class WishlistController {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 		// JUST FOR TEST
-		System.out.println(this.trip.getTripName());
+		System.out.println("TRIP" + this.trip.getTripName());
+
 	}
 }

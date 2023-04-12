@@ -176,6 +176,7 @@ public class TripPageController implements Initializable {
 
 		WishlistController wishlistController = fxmlLoader.getController();
 		wishlistController.setTrip(this.trip);
+		// set trip
 
 		wishlistHolder.getChildren().add(pane);
 	}
