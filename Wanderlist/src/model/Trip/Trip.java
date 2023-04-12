@@ -1,11 +1,15 @@
 package model.Trip;
 
 import java.util.Calendar;
+import java.util.Date;
+
+import model.User.User;
 
 public class Trip {
+	private User user;
 	private String tripName;
-	private Calendar startDate;
-	private Calendar endDate;
+	private Date startDate;
+	private Date endDate;
 	private String country;
 	private String city;
 	private People people;
@@ -14,8 +18,10 @@ public class Trip {
 	private DayList days;
 
 	// constructor
-	public Trip(String tripName, String country, String city, int startYear, int startMonth, int startDate, int endYear,
-			int endMonth, int endDate, String note) {
+	public Trip(User user, String tripName, String country, String city, int startYear, int startMonth, int startDate,
+			int endYear, int endMonth, int endDate, String note) {
+
+		this.user = user;
 
 		this.tripName = tripName;
 		this.country = country;
@@ -31,6 +37,10 @@ public class Trip {
 
 	// getter and setter
 
+	public User getUser() {
+		return user;
+	}
+
 	public String getTripName() {
 		return tripName;
 	}
@@ -39,7 +49,7 @@ public class Trip {
 		this.tripName = tripName;
 	}
 
-	public Calendar getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
@@ -50,7 +60,9 @@ public class Trip {
 		start.set(year, month - 1, date, 0, 0, 0);
 		start.set(Calendar.MILLISECOND, 0);
 
-		this.startDate = start;
+		Date startDate = start.getTime();
+
+		this.startDate = startDate;
 	}
 
 	public String getCountry() {
@@ -81,7 +93,7 @@ public class Trip {
 		this.note = note;
 	}
 
-	public Calendar getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
@@ -92,7 +104,9 @@ public class Trip {
 
 		end.set(Calendar.MILLISECOND, 0);
 
-		this.endDate = end;
+		Date endDate = end.getTime();
+
+		this.endDate = endDate;
 	}
 
 	public Wishlist getWishlist() {
@@ -129,7 +143,7 @@ public class Trip {
 	// calculate number of days
 	public Integer calculateNubmerOfDays() {
 
-		long difference = this.getEndDate().getTimeInMillis() - this.getStartDate().getTimeInMillis();
+		long difference = this.getEndDate().getTime() - this.getStartDate().getTime();
 		double daysBetween = difference / (1000 * 60 * 60 * 24);
 
 		int num = (int) daysBetween + 1;
@@ -146,7 +160,5 @@ public class Trip {
 	public void removeItemFromWishlist(Item item) {
 		wishlist.removeItemFromWishlist(item);
 	}
-
-	// view item
 
 }

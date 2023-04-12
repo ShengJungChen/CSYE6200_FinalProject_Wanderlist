@@ -1,15 +1,29 @@
 package application;
 
+import model.System.ApplicationSystem;
+import model.Trip.Trip;
+import model.User.User;
+
 public class TestDriver {
 
 	public static void main(String[] args) {
 
-		DB4OUtils db4oUtils = DB4OUtils.getInstance();
-		ApplicationSystem appSystem = db4oUtils.retrieveSystem();
+		ApplicationSystem database = ApplicationSystem.getInstance();
 
-		appSystem.getUserDirectory().addNewUser("anita@gmail.com", "anita");
+		database.getUserDirectory().addNewUser("yifei@gmail.com", "test");
 
-		System.out.println(appSystem.getUserDirectory().getUsers().get(0).getUserEmail());
+		User user = database.getUserDirectory().getUserByEmail("anita@gmail.com");
+		user.getTrips().addNewTrip("TRIP1", "HAHA", "HEY", 2023, 1, 1, 2023, 1, 4, null);
+
+		ApplicationSystem.getDb4oUtil().storeSystem(database);
+
+		for (String s : database.getUserDirectory().getAllEmail()) {
+			System.out.println(s);
+		}
+
+		for (Trip trip : user.getTrips().getTrips()) {
+			System.out.println(trip.getTripName());
+		}
 
 	}
 

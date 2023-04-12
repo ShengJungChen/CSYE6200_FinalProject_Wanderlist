@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -112,6 +114,9 @@ public class ViewItemController extends Application {
 	}
 	
 	@FXML	private void cancelButtonAction(ActionEvent event) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setContentText("Changes you made will not be saved.");
+		alert.showAndWait();	
 		btn_edit.setDisable(false);
 		btn_cancel.setDisable(true);
 		btn_save.setDisable(true);
@@ -119,6 +124,9 @@ public class ViewItemController extends Application {
 	}
 	
 	@FXML	private void saveButtonAction(ActionEvent event) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setContentText("All changes saved.");
+		alert.showAndWait();
 		btn_edit.setDisable(false);
 		btn_cancel.setDisable(true);
 		btn_save.setDisable(true);

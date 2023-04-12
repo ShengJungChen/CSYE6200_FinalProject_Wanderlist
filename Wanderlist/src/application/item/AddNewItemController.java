@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -68,19 +69,19 @@ public class AddNewItemController extends Application {
 	@FXML
 	private void onTypeBoxChanged() throws IOException {
 		if(typeBox.getValue().equals("Eat")) {
-			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_eatPane.fxml"));
-			pane.getChildren().setAll(eatpane);
+			Pane typepane = FXMLLoader.load(getClass().getResource("AddNewItem_eatPane.fxml"));
+			pane.getChildren().setAll(typepane);
 		} else if (typeBox.getValue().equals("Buy")) {
-			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_buyPane.fxml"));
-			pane.getChildren().setAll(eatpane);
+			Pane typepane = FXMLLoader.load(getClass().getResource("AddNewItem_buyPane.fxml"));
+			pane.getChildren().setAll(typepane);
 		}
 		else if (typeBox.getValue().equals("Play")) {
-			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_playPane.fxml"));
-			pane.getChildren().setAll(eatpane);
+			Pane typepane = FXMLLoader.load(getClass().getResource("AddNewItem_playPane.fxml"));
+			pane.getChildren().setAll(typepane);
 		}
 		else if (typeBox.getValue().equals("See")) {
-			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_seePane.fxml"));
-			pane.getChildren().setAll(eatpane);
+			Pane typepane = FXMLLoader.load(getClass().getResource("AddNewItem_seePane.fxml"));
+			pane.getChildren().setAll(typepane);
 		}
 	}
 	
@@ -91,6 +92,28 @@ public class AddNewItemController extends Application {
 		Parent root = loader.load();
 		Scene scene = btn_back.getScene();
 		scene.setRoot(root);
+	}
+	
+	@FXML
+	public void saveButtonAction(ActionEvent event) {
+		String name = name_input.getText();
+		String type = typeBox.getValue();
+		if(name.isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Please enter the schedule name.");
+			alert.showAndWait();
+		}
+		if(type == null) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Please select a type.");
+			alert.showAndWait();
+		}
+		if (!name.isEmpty() && type != null ) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText("Success");
+			alert.setContentText("Your schedule was saved.");
+			alert.showAndWait();
+		}
 	}
 
 	public static void main(String[] args) {

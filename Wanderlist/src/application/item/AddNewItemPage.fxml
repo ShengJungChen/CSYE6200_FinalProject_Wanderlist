@@ -60,11 +60,11 @@
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="name_input" prefHeight="30.0" prefWidth="184.0" promptText="name (test)" GridPane.columnIndex="1" />
-                        <TextField fx:id="url_input" prefHeight="30.0" prefWidth="276.0" promptText="url (test)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="address_input" prefHeight="30.0" prefWidth="184.0" promptText="address (test)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="name_input" prefHeight="30.0" prefWidth="184.0" promptText="name" GridPane.columnIndex="1" />
+                        <TextField fx:id="url_input" prefHeight="30.0" prefWidth="276.0" promptText="url" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="address_input" prefHeight="30.0" prefWidth="184.0" promptText="address" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="typeBox" onAction="#initialize" prefHeight="30.0" prefWidth="150.0" promptText="select a type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextArea fx:id="note_input" prefHeight="89.0" prefWidth="279.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextArea fx:id="note_input" prefHeight="89.0" prefWidth="279.0" promptText="Add note..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <Pane fx:id="pane" prefHeight="200.0" prefWidth="843.0">
@@ -100,7 +100,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_save" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Save">
+            <Button fx:id="btn_save" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="35.0" prefWidth="70.0" text="Save">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

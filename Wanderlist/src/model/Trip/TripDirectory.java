@@ -27,8 +27,8 @@ public class TripDirectory {
 	// add new trip
 	public void addNewTrip(String tripName, String country, String city, int startYear, int startMonth, int startDate,
 			int endYear, int endMonth, int endDate, String note) {
-		Trip trip = new Trip(tripName, country, city, startYear, startMonth, startDate, endYear, endMonth, endDate,
-				note);
+		Trip trip = new Trip(user, tripName, country, city, startYear, startMonth, startDate, endYear, endMonth,
+				endDate, note);
 		this.trips.add(trip);
 	}
 
