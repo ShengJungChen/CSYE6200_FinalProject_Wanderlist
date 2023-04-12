@@ -6,6 +6,7 @@ import application.Trip.AddTripController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,5 +65,14 @@ public class DashboardController {
 
 		Stage stage = (Stage) btnAdd.getScene().getWindow();
 		stage.setScene(new Scene(root));
+	}
+
+	// FXML LOG OUT
+	public void handleButtonLogout(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setTitle("Login");
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 }

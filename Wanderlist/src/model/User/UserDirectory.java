@@ -6,12 +6,9 @@ import java.util.Set;
 public class UserDirectory {
 	public HashMap<String, User> userHashMap;
 
-//	public ArrayList<User> users;
-
-//	 constructor
+	// constructor
 	public UserDirectory() {
 		this.userHashMap = new HashMap<String, User>();
-//		this.users = new ArrayList<User>();
 	}
 
 	// create user

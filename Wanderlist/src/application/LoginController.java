@@ -39,7 +39,7 @@ public class LoginController {
 		stage.show();
 	}
 
-	public void switchToLoginPage(ActionEvent event) throws IOException {
+	public void logIn(ActionEvent event) throws IOException {
 
 		String email = tf_username.getText();
 		String password = tf_password.getText();
@@ -74,17 +74,6 @@ public class LoginController {
 				stage.setScene(scene);
 				stage.show();
 			}
-
 		}
-
 	}
-
-	public void handleButtonLogout(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setTitle("Login");
-		stage.setScene(new Scene(root));
-		stage.show();
-	}
-
 }
