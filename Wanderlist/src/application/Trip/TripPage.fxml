@@ -31,57 +31,6 @@
                         <Button fx:id="btnCancel" disable="true" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" prefWidth="80.0" text="Cancel" />
                      </children>
                   </HBox>
-                  <Label text="Wishlist">
-                     <font>
-                        <Font name="Arial Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <VBox fx:id="paneWishlist" prefHeight="200.0" prefWidth="825.0" />
-                     </content>
-                  </ScrollPane>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="259.0" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="btnView" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="View" />
-                        <Button fx:id="btnAdd" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Add" />
-                        <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Delete" />
-                     </children>
-                  </HBox>
-                  <Label text="Schedule">
-                     <font>
-                        <Font name="Arial Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <ScrollPane prefHeight="200.0" prefWidth="843.0">
-                     <content>
-                        <HBox fx:id="paneDays" prefHeight="234.0" prefWidth="1126.0">
-                           <children>
-                              <VBox prefHeight="234.0" prefWidth="323.0">
-                                 <children>
-                                    <Label text="MM/DD" />
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="234.0" prefWidth="323.0">
-                                 <children>
-                                    <Label text="MM/DD" />
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="333.0" layoutY="10.0" prefHeight="234.0" prefWidth="323.0">
-                                 <children>
-                                    <Label text="MM/DD" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </content>
-                  </ScrollPane>
-                  <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="313.0" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="btnRemove" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" text="Remove from Schedule" />
-                        <Button layoutX="64.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="View" />
-                     </children>
-                  </HBox>
                   <VBox fx:id="wishlistHolder" prefHeight="639.0" prefWidth="843.0" />
                </children>
             </VBox>
