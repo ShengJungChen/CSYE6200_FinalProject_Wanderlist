@@ -62,16 +62,11 @@ public class TripPageController implements Initializable {
 
 	@FXML
 	private VBox paneWishlist;
-//
-//	@FXML
-//	private Parent gridEdit;
 
 	private EditTripController editTripController;
-//
-//	@FXML
-//	private Parent gridShow;
 
-//	private ShowTripController showTripController;
+	@FXML
+	private VBox wishlistHolder;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -89,16 +84,17 @@ public class TripPageController implements Initializable {
 
 		ShowTripController showTripController = fxmlLoader.getController();
 		showTripController.setData(this.trip);
-		showTripController.setData(this.trip);
 
 		paneTripDetailHolder.getChildren().add(pane);
+
+		loadWishlist();
 
 	}
 
 	@FXML
 	public void backAction(ActionEvent event) throws IOException {
 
-		// ADD ALERT
+		// back alert
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
 		alert.setHeaderText("Are you sure you want to cancel edit?");
@@ -145,37 +141,6 @@ public class TripPageController implements Initializable {
 
 		this.editTripController.saveUpdate(event, trip);
 
-//		FXMLLoader fxmlLoader = new FXMLLoader();
-//		fxmlLoader.setLocation(getClass().getResource("../../application/Trip/EditTrip.fxml"));
-//
-//		GridPane pane = fxmlLoader.load();
-//
-//		EditTripController editTripController = fxmlLoader.getController();
-//		editTripController.saveUpdate(event, this.trip);
-
-		// FIX THIS ALERT!!!
-
-		// show alert to confirm save
-//		Alert alert = new Alert(AlertType.CONFIRMATION);
-//		alert.setTitle("CONFRIMATION");
-//		alert.setHeaderText("Are you sure you want to save this edit?");
-//		alert.setContentText("Old information will be overwritten.");
-//		Optional<ButtonType> result = alert.showAndWait();
-//
-//		if (result.get() == ButtonType.OK) {
-//			// GET DATA
-//			// save data
-//			gridEditController.saveUpdate(event, trip);
-//			// show mode
-//			gridShow.setVisible(true);
-//			gridEdit.setVisible(false);
-//			btnEdit.setDisable(false);
-//			btnSave.setDisable(true);
-//			// JUMP TO END?
-//			btnCancel.setDisable(true);
-//		} else {
-//			event.consume();
-//		}
 	}
 
 	@FXML
@@ -203,4 +168,14 @@ public class TripPageController implements Initializable {
 		}
 	}
 
+	public void loadWishlist() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("../../application/Trip/wishlist.fxml"));
+
+		VBox pane = fxmlLoader.load();
+
+		WishlistController wishlistController = fxmlLoader.getController();
+
+		wishlistHolder.getChildren().add(pane);
+	}
 }

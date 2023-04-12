@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
+   <children>
+      <Label text="Wishlist" />
+      <ListView fx:id="lvWishlist" prefHeight="200.0" prefWidth="200.0" />
+      <HBox prefHeight="40.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="btnNewItem" mnemonicParsing="false" text="New Item" />
+            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="View" />
+            <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+         </children>
+      </HBox>
+      <ScrollPane prefHeight="300.0" prefWidth="600.0">
+         <content>
+            <HBox fx:id="dayHolder" prefHeight="300.0" prefWidth="705.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>
