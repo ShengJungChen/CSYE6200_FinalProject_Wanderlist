@@ -34,7 +34,7 @@
             </Label>
             <TextField fx:id="tf_username" layoutX="375.0" layoutY="139.0" />
             <TextField fx:id="tf_password" layoutX="375.0" layoutY="214.0" />
-            <Button fx:id="button_signup" layoutX="293.0" layoutY="316.0" mnemonicParsing="false" style="-fx-background-color: #FED700;" text="Sign Up">
+            <Button fx:id="button_signup" layoutX="293.0" layoutY="316.0" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #FED700;" text="Sign Up">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
