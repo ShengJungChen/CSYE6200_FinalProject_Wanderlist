@@ -63,8 +63,11 @@ public class buyPane_Controller extends Application {
 	
 	@FXML
 	private void deleteItem(ActionEvent event) {
-		int selectedID = listView.getSelectionModel().getSelectedIndex();
-		listView.getItems().remove(selectedID);
+		String selectedItem = listView.getSelectionModel().getSelectedItem();
+		if(selectedItem != null) {
+			listView.getItems().remove(selectedItem);
+		}
+		
 	}
 	
 	public CheckBox getMon() {

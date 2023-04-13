@@ -99,13 +99,13 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="from" onAction="#initialize" prefHeight="23.0" prefWidth="67.0" promptText="0" />
+                  <ComboBox fx:id="from" prefHeight="23.0" prefWidth="67.0" promptText="0" />
                   <Label text="to">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="to" onAction="#initialize" prefHeight="23.0" prefWidth="67.0" promptText="0" />
+                  <ComboBox fx:id="to" prefHeight="23.0" prefWidth="67.0" promptText="0" />
                </children>
                <opaqueInsets>
                   <Insets />

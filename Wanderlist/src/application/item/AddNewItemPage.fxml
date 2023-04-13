@@ -95,7 +95,7 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="btn_cancel" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel">
+            <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="35.0" prefWidth="70.0" text="Cancel">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

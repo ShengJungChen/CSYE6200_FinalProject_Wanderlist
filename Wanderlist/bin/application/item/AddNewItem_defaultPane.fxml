@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="656.0" prefWidth="877.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.ItemTypeController">
+<VBox alignment="TOP_CENTER" prefHeight="656.0" prefWidth="877.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.defaultPane_Controller">
    <children>
       <Pane fx:id="firstPane" prefHeight="250.0" prefWidth="843.0">
          <children>
@@ -54,7 +54,7 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="note" prefHeight="89.0" prefWidth="279.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextArea fx:id="itemNote" prefHeight="89.0" prefWidth="279.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="type" text="type" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="14.0" />
@@ -71,9 +71,9 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="typeBox" prefWidth="150.0" promptText="select a type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="name_input" prefHeight="30.0" prefWidth="184.0" promptText="name the schedule" GridPane.columnIndex="1" />
-                  <TextField fx:id="url_input" prefHeight="30.0" prefWidth="276.0" promptText="https://" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="address_input" prefHeight="30.0" prefWidth="184.0" promptText="street name, city ....." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="itemName" prefHeight="30.0" prefWidth="184.0" promptText="name the schedule" GridPane.columnIndex="1" />
+                  <TextField fx:id="itemUrl" prefHeight="30.0" prefWidth="276.0" promptText="https://" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="itemAddress" prefHeight="30.0" prefWidth="184.0" promptText="street name, city ....." GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

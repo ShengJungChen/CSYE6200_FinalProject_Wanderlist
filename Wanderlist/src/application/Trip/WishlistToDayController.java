@@ -146,7 +146,7 @@ public class WishlistToDayController extends Application {
 
 	@FXML
 	private void populateData() {
-		leftList.addAll("A1", "A2", "A3");
+		leftList.addAll("A1", "A2", "A3","A2");
 		day1List.addAll("B1", "B2", "B3");
 
 		poolListView.setItems(leftList);
