@@ -1,7 +1,5 @@
 package model.Trip;
 
-import java.util.List;
-
 public abstract class Item {
 
 	private Type type;
@@ -66,7 +64,11 @@ public abstract class Item {
 	public void setItemNote(String itemNote) {
 		this.itemNote = itemNote;
 	}
-	
+
+	@Override
+	public String toString() {
+		return this.itemName;
+	}
 
 	// update item
 	public abstract void updateItem();
