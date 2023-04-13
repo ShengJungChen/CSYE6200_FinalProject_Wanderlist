@@ -327,7 +327,4 @@ public class AddNewItemController extends Application {
 		scene.setRoot(root);
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

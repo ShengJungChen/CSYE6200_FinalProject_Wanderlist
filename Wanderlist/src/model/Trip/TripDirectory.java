@@ -37,6 +37,5 @@ public class TripDirectory {
 		this.trips.remove(trip);
 	}
 
-	// view trip
 
 }

@@ -84,7 +84,7 @@ public class TripItemController implements Initializable {
 
 		if (result.get() == ButtonType.OK) {
 			// delete trip & save to database
-			database.getUserDirectory().getUserByEmail("anita@gmail.com").getTrips().deleteTrip(trip);
+			trip.getUser().getTrips().deleteTrip(this.trip);
 			database.store();
 
 			// refresh dashboard

@@ -67,8 +67,6 @@ public class buyPane_Controller extends Application {
 		listView.getItems().remove(selectedID);
 	}
 	
-
-	
 	public CheckBox getMon() {
 		return mon;
 	}
