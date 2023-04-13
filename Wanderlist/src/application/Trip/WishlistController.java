@@ -1,6 +1,9 @@
 package application.Trip;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import application.item.AddNewItemController;
 import javafx.event.ActionEvent;
@@ -13,9 +16,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.System.ApplicationSystem;
 import model.Trip.Item;
+import model.Trip.Day;
 import model.Trip.Trip;
 
 public class WishlistController {
@@ -55,7 +60,7 @@ public class WishlistController {
 
 	
 
-	//add new item
+	// item
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 		// JUST FOR TEST
@@ -66,6 +71,8 @@ public class WishlistController {
 	    for (Item item : this.trip.getWishlist().getWishList()) {
 	        lvWishlist.getItems().add(item.getItemName());
 	    }
+	    
+	    populateDayList();
 	}
 	 //delete a item
 	@FXML
@@ -92,4 +99,37 @@ public class WishlistController {
 	        alert.showAndWait();
 	    }
 	}
+
+	public void populateDayList() {
+
+		dayHolder.getChildren().clear();
+
+		ArrayList<Day> dayList = trip.getDays().getDays();
+
+		for (int i = 0; i < dayList.size(); i++) {
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getClass().getResource("DayView.fxml"));
+
+			try {
+				VBox vBox = fxmlLoader.load();
+				DayViewController dayViewController = fxmlLoader.getController();
+
+				// get date string
+				Date date = dayList.get(i).getDate();
+				String pattern = "yyyy/MM/dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				String dateString = simpleDateFormat.format(date);
+
+				// set
+				dayViewController.setData(dateString, dayList.get(i).getWeekDay());
+
+				dayHolder.getChildren().add(vBox);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 }
