@@ -52,37 +52,37 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <CheckBox mnemonicParsing="false" text="Monday">
+                  <CheckBox fx:id="mon" mnemonicParsing="false" text="Monday">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Tuesday" GridPane.rowIndex="1">
+                  <CheckBox fx:id="tue" mnemonicParsing="false" text="Tuesday" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Wednesday" GridPane.rowIndex="2">
+                  <CheckBox fx:id="wed" mnemonicParsing="false" text="Wednesday" GridPane.rowIndex="2">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Thursday" GridPane.rowIndex="3">
+                  <CheckBox fx:id="thur" mnemonicParsing="false" text="Thursday" GridPane.rowIndex="3">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" text="Friday" GridPane.columnIndex="1">
+                  <CheckBox fx:id="fri" mnemonicParsing="false" text="Friday" GridPane.columnIndex="1">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="131.0" layoutY="10.0" mnemonicParsing="false" text="Saturday" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <CheckBox fx:id="sat" layoutX="131.0" layoutY="10.0" mnemonicParsing="false" text="Saturday" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="131.0" layoutY="27.0" mnemonicParsing="false" text="Sunday" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <CheckBox fx:id="sun" layoutX="131.0" layoutY="27.0" mnemonicParsing="false" text="Sunday" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -99,13 +99,13 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox prefHeight="23.0" prefWidth="67.0" />
+                  <ComboBox fx:id="from" onAction="#initialize" prefHeight="23.0" prefWidth="67.0" promptText="0" />
                   <Label text="to">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox prefHeight="23.0" prefWidth="67.0" />
+                  <ComboBox fx:id="to" onAction="#initialize" prefHeight="23.0" prefWidth="67.0" promptText="0" />
                </children>
                <opaqueInsets>
                   <Insets />
