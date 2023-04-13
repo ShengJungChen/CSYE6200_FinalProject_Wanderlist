@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import model.System.ApplicationSystem;
 import model.Trip.Day;
@@ -38,6 +41,9 @@ public class DayViewController {
 	private Button btn_remove;
 	@FXML
 	private Button btn_view;
+
+	private static DayViewController orgViewController;
+	private static Item dragItem;
 
 	public void setData(WishlistController wishlistController, Day day, String date, String weekday) {
 		this.wishlistController = wishlistController;
@@ -75,6 +81,22 @@ public class DayViewController {
 		}
 	}
 
+	// TEST FOR DAY TO DAY DRAG
+	public void dragDetected(MouseEvent event) {
+		Item player = lvDay.getSelectionModel().getSelectedItem();
+		if (player == null) {
+			return;
+		}
+		this.dragItem = player;
+		Dragboard dragBoard = lvDay.startDragAndDrop(TransferMode.MOVE);
+		ClipboardContent content = new ClipboardContent();
+		content.put(Item.DATA_FORMAT, player);
+		dragBoard.setContent(content);
+
+		orgViewController = this;
+
+	}
+
 	public void dragOver(DragEvent dragEvent) {
 		if (dragEvent.getDragboard().hasContent(Item.DATA_FORMAT)) {
 			dragEvent.acceptTransferModes(TransferMode.MOVE);
@@ -87,12 +109,35 @@ public class DayViewController {
 		lvDay.setItems(olDay);
 		dragEvent.setDropCompleted(true);
 
-		// update wishlist controller
-		wishlistController.removeDragedOutItem();
+		if (orgViewController != null) {
+			// update daylist
+			orgViewController.getOlDay().remove(dragItem);
+			orgViewController.getLvDay().setItems(orgViewController.getOlDay());
+			// update object
+			orgViewController.getDay().removeItemFromSchedule(dragItem);
+			day.getSchedule().add(dragItem);
+			// reset reference
+			orgViewController = null;
+		} else {
+			// update wishlist controller
+			wishlistController.removeDragedOutItem();
+			day.getSchedule().add(player);
+		}
 
 		// update day's schedule and save
-		day.getSchedule().add(player);
 		database.store();
+	}
+
+	public Day getDay() {
+		return this.day;
+	}
+
+	public ListView<Item> getLvDay() {
+		return lvDay;
+	}
+
+	public ObservableList<Item> getOlDay() {
+		return olDay;
 	}
 
 }
