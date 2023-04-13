@@ -221,8 +221,21 @@ public class EditTripController implements Initializable {
 					trip.setCountry(country);
 					trip.setCity(city);
 					trip.setNote(note);
-					trip.setStartDate(startYear, startMonth, startDate);
-					trip.setEndDate(endYear, endMonth, endDate);
+
+					// check if date has been updated
+					int orgStartYear = trip.getStartDate().getYear() + 1900;
+					int orgStartMonth = trip.getStartDate().getMonth() + 1;
+					int orgStartDate = trip.getStartDate().getDate();
+					int orgEndYear = trip.getEndDate().getYear() + 1900;
+					int orgEndMonth = trip.getEndDate().getMonth() + 1;
+					int orgEndDate = trip.getEndDate().getDate();
+
+					if (orgStartYear != startYear || orgStartMonth != startMonth || orgStartDate != startDate
+							|| orgEndYear != endYear || orgEndMonth != endMonth || orgEndDate != endDate) {
+						trip.setStartDate(startYear, startMonth, startDate);
+						trip.setEndDate(endYear, endMonth, endDate);
+						trip.getDays().createDays();
+					}
 
 					database.store();
 
