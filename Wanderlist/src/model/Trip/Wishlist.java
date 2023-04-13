@@ -23,26 +23,52 @@ public class Wishlist  {
 		return wishlist;
 	}
 
-	public void addItem(Item.Type type, String itemName) {
+	public Item addItem(Item.Type type, String itemName) {
 
+//		switch (type) {
+//		case Eat:
+//			Eat eatItem = new Eat(type, trip, itemName);
+//			this.wishlist.add(eatItem);
+//			return eatItem;
+////			break;
+//		case Buy:
+//			Buy buyItem = new Buy(type, trip, itemName);
+//			this.wishlist.add(buyItem);
+//			return buyItem;
+////			break;
+//		case Play:
+//			Play playItem = new Play(type, trip, itemName);
+//			this.wishlist.add(playItem);
+//			return playItem;
+////			break;
+//		case See:
+//			See seeItem = new See(type, trip, itemName);
+//			this.wishlist.add(seeItem);
+//			return seeItem;
+////			break;
+//		}
+		
+		Item item = null;
+		
 		switch (type) {
 		case Eat:
-			Eat eatItem = new Eat(type, trip, itemName);
-			this.wishlist.add(eatItem);
-			break;
+			item = new Eat(type, trip, itemName);
+			this.wishlist.add(item);
+			return item;
 		case Buy:
 			Buy buyItem = new Buy(type, trip, itemName);
 			this.wishlist.add(buyItem);
-			break;
+			return buyItem;
 		case Play:
 			Play playItem = new Play(type, trip, itemName);
 			this.wishlist.add(playItem);
-			break;
+			return playItem;
 		case See:
 			See seeItem = new See(type, trip, itemName);
 			this.wishlist.add(seeItem);
-			break;
+			return seeItem;
 		}
+		return item;
 	}
 	
 //	public ArrayList<Item> getAllItems() {

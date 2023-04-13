@@ -1,7 +1,6 @@
 package application.item;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,9 +23,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Trip.Item;
 
 public class ViewItemController extends Application {
 
+	Item item;
 	// button
 	@FXML	private Button btn_back;
 	@FXML	private Button btn_edit;
@@ -94,6 +95,23 @@ public class ViewItemController extends Application {
 			Pane eatpane = FXMLLoader.load(getClass().getResource("AddNewItem_seePane.fxml"));
 			secondPane.getChildren().setAll(eatpane);
 		}
+	}
+	
+	public void setData(Item item) {	
+		this.item = item;
+		
+		name.setText(item.getItemName());
+		url.setText(item.getUrl());
+		address.setText(item.getAddress());
+		note.setText(item.getItemNote());
+
+		typeBox.setValue(item.getType());
+		
+		if(typeBox.getValue().equals("Eat")) {
+			
+		}
+		
+		
 	}
 
 	@FXML
