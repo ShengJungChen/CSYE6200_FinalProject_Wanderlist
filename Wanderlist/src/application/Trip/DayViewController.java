@@ -18,7 +18,9 @@ public class DayViewController extends Application {
 	@FXML
 	private ListView<String> dayListView = new ListView<String>();
 	@FXML
-	private Label dayNum;
+	private Label lbDate;
+	@FXML
+	private Label lbWeekday;
 	@FXML
 	private Button btn_remove;
 	@FXML
@@ -55,8 +57,9 @@ public class DayViewController extends Application {
 		}
 	}
 
-	public void setData(String date) {
-		this.dayNum.setText(date);
+	public void setData(String date, String weekday) {
+		this.lbDate.setText(date);
+		this.lbWeekday.setText(weekday);
 	}
 
 }

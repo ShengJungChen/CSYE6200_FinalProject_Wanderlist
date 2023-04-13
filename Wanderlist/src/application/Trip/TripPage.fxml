@@ -31,7 +31,7 @@
                         <Button fx:id="btnCancel" disable="true" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" prefWidth="80.0" text="Cancel" />
                      </children>
                   </HBox>
-                  <VBox fx:id="wishlistHolder" prefHeight="740.0" prefWidth="843.0" />
+                  <VBox fx:id="wishlistHolder" prefHeight="740.0" prefWidth="843.0" spacing="10.0" />
                </children>
             </VBox>
          </content>

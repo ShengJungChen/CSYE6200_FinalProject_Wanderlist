@@ -84,7 +84,8 @@ public class WishlistController {
 				String dateString = simpleDateFormat.format(date);
 
 				// set
-				dayViewController.setData(dateString);
+				dayViewController.setData(dateString, dayList.get(i).getWeekDay());
+
 				dayHolder.getChildren().add(vBox);
 
 			} catch (IOException e) {

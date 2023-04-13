@@ -10,15 +10,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.DayViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="250.0" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.DayViewController">
    <children>
-      <Label fx:id="dayNum" text="Day 1">
-         <font>
-            <Font name="Arial Bold" size="14.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" prefHeight="75.0" prefWidth="250.0">
+         <children>
+            <Label fx:id="lbDate" alignment="TOP_CENTER" text="Date" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbWeekday" alignment="TOP_CENTER" layoutX="117.0" layoutY="55.0" text="Weekday">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
       <ListView fx:id="dayListView" prefHeight="353.0" prefWidth="279.0" />
-      <HBox alignment="CENTER_RIGHT" prefWidth="600.0" spacing="10.0">
+      <HBox alignment="CENTER_RIGHT" prefWidth="600.0" spacing="20.0">
          <children>
             <Button fx:id="btn_remove" mnemonicParsing="false" onAction="#moveButtonAction" prefHeight="12.0" prefWidth="15.0">
                <graphic>
@@ -29,7 +38,10 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btn_view" mnemonicParsing="false" onAction="#viewButtonAction" prefHeight="23.0" prefWidth="49.0" text="View" />
+            <Button fx:id="btn_view" mnemonicParsing="false" onAction="#viewButtonAction" prefHeight="23.0" prefWidth="49.0" text="View">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />
