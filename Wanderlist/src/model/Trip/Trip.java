@@ -2,6 +2,9 @@ package model.Trip;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+
 
 import model.User.User;
 
@@ -96,6 +99,8 @@ public class Trip {
 	public Date getEndDate() {
 		return endDate;
 	}
+	
+	
 
 	public void setEndDate(int year, int month, int date) {
 
