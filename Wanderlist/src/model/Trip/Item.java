@@ -1,13 +1,17 @@
 package model.Trip;
 
-public abstract class Item {
+import java.io.Serializable;
+
+import javafx.scene.input.DataFormat;
+
+public abstract class Item implements Serializable {
+
+	public static final DataFormat DATA_FORMAT = new DataFormat("Item");
 
 	private Type type;
 
 	public enum Type {
-
 		Eat, Play, See, Buy
-
 	}
 
 	private Trip trip;

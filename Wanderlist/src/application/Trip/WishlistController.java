@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import application.item.AddNewItemController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,53 +50,25 @@ public class WishlistController {
 	@FXML
 	private ListView<Item> lvWishlist;
 
-	@FXML
-	public void newItemAction(ActionEvent event) throws IOException {
+	private ObservableList<Item> olWishlist = FXCollections.observableArrayList();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
-
-		Parent root = loader.load();
-		AddNewItemController addNewItemController = loader.getController();
-		addNewItemController.setTrip(this.trip);
-
-		Stage stage = (Stage) btnNewItem.getScene().getWindow();
-		stage.setScene(new Scene(root));
-
-	}
+	Item dragItem;
 
 	// item
 	public void setTrip(Trip trip) {
 		this.trip = trip;
-		// JUST FOR TEST
-		// System.out.println("TRIP" + this.trip.getTripName());
 
-		// Clear any existing items in the ListView
-		lvWishlist.getItems().clear();
-		for (Item item : this.trip.getWishlist().getWishList()) {
-			lvWishlist.getItems().add(item);
-		}
-
+		populateWishlist();
 		populateDayList();
 	}
 
-	// delete a item
-	@FXML
-	public void deleteSelectedItem() {
-		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
-		if (selectedItem != null) {
-			// remove item from listview
-			lvWishlist.getItems().remove(selectedItem);
+	public void populateWishlist() {
+		// clear any existing items in the ListView
+		lvWishlist.getItems().clear();
 
-			// remove item from wishlist
-			trip.getWishlist().removeItemFromWishlist(selectedItem);
-		} else {
-			// if no item is selected
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("No item selected");
-			alert.setContentText("Please select an item to delete");
-			alert.showAndWait();
-		}
+		olWishlist.addAll(this.trip.getWishlist().getWishList());
+		lvWishlist.setItems(olWishlist);
+
 	}
 
 	public void populateDayList() {
@@ -108,21 +86,94 @@ public class WishlistController {
 				DayViewController dayViewController = fxmlLoader.getController();
 
 				// get date string
-				Date date = dayList.get(i).getDate();
+				Day day = dayList.get(i);
+				Date date = day.getDate();
 				String pattern = "yyyy/MM/dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 				String dateString = simpleDateFormat.format(date);
 
 				// set
-				dayViewController.setData(dateString, dayList.get(i).getWeekDay());
-
+				dayViewController.setData(this, day, dateString, dayList.get(i).getWeekDay());
 				dayHolder.getChildren().add(vBox);
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
 
+	@FXML
+	public void newItemAction(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/AddNewItemPage.fxml"));
+
+		Parent root = loader.load();
+		AddNewItemController addNewItemController = loader.getController();
+		addNewItemController.setTrip(this.trip);
+
+		Stage stage = (Stage) btnNewItem.getScene().getWindow();
+		stage.setScene(new Scene(root));
+
+	}
+
+	// delete a item
+	@FXML
+	public void deleteSelectedItem() {
+		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			// remove item from listview
+			lvWishlist.getItems().remove(selectedItem);
+			// remove item from wishlist and save
+			trip.getWishlist().removeItemFromWishlist(selectedItem);
+			database.store();
+
+		} else {
+			// if no item is selected
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("No item selected");
+			alert.setContentText("Please select an item to delete");
+			alert.showAndWait();
+		}
+	}
+
+	public void dragDetected(MouseEvent event) {
+		Item player = lvWishlist.getSelectionModel().getSelectedItem();
+		if (player == null) {
+			return;
+		}
+		this.dragItem = player;
+		Dragboard dragBoard = lvWishlist.startDragAndDrop(TransferMode.MOVE);
+		ClipboardContent content = new ClipboardContent();
+		content.put(Item.DATA_FORMAT, player);
+		dragBoard.setContent(content);
+	}
+
+	public ListView<Item> getLvWishlist() {
+		return lvWishlist;
+	}
+
+	public void removeDragedOutItem() {
+		olWishlist.remove(dragItem);
+		lvWishlist.setItems(olWishlist);
+		// update object
+		trip.getWishlist().removeItemFromWishlist(dragItem);
+	}
+
+	public void setLvWishlist(ListView<Item> lvWishlist) {
+		this.lvWishlist = lvWishlist;
+	}
+
+	public ObservableList<Item> getOlWisList() {
+		return olWishlist;
+	}
+
+	public void setOlWisList(ObservableList<Item> olWisList) {
+		this.olWishlist = olWisList;
+	}
+
+	public Trip getTrip() {
+		return trip;
 	}
 
 }

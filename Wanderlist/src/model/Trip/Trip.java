@@ -1,14 +1,12 @@
 package model.Trip;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
-
 
 import model.User.User;
 
-public class Trip {
+public class Trip implements Serializable {
 	private User user;
 	private String tripName;
 	private Date startDate;
@@ -99,8 +97,6 @@ public class Trip {
 	public Date getEndDate() {
 		return endDate;
 	}
-	
-	
 
 	public void setEndDate(int year, int month, int date) {
 
@@ -159,6 +155,10 @@ public class Trip {
 	// add item to wishlist
 	public void addItemToWishlist(Item.Type type, String itemName) {
 		wishlist.addItem(type, itemName);
+	}
+
+	public void addItemToWishlist(Item item) {
+		wishlist.addItem(item);
 	}
 
 	// delete item from wishlist
