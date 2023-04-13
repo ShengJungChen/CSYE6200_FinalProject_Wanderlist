@@ -43,6 +43,7 @@ public class WishlistController {
 
 		Parent root = loader.load();
 		AddNewItemController addNewItemController = loader.getController();
+		addNewItemController.setTrip(this.trip);
 
 		Stage stage = (Stage) btnNewItem.getScene().getWindow();
 		stage.setScene(new Scene(root));

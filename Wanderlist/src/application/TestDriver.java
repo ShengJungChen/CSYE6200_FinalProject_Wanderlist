@@ -15,6 +15,8 @@ public class TestDriver {
 		User user = database.getUserDirectory().getUserByEmail("anita@gmail.com");
 		user.getTrips().addNewTrip("TRIP1", "HAHA", "HEY", 2023, 1, 1, 2023, 1, 4, null);
 
+		user.getTrips().getTrips().get(0).getWishlist().addItem(null, null);
+		
 		ApplicationSystem.getDb4oUtil().storeSystem(database);
 
 		for (String s : database.getUserDirectory().getAllEmail()) {
