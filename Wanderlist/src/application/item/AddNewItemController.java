@@ -116,7 +116,4 @@ public class AddNewItemController extends Application {
 		}
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

@@ -1,8 +1,9 @@
 package model.Trip;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Wishlist {
+public class Wishlist  {
 
 	private Trip trip;
 	private ArrayList<Item> wishlist;
@@ -43,6 +44,19 @@ public class Wishlist {
 			break;
 		}
 	}
+	
+//	public ArrayList<Item> getAllItems() {
+//	    ArrayList<Item> allItems = new ArrayList<>();
+//	    for (Item item : wishlist) {
+//	        if (item.getTrip().equals(trip)) {
+//	            allItems.add(item);
+//	        }
+//	    }
+//	    return allItems;
+//	}
+	
+	
+
 
 	public void removeItemFromWishlist(Item item) {
 		wishlist.remove(item);
