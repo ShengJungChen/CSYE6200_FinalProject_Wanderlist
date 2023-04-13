@@ -215,8 +215,7 @@ public class EditTripController implements Initializable {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("CONFRIMATION");
 				alert.setHeaderText("Are you sure you want to update this trip?");
-				alert.setContentText(
-						"If you have modified the date, all scheduled items will return to wishlist. Continue?");
+				alert.setContentText("If you have modified the date, all scheduled items will return to wishlist. Continue?");
 				Optional<ButtonType> result = alert.showAndWait();
 
 				if (result.get() == ButtonType.OK) {
@@ -237,19 +236,19 @@ public class EditTripController implements Initializable {
 					if (orgStartYear != startYear || orgStartMonth != startMonth || orgStartDate != startDate
 							|| orgEndYear != endYear || orgEndMonth != endMonth || orgEndDate != endDate) {
 
-						// put all scheduled items back to wishlist
-						Wishlist wishlist = trip.getWishlist();
-						for (int i = 0; i < trip.getDays().getDays().size(); i++) {
-							Day day = trip.getDays().getDays().get(i);
-							for (Item item : day.getSchedule()) {
-								wishlist.addItem(item);
+							// put all scheduled items back to wishlist
+							Wishlist wishlist = trip.getWishlist();
+							for (int i = 0; i < trip.getDays().getDays().size(); i++) {
+								Day day = trip.getDays().getDays().get(i);
+								for (Item item : day.getSchedule()) {
+									wishlist.addItem(item);
+								}
 							}
-						}
 
-						// update trip date
-						trip.setStartDate(startYear, startMonth, startDate);
-						trip.setEndDate(endYear, endMonth, endDate);
-						trip.getDays().createDays();
+							// update trip date
+							trip.setStartDate(startYear, startMonth, startDate);
+							trip.setEndDate(endYear, endMonth, endDate);
+							trip.getDays().createDays();
 					}
 
 					database.store();
