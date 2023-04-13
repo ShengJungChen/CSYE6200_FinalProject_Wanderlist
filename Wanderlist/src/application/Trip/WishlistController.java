@@ -65,8 +65,6 @@ public class WishlistController {
 
 	public void populateDayList() {
 
-		System.out.println("HERE");
-
 		dayHolder.getChildren().clear();
 
 		ArrayList<Day> dayList = trip.getDays().getDays();
@@ -88,7 +86,6 @@ public class WishlistController {
 				// set
 				dayViewController.setData(dateString);
 				dayHolder.getChildren().add(vBox);
-				System.out.println("ADD" + i);
 
 			} catch (IOException e) {
 				e.printStackTrace();
