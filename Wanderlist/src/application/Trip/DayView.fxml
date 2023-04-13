@@ -26,7 +26,7 @@
             </Label>
          </children>
       </VBox>
-      <ListView fx:id="dayListView" prefHeight="353.0" prefWidth="279.0" />
+      <ListView fx:id="lvDay" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="353.0" prefWidth="279.0" />
       <HBox alignment="CENTER_RIGHT" prefWidth="600.0" spacing="20.0">
          <children>
             <Button fx:id="btn_remove" mnemonicParsing="false" onAction="#moveButtonAction" prefHeight="12.0" prefWidth="15.0">

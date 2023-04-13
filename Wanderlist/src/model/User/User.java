@@ -1,8 +1,10 @@
 package model.User;
 
+import java.io.Serializable;
+
 import model.Trip.TripDirectory;
 
-public class User {
+public class User implements Serializable {
 	private String email;
 	private String password;
 	private TripDirectory trips;

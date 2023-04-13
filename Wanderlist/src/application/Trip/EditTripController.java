@@ -23,7 +23,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.System.ApplicationSystem;
+import model.Trip.Day;
+import model.Trip.Item;
 import model.Trip.Trip;
+import model.Trip.Wishlist;
 import model.User.User;
 
 public class EditTripController implements Initializable {
@@ -232,9 +235,31 @@ public class EditTripController implements Initializable {
 
 					if (orgStartYear != startYear || orgStartMonth != startMonth || orgStartDate != startDate
 							|| orgEndYear != endYear || orgEndMonth != endMonth || orgEndDate != endDate) {
-						trip.setStartDate(startYear, startMonth, startDate);
-						trip.setEndDate(endYear, endMonth, endDate);
-						trip.getDays().createDays();
+
+						Alert alertDate = new Alert(AlertType.CONFIRMATION);
+						alert.setTitle("CONFRIMATION");
+						alert.setHeaderText("Trip Date has been modified");
+						alert.setContentText("All scheduled items will return to wishlist. Continue?");
+						Optional<ButtonType> resultDate = alert.showAndWait();
+
+						if (result.get() == ButtonType.OK) {
+
+							// put all scheduled items back to wishlist
+							Wishlist wishlist = trip.getWishlist();
+							for (int i = 0; i < trip.getDays().getDays().size(); i++) {
+								Day day = trip.getDays().getDays().get(i);
+								for (Item item : day.getSchedule()) {
+									wishlist.addItem(item);
+								}
+							}
+
+							// update trip date
+							trip.setStartDate(startYear, startMonth, startDate);
+							trip.setEndDate(endYear, endMonth, endDate);
+							trip.getDays().createDays();
+						} else {
+							event.consume();
+						}
 					}
 
 					database.store();

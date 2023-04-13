@@ -6,17 +6,12 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -24,28 +19,33 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import model.Trip.Eat;
+import model.Trip.Item;
+import model.Trip.Trip;
+import model.User.User;
 
 public class WishlistToDayController extends Application {
 
 	@FXML
-	private ListView<String> poolListView = new ListView<String>();
+	private ListView<Item> poolListView = new ListView<Item>();
 	@FXML
-	private ListView<String> day1ListView = new ListView<String>();
+	private ListView<Item> day1ListView = new ListView<Item>();
 	@FXML
-	private ListView<String> day2ListView = new ListView<String>();
+	private ListView<Item> day2ListView = new ListView<Item>();
 
 	@FXML
 	private Button btn_remove;
 	@FXML
 	private Button btn_remove2;
 
-	private ObservableList<String> leftList = FXCollections.observableArrayList();
-	private ObservableList<String> day1List = FXCollections.observableArrayList();
-	private ObservableList<String> day2List = FXCollections.observableArrayList();
+	private ObservableList<Item> leftList = FXCollections.observableArrayList();
+	private ObservableList<Item> day1List = FXCollections.observableArrayList();
+	private ObservableList<Item> day2List = FXCollections.observableArrayList();
 
 	@FXML
 	private GridPane rootPane = new GridPane();
+
+	Item dragItem;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -63,13 +63,13 @@ public class WishlistToDayController extends Application {
 	}
 
 	public void initialize() {
-		dragdrop();
+//		dragdrop();
 		populateData();
 	}
 
 	@FXML
 	private void moveButtonAction(ActionEvent e) {
-		String selectedItem = day1ListView.getSelectionModel().getSelectedItem();
+		Item selectedItem = day1ListView.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
 			poolListView.getItems().add(selectedItem);
 			day1ListView.getItems().remove(selectedItem);
@@ -78,76 +78,108 @@ public class WishlistToDayController extends Application {
 
 	@FXML
 	private void moveButtonAction2(ActionEvent e) {
-		String selectedItem = day2ListView.getSelectionModel().getSelectedItem();
+		Item selectedItem = day2ListView.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
 			poolListView.getItems().add(selectedItem);
 			day2ListView.getItems().remove(selectedItem);
 		}
 	}
 
-	private void dragdrop() {
-
-		poolListView.setOnDragDetected(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				if (poolListView.getSelectionModel().getSelectedItem() == null) {
-					return;
-				}
-				Dragboard dragBoard = poolListView.startDragAndDrop(TransferMode.MOVE);
-				ClipboardContent content = new ClipboardContent();
-				content.putString(poolListView.getSelectionModel().getSelectedItem());
-				dragBoard.setContent(content);
-			}
-		});
-
-		day1ListView.setOnDragOver(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent dragEvent) {
-				if (dragEvent.getDragboard().hasString()) {
-					dragEvent.acceptTransferModes(TransferMode.MOVE);
-				}
-			}
-		});
-
-		day1ListView.setOnDragDropped(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent dragEvent) {
-				String player = dragEvent.getDragboard().getString();
-				day1List.addAll(player);
-				leftList.remove(player);
-				day1ListView.setItems(day1List);
-				poolListView.setItems(leftList);
-				dragEvent.setDropCompleted(true);
-			}
-		});
-
-		day2ListView.setOnDragOver(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent dragEvent) {
-				if (dragEvent.getDragboard().hasString()) {
-					dragEvent.acceptTransferModes(TransferMode.MOVE);
-				}
-			}
-		});
-
-		day2ListView.setOnDragDropped(new EventHandler<DragEvent>() {
-			@Override
-			public void handle(DragEvent dragEvent) {
-				String player = dragEvent.getDragboard().getString();
-				day2List.addAll(player);
-				leftList.remove(player);
-				day2ListView.setItems(day2List);
-				poolListView.setItems(leftList);
-				dragEvent.setDropCompleted(true);
-			}
-		});
-
+	public void dragDetected(MouseEvent event) {
+		Item player = poolListView.getSelectionModel().getSelectedItem();
+		if (player == null) {
+			return;
+		}
+		dragItem = player;
+		Dragboard dragBoard = poolListView.startDragAndDrop(TransferMode.MOVE);
+		ClipboardContent content = new ClipboardContent();
+		content.put(Item.DATA_FORMAT, player);
+		dragBoard.setContent(content);
 	}
+
+	public void dragOver(DragEvent dragEvent) {
+		if (dragEvent.getDragboard().hasContent(Item.DATA_FORMAT)) {
+			dragEvent.acceptTransferModes(TransferMode.MOVE);
+		}
+	}
+
+	public void dragDropped(DragEvent dragEvent) {
+		Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
+		day1List.addAll(player);
+		leftList.remove(dragItem);
+		day1ListView.setItems(day1List);
+		poolListView.setItems(leftList);
+		dragEvent.setDropCompleted(true);
+	}
+
+//	private void dragdrop() {
+//
+//		poolListView.setOnDragDetected(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				Item player = poolListView.getSelectionModel().getSelectedItem();
+//				if (player == null) {
+//					return;
+//				}
+//				dragItem = player;
+//				Dragboard dragBoard = poolListView.startDragAndDrop(TransferMode.MOVE);
+//				ClipboardContent content = new ClipboardContent();
+//				content.put(Item.DATA_FORMAT, player);
+//				dragBoard.setContent(content);
+//			}
+//		});
+//
+//		day1ListView.setOnDragOver(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent dragEvent) {
+//				if (dragEvent.getDragboard().hasContent(Item.DATA_FORMAT)) {
+//					dragEvent.acceptTransferModes(TransferMode.MOVE);
+//				}
+//			}
+//		});
+//
+//		day1ListView.setOnDragDropped(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent dragEvent) {
+//				Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
+//				day1List.addAll(player);
+//				leftList.remove(dragItem);
+//				day1ListView.setItems(day1List);
+//				poolListView.setItems(leftList);
+//				dragEvent.setDropCompleted(true);
+//			}
+//		});
+//
+//		day2ListView.setOnDragOver(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent dragEvent) {
+//				if (dragEvent.getDragboard().hasContent(Item.DATA_FORMAT)) {
+//					dragEvent.acceptTransferModes(TransferMode.MOVE);
+//				}
+//			}
+//		});
+//
+//		day2ListView.setOnDragDropped(new EventHandler<DragEvent>() {
+//			@Override
+//			public void handle(DragEvent dragEvent) {
+//				Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
+//				day2List.addAll(player);
+//				leftList.remove(player);
+//				day2ListView.setItems(day2List);
+//				poolListView.setItems(leftList);
+//				dragEvent.setDropCompleted(true);
+//			}
+//		});
+//
+//	}
 
 	@FXML
 	private void populateData() {
-		leftList.addAll("A1", "A2", "A3");
-		day1List.addAll("B1", "B2", "B3");
+		User user = new User("qwe", "qwe");
+		Trip trip = new Trip(user, "TEST", "TEST", "TEST", 2023, 2, 1, 2023, 2, 2, null);
+
+		leftList.addAll(new Eat(Item.Type.Eat, trip, "Eat"));
+		day1List.addAll(new Eat(Item.Type.Eat, trip, "Eat2"));
 
 		poolListView.setItems(leftList);
 		day1ListView.setItems(day1List);

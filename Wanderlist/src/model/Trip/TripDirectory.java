@@ -1,10 +1,11 @@
 package model.Trip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.User.User;
 
-public class TripDirectory {
+public class TripDirectory implements Serializable {
 
 	private User user;
 	private ArrayList<Trip> trips;
@@ -36,6 +37,5 @@ public class TripDirectory {
 	public void deleteTrip(Trip trip) {
 		this.trips.remove(trip);
 	}
-
 
 }

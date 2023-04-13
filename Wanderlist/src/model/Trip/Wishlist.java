@@ -1,9 +1,9 @@
 package model.Trip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class Wishlist  {
+public class Wishlist implements Serializable {
 
 	private Trip trip;
 	private ArrayList<Item> wishlist;
@@ -21,6 +21,10 @@ public class Wishlist  {
 
 	public ArrayList<Item> getWishList() {
 		return wishlist;
+	}
+
+	public void addItem(Item item) {
+		wishlist.add(item);
 	}
 
 	public Item addItem(Item.Type type, String itemName) {
@@ -47,9 +51,9 @@ public class Wishlist  {
 //			return seeItem;
 ////			break;
 //		}
-		
+
 		Item item = null;
-		
+
 		switch (type) {
 		case Eat:
 			item = new Eat(type, trip, itemName);
@@ -70,7 +74,7 @@ public class Wishlist  {
 		}
 		return item;
 	}
-	
+
 //	public ArrayList<Item> getAllItems() {
 //	    ArrayList<Item> allItems = new ArrayList<>();
 //	    for (Item item : wishlist) {
@@ -80,9 +84,6 @@ public class Wishlist  {
 //	    }
 //	    return allItems;
 //	}
-	
-	
-
 
 	public void removeItemFromWishlist(Item item) {
 		wishlist.remove(item);
