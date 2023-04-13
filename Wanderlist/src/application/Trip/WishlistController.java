@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import application.item.AddNewItemController;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -118,14 +120,26 @@ public class WishlistController {
 
 	// delete a item
 	@FXML
-	public void deleteSelectedItem() {
+	public void deleteSelectedItem(ActionEvent event) {
 		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
-			// remove item from listview
-			lvWishlist.getItems().remove(selectedItem);
-			// remove item from wishlist and save
-			trip.getWishlist().removeItemFromWishlist(selectedItem);
-			database.store();
+
+			// delete alert
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFRIMATION");
+			alert.setHeaderText("Are you sure you want to delete this item?");
+			alert.setContentText("This change cannot be recovered.");
+			Optional<ButtonType> result = alert.showAndWait();
+
+			if (result.get() == ButtonType.OK) {
+				// remove item from listview
+				lvWishlist.getItems().remove(selectedItem);
+				// remove item from wishlist and save
+				trip.getWishlist().removeItemFromWishlist(selectedItem);
+				database.store();
+			} else {
+				event.consume();
+			}
 
 		} else {
 			// if no item is selected
