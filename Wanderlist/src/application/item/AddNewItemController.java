@@ -110,6 +110,7 @@ public class AddNewItemController extends Application {
 	
 	public void setTrip(Trip trip) {
 		this.trip = trip;
+		String tripname = trip.getTripName();
 	}
 	
 	public void addScheduleItem(ActionEvent event, Trip trip) throws IOException {
@@ -301,30 +302,55 @@ public class AddNewItemController extends Application {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Please enter the schedule name.");
 			alert.showAndWait();
+			event.consume();
 		}
 		if(type == null) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Please select a type.");
 			alert.showAndWait();
+			event.consume();
 		}
 		if (!name.isEmpty() && type != null ) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText("Success");
 			alert.setContentText("Your schedule was saved.");
 			alert.showAndWait();
+			event.consume();
 		}
 		
 		//add item to trip
 		addScheduleItem(event, trip);
 		System.out.println("success");
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+		Parent root = loader.load();
+		TripPageController tripPageController = loader.getController();
+		tripPageController.setData(trip);
+
+		Stage stage = (Stage) btn_save.getScene().getWindow();
+		stage.setScene(new Scene(root));
 	}
 	
 	@FXML
 	private void backButtonAction(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
 		Parent root = loader.load();
-		Scene scene = btn_back.getScene();
-		scene.setRoot(root);
+		TripPageController tripPageController = loader.getController();
+		tripPageController.setData(trip);
+
+		Stage stage = (Stage) btn_back.getScene().getWindow();
+		stage.setScene(new Scene(root));
+	}
+	
+	@FXML
+	private void cancelButtonAction(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+		Parent root = loader.load();
+		TripPageController tripPageController = loader.getController();
+		tripPageController.setData(trip);
+
+		Stage stage = (Stage) btn_cancel.getScene().getWindow();
+		stage.setScene(new Scene(root));
 	}
 
 }
