@@ -29,29 +29,6 @@ public class Wishlist implements Serializable {
 
 	public Item addItem(Item.Type type, String itemName) {
 
-//		switch (type) {
-//		case Eat:
-//			Eat eatItem = new Eat(type, trip, itemName);
-//			this.wishlist.add(eatItem);
-//			return eatItem;
-////			break;
-//		case Buy:
-//			Buy buyItem = new Buy(type, trip, itemName);
-//			this.wishlist.add(buyItem);
-//			return buyItem;
-////			break;
-//		case Play:
-//			Play playItem = new Play(type, trip, itemName);
-//			this.wishlist.add(playItem);
-//			return playItem;
-////			break;
-//		case See:
-//			See seeItem = new See(type, trip, itemName);
-//			this.wishlist.add(seeItem);
-//			return seeItem;
-////			break;
-//		}
-
 		Item item = null;
 
 		switch (type) {
@@ -75,21 +52,8 @@ public class Wishlist implements Serializable {
 		return item;
 	}
 
-//	public ArrayList<Item> getAllItems() {
-//	    ArrayList<Item> allItems = new ArrayList<>();
-//	    for (Item item : wishlist) {
-//	        if (item.getTrip().equals(trip)) {
-//	            allItems.add(item);
-//	        }
-//	    }
-//	    return allItems;
-//	}
-
 	public void removeItemFromWishlist(Item item) {
 		wishlist.remove(item);
-	}
-
-	public void moveItemToDay(Item item) {
 	}
 
 }

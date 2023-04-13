@@ -1,6 +1,7 @@
 package application.Dashboard;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import application.Trip.AddTripController;
 import javafx.event.ActionEvent;
@@ -9,7 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -67,12 +71,21 @@ public class DashboardController {
 		stage.setScene(new Scene(root));
 	}
 
-	// FXML LOG OUT
 	public void handleButtonLogout(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("../../application/login.fxml"));
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setTitle("Login");
-		stage.setScene(new Scene(root));
-		stage.show();
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("CONFRIMATION");
+		alert.setHeaderText("Are you sure you want to log out?");
+		alert.setContentText("Your changes have been saved.");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+			Parent root = FXMLLoader.load(getClass().getResource("../../application/login.fxml"));
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setTitle("Login");
+			stage.setScene(new Scene(root));
+			stage.show();
+		} else {
+			event.consume();
+		}
 	}
 }
