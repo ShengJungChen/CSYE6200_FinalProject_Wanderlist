@@ -175,6 +175,9 @@ public class WishlistToDayController extends Application {
 
 	@FXML
 	private void populateData() {
+//		leftList.addAll("A1", "A2", "A3","A2");
+//		day1List.addAll("B1", "B2", "B3");
+
 		User user = new User("qwe", "qwe");
 		Trip trip = new Trip(user, "TEST", "TEST", "TEST", 2023, 2, 1, 2023, 2, 2, null);
 
