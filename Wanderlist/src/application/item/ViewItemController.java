@@ -102,7 +102,7 @@ public class ViewItemController extends Application {
 
 	@FXML
 	private void initialize() throws IOException {
-
+		
 	}
 
 	@FXML
@@ -122,23 +122,23 @@ public class ViewItemController extends Application {
 //		}
 	}
 
-	public void setTrip(Trip trip) {
+	public void setData(Trip trip, Item item) throws IOException {
 		this.trip = trip;
-	}
-	public void setData(Item item) throws IOException {
 		this.item = item;
-		itemType.setText(item.getType());
 
 		if (item.getType() == "Eat") {
+			Type type = Type.Eat;
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("AddNewItem_eatPane.fxml"));
 			Pane pane = fxmlLoader.load();
-			this.eatController = fxmlLoader.getController();
-			secondPane.getChildren().add(pane);
-			setEatItem(this.eat);
+			eatPane_Controller eatController = fxmlLoader.getController();	
+			//run setEatItem method
+			setEatItem(type, this.eat, eatController); 
+			secondPane.getChildren().add(pane);	
 			
 		} 
 		else if (item.getType() == "Buy") {
+			itemType.setText("Buy");
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("AddNewItem_buyPane.fxml"));
 			Pane pane = fxmlLoader.load();
@@ -147,6 +147,7 @@ public class ViewItemController extends Application {
 			setBuyItem(this.buy);
 		}
 		else if (item.getType() == "Play") {
+			itemType.setText("Play");
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("AddNewItem_playPane.fxml"));
 			Pane pane = fxmlLoader.load();
@@ -155,6 +156,7 @@ public class ViewItemController extends Application {
 			setPlayItem(play);
 		}
 		else if (item.getType() == "See") {
+			itemType.setText("See");
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("AddNewItem_seePane.fxml"));
 			Pane pane = fxmlLoader.load();
@@ -165,7 +167,7 @@ public class ViewItemController extends Application {
 		
 	}
 	
-	public void setEatItem(Eat eat)  throws IOException{
+	public void setEatItem(Type type, Eat eat, eatPane_Controller eatController) throws IOException{
 		this.eat = eat;
 		itemName.setText(eat.getItemName());
 		itemUrl.setText(eat.getUrl());

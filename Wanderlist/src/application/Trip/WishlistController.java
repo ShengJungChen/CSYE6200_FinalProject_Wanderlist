@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import application.item.ViewItemController;
 import application.item.AddNewItemController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,6 +115,28 @@ public class WishlistController {
 		Stage stage = (Stage) btnNewItem.getScene().getWindow();
 		stage.setScene(new Scene(root));
 
+	}
+	
+	//view item
+	@FXML
+	public void viewAction(ActionEvent event) throws IOException {
+		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/ViewItemPage.fxml"));
+		Parent root = loader.load();
+		ViewItemController viewItemController = loader.getController();
+		viewItemController.setData(trip, selectedItem);
+
+		Stage stage = (Stage) btnView.getScene().getWindow();
+		stage.setScene(new Scene(root));
+		
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("No item selected");
+			alert.setContentText("Please select an item to view");
+			alert.showAndWait();
+		}
 	}
 
 	// delete a item
