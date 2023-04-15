@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import application.item.ViewItemController;
 import application.item.AddNewItemController;
+import application.item.EatViewController;
+import application.item.PlayViewController;
+import application.item.SeeViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +34,8 @@ import model.System.ApplicationSystem;
 import model.Trip.Day;
 import model.Trip.Item;
 import model.Trip.Trip;
+
+
 
 public class WishlistController {
 
@@ -122,17 +127,11 @@ public class WishlistController {
 	
 	//view item
 	@FXML
-	public void viewAction(ActionEvent event) throws IOException {
+	public void handleViewButtonClick()
+	{
 		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/ViewItemPage.fxml"));
-		Parent root = loader.load();
-		ViewItemController viewItemController = loader.getController();
-		viewItemController.setData(trip, selectedItem);
-
-		Stage stage = (Stage) btnView.getScene().getWindow();
-		stage.setScene(new Scene(root));
-		
+            navigateToItemView(selectedItem);
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -141,6 +140,69 @@ public class WishlistController {
 			alert.showAndWait();
 		}
 	}
+	
+	public void navigateToItemView(Item item) {
+			String itemType = item.getType();
+			
+			try {
+	            FXMLLoader loader = new FXMLLoader();
+	            Parent root;
+	            switch (itemType) {
+	                case "Eat":
+	                    loader.setLocation(getClass().getResource("../../application/item/EatViewPane.fxml"));
+	                    break;
+	                case "Play":
+	                    loader.setLocation(getClass().getResource("../../application/item/PlayViewPane.fxml"));
+	                    break;
+	                case "See":
+	                    loader.setLocation(getClass().getResource("../../application/item/SeeViewPane.fxml"));
+	                    break;
+	                case "Buy":
+	                    loader.setLocation(getClass().getResource("../../application/item/BuyViewPane.fxml"));
+	                    break;
+	                default:
+	                    throw new IllegalStateException("Invalid item type: " + itemType);
+	            }
+	            root = loader.load();
+	            
+	         // Get the controller instance and call setItem method
+	            Object controller = loader.getController();
+	            if (controller instanceof SeeViewController) {
+	                ((SeeViewController) controller).SetItemDetails(item);
+	            } else if (controller instanceof EatViewController) {
+	                ((EatViewController) controller).SetItemDetails(item);
+	            } else if (controller instanceof PlayViewController) {
+	                ((PlayViewController) controller).SetItemDetails(item);
+	            } 
+//	                else if (controller instanceof BuyViewController) {
+//	                ((BuyViewController) controller).setItem(item);
+//	            }
+	            Scene scene = new Scene(root);
+	            Stage stage = (Stage) btnDelete.getScene().getWindow();
+	            
+	            stage.setScene(scene);
+	            stage.show();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
+			
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/ViewItemPage.fxml"));
+//		Parent root = loader.load();
+//		ViewItemController viewItemController = loader.getController();
+//		viewItemController.setData(trip, selectedItem);
+//
+//		Stage stage = (Stage) btnView.getScene().getWindow();
+//		stage.setScene(new Scene(root));
+//		
+//		} else {
+//			Alert alert = new Alert(AlertType.ERROR);
+//			alert.setTitle("Error");
+//			alert.setHeaderText("No item selected");
+//			alert.setContentText("Please select an item to view");
+//			alert.showAndWait();
+//		}
+//	}
 
 	// delete a item
 	@FXML

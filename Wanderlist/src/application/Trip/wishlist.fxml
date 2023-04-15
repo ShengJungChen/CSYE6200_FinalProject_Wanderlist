@@ -19,7 +19,7 @@
       <HBox alignment="CENTER_RIGHT" spacing="20.0">
          <children>
             <Button fx:id="btnNewItem" mnemonicParsing="false" onAction="#newItemAction" text="New Item" />
-            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewAction" text="View" />
+            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleViewButtonClick" text="View" />
             <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteSelectedItem" text="Delete" />
          </children>
          <VBox.margin>
