@@ -119,6 +119,7 @@ public class AddNewItemController extends Application {
 		String url = url_input.getText();
 		String address = address_input.getText();
 		String itemNote = note_input.getText();
+		String itemType = typeBox.getValue();
 
 		if(typeBox.getValue().equals("Eat")) {
 			Type type = Type.Eat;
@@ -150,6 +151,7 @@ public class AddNewItemController extends Application {
 			boolean reservation = eatController.getReservation().isSelected();
 			
 			//set data into eatItem
+			
 			Eat eat = (Eat) trip.getWishlist().addItem(type, itemName);
 			eat.setItemName(itemName);
 			eat.setUrl(url);
@@ -192,7 +194,8 @@ public class AddNewItemController extends Application {
 				ObservableList<String> fxmlList = buyController.getListView().getItems();
 				ArrayList<String> shoppingList = new ArrayList<>(fxmlList);
 				
-				//set data into eatItem
+				//set data into buyItem
+				
 				Buy buy = (Buy)trip.getWishlist().addItem(type, itemName);
 				buy.setItemName(itemName);
 				buy.setUrl(url);
