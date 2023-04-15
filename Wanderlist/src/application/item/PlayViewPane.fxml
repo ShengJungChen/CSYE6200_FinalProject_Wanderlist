@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.PlayViewController">
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="843.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_CENTER" prefHeight="656.0" prefWidth="877.0" spacing="20.0">
+               <children>
+                  <GridPane fx:id="gridPane" prefHeight="423.0" prefWidth="857.0" vgap="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.33333333333334" minWidth="10.0" prefWidth="89.4444580078125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.2222035725912" minWidth="10.0" prefWidth="253.22220865885419" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Name" textAlignment="RIGHT">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Type" textAlignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="URL" textAlignment="RIGHT" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label prefWidth="52.0" text="Address" textAlignment="RIGHT" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Note" textAlignment="RIGHT" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_name" textAlignment="RIGHT" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_type" text="Play" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_url" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_address" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Operating Days TEST" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_operatingDays" prefHeight="48.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Opening Hours" GridPane.rowIndex="6" />
+                        <Label text="Ticket" GridPane.rowIndex="7" />
+                        <CheckBox fx:id="cb_ticket" disable="true" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </CheckBox>
+                        <Label text="Price" GridPane.rowIndex="8" />
+                        <Label fx:id="lbl_price" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <children>
+                              <Label text="from">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_starthour" />
+                              <Label text="to">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_endhour" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </children>
+               <opaqueInsets>
+                  <Insets left="10.0" top="10.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </ScrollPane>
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <bottom>
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Button fx:id="btn_cancel" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_save" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Save">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_edit" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Edit">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btn_back" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Back">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+            <Label contentDisplay="CENTER" text="View Play Schedule Details" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
