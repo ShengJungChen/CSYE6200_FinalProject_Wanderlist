@@ -73,6 +73,7 @@ public class WishlistController {
 		lvWishlist.setItems(olWishlist);
 
 	}
+	//view action, 根据type->page
 
 	public void populateDayList() {
 

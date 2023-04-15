@@ -15,6 +15,14 @@ public class TestDriver {
 		ApplicationSystem database = ApplicationSystem.getInstance();
 
 		User user = database.getUserDirectory().getUserByEmail("123");
+
+		user.getTrips().getTrips().get(0).getWishlist().addItem(Type.Buy, "cryingtiger3");
+		user.getTrips().getTrips().get(0).getWishlist().addItem(null, null);
+		
+		database.store();
+		
+//		ApplicationSystem.getDb4oUtil().storeSystem(database);
+
 		user.getTrips().getTrips().get(0).getWishlist().addItem(Type.Buy, "cryingtiger1");
 
 		database.store();
