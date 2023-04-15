@@ -150,7 +150,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_edit" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Edit">
+            <Button fx:id="btn_edit" mnemonicParsing="false" onAction="#editItemAction" prefHeight="35.0" prefWidth="70.0" text="Edit">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

@@ -78,7 +78,7 @@ public class WishlistController {
 		lvWishlist.setItems(olWishlist);
 
 	}
-	//view action, 根据type->page
+	//view action, ��type->page
 
 	public void populateDayList() {
 
@@ -170,7 +170,7 @@ public class WishlistController {
 	            if (controller instanceof SeeViewController) {
 	                ((SeeViewController) controller).SetItemDetails(item);
 	            } else if (controller instanceof EatViewController) {
-	                ((EatViewController) controller).SetItemDetails(item);
+	                ((EatViewController) controller).SetItemDetails(item, trip);
 	            } else if (controller instanceof PlayViewController) {
 	                ((PlayViewController) controller).SetItemDetails(item);
 	            } 
