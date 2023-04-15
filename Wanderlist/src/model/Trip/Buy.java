@@ -59,10 +59,4 @@ public class Buy extends Item {
 		return shoppingList;
 	}
 
-	@Override
-	public void updateItem() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

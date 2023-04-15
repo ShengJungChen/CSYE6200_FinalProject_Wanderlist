@@ -74,7 +74,4 @@ public abstract class Item implements Serializable {
 		return this.itemName;
 	}
 
-	// update item
-	public abstract void updateItem();
-
 }

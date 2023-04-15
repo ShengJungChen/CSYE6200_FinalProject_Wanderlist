@@ -41,8 +41,8 @@ public class Day implements Serializable {
 		return schedule;
 	}
 
-	// remove the item from the day
-
-	// view item
+	public void removeItemFromSchedule(Item item) {
+		schedule.remove(item);
+	}
 
 }
