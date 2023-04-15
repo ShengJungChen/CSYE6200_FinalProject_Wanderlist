@@ -99,6 +99,7 @@ public class WishlistController {
 	        alert.showAndWait();
 	    }
 	}
+	//view action, 根据type->page
 
 	public void populateDayList() {
 
