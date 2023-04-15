@@ -1,21 +1,33 @@
 package application.item;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Trip.TripPageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import model.System.ApplicationSystem;
 import model.Trip.Eat;
 import model.Trip.Item;
 import model.Trip.See;
+import model.Trip.Trip;
+import application.item.*;
 
 public class EatViewController {
 	
 	ApplicationSystem database = ApplicationSystem.getInstance();
 
+	private Trip trip;
+	private Item item;
+	
 	@FXML
 	private Button btn_back;
 	
@@ -47,9 +59,10 @@ public class EatViewController {
 	private Button btn_edit;
 	
 	
-	public void SetItemDetails(Item item)
+	public void SetItemDetails(Item item, Trip trip)
 	{
-		//Eat eatItem = (Eat) item;
+		this.item = item;
+		this.trip = trip;
 		
 		lbl_name.setText(item.getItemName());
 		lbl_url.setText(item.getUrl());
@@ -95,5 +108,14 @@ public class EatViewController {
 	    return daysOfWeek;
 	}
 
+	@FXML
+	private void editItemAction (ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditItem_eat.fxml"));
+		Parent root = loader.load();
+		EditItemController_eat editEat = loader.getController();
+		editEat.setData(trip, item);
+		Stage stage = (Stage) btn_back.getScene().getWindow();
+		stage.setScene(new Scene(root));
+	}
 
 }
