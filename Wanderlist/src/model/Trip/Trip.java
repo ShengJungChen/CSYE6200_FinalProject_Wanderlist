@@ -118,22 +118,6 @@ public class Trip implements Serializable {
 		return days;
 	}
 
-	// update trip
-//	public void updateTrip(User user, String tripName, Calendar startDate, Calendar endDate, String country,
-//			String city, User people, String note, ArrayList<Item> wishlist, ArrayList<Day> days) {
-//		setUser(user);
-//		setTripName(tripName);
-//		setStartDate(startDate);
-//		setEndDate(endDate);
-//		setCountry(country);
-//		setCity(city);
-//		setPeople(people);
-//		setNote(note);
-//		setWishlist(wishlist);
-//		setDays(days);
-//
-//	}
-
 	// update the date
 	public void updateDate(int startYear, int startMonth, int startDate, int endYear, int endMonth, int endDate) {
 		setStartDate(startYear, startMonth, startDate);
@@ -153,17 +137,17 @@ public class Trip implements Serializable {
 	}
 
 	// add item to wishlist
-	public void addItemToWishlist(Item.Type type, String itemName) {
-		wishlist.addItem(type, itemName);
-	}
-
-	public void addItemToWishlist(Item item) {
-		wishlist.addItem(item);
-	}
-
-	// delete item from wishlist
-	public void removeItemFromWishlist(Item item) {
-		wishlist.removeItemFromWishlist(item);
-	}
+//	public void addItemToWishlist(Item.Type type, String itemName) {
+//		wishlist.addItem(type, itemName);
+//	}
+//
+//	public void addItemToWishlist(Item item) {
+//		wishlist.addItem(item);
+//	}
+//
+//	// delete item from wishlist
+//	public void removeItemFromWishlist(Item item) {
+//		wishlist.removeItemFromWishlist(item);
+//	}
 
 }

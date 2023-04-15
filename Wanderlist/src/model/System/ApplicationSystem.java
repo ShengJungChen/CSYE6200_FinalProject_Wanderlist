@@ -1,6 +1,5 @@
 package model.System;
 
-import model.Trip.Trip;
 import model.User.UserDirectory;
 
 public class ApplicationSystem {
@@ -29,10 +28,8 @@ public class ApplicationSystem {
 		db4oUtils.storeSystem(this);
 	}
 
-
-
-	public Object getWishlist(Trip trip) {
-		return trip.getWishlist();
-	}
+//	public Object getWishlist(Trip trip) {
+//		return trip.getWishlist();
+//	}
 
 }
