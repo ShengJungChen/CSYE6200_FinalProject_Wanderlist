@@ -1,6 +1,7 @@
 package application.item;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -17,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class buyPane_Controller extends Application {
+public class eatPane_Controller extends Application {
 	//operating day
 	@FXML private CheckBox mon;
 	@FXML private CheckBox tue;
@@ -27,26 +28,23 @@ public class buyPane_Controller extends Application {
 	@FXML private CheckBox sat;
 	@FXML private CheckBox sun;
 	
-	//operating hours
+	//operating hour
 	@FXML private ComboBox<Integer> from;
 	@FXML private ComboBox<Integer> to;	
 
-	//shopping list
-	@FXML private Button btn_add;
-	@FXML private Button btn_delete;
-	@FXML private ListView<String> listView;
-	@FXML private TextField input;
+	//reservation
+	@FXML private CheckBox reservation;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("AddNewItem_buyPane.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("AddNewItem_eatPane.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("test by ariel");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
+	
 	@FXML
 	public void initialize() {
 		
@@ -54,20 +52,15 @@ public class buyPane_Controller extends Application {
 		to.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23));
 		from.getSelectionModel().select(0);
 		to.getSelectionModel().select(0);
-	}
-	
-	@FXML
-	private void addItem(ActionEvent event) {
-		listView.getItems().add(input.getText());
-	}
-	
-	@FXML
-	private void deleteItem(ActionEvent event) {
-		String selectedItem = listView.getSelectionModel().getSelectedItem();
-		if(selectedItem != null) {
-			listView.getItems().remove(selectedItem);
-		}
 		
+//	    ArrayList<Integer> operatingDays = new ArrayList<Integer>();
+//	    if(mon.isSelected()) {
+//	        operatingDays.add(1);
+//	    }
+//	    if(tue.isSelected()) {
+//	        operatingDays.add(2);
+//	    }
+//	    System.out.println(operatingDays);
 	}
 	
 	public CheckBox getMon() {
@@ -142,36 +135,12 @@ public class buyPane_Controller extends Application {
 		this.to = to;
 	}
 
-	public Button getBtn_add() {
-		return btn_add;
+	public CheckBox getReservation() {
+		return reservation;
 	}
 
-	public void setBtn_add(Button btn_add) {
-		this.btn_add = btn_add;
-	}
-
-	public Button getBtn_delete() {
-		return btn_delete;
-	}
-
-	public void setBtn_delete(Button btn_delete) {
-		this.btn_delete = btn_delete;
-	}
-
-	public ListView<String> getListView() {
-		return listView;
-	}
-
-	public void setListView(ListView<String> listView) {
-		this.listView = listView;
-	}
-
-	public TextField getInput() {
-		return input;
-	}
-
-	public void setInput(TextField input) {
-		this.input = input;
+	public void setReservation(CheckBox reservation) {
+		this.reservation = reservation;
 	}
 
 	public static void main(String[] args) {

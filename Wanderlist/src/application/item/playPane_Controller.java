@@ -17,8 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class buyPane_Controller extends Application {
-	//operating day
+public class playPane_Controller extends Application {
+
 	@FXML private CheckBox mon;
 	@FXML private CheckBox tue;
 	@FXML private CheckBox wed;
@@ -27,20 +27,16 @@ public class buyPane_Controller extends Application {
 	@FXML private CheckBox sat;
 	@FXML private CheckBox sun;
 	
-	//operating hours
 	@FXML private ComboBox<Integer> from;
 	@FXML private ComboBox<Integer> to;	
-
-	//shopping list
-	@FXML private Button btn_add;
-	@FXML private Button btn_delete;
-	@FXML private ListView<String> listView;
-	@FXML private TextField input;
+	
+	@FXML private CheckBox ticket;
+	@FXML private TextField price;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("AddNewItem_buyPane.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("AddNewItem_playPane.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("test by ariel");
 		primaryStage.setScene(scene);
@@ -52,24 +48,15 @@ public class buyPane_Controller extends Application {
 		
 		from.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23));
 		to.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23));
+
 		from.getSelectionModel().select(0);
 		to.getSelectionModel().select(0);
-	}
-	
-	@FXML
-	private void addItem(ActionEvent event) {
-		listView.getItems().add(input.getText());
-	}
-	
-	@FXML
-	private void deleteItem(ActionEvent event) {
-		String selectedItem = listView.getSelectionModel().getSelectedItem();
-		if(selectedItem != null) {
-			listView.getItems().remove(selectedItem);
-		}
 		
+		price.setText("00");
 	}
+
 	
+
 	public CheckBox getMon() {
 		return mon;
 	}
@@ -142,36 +129,20 @@ public class buyPane_Controller extends Application {
 		this.to = to;
 	}
 
-	public Button getBtn_add() {
-		return btn_add;
+	public CheckBox getTicket() {
+		return ticket;
 	}
 
-	public void setBtn_add(Button btn_add) {
-		this.btn_add = btn_add;
+	public void setTicket(CheckBox ticket) {
+		this.ticket = ticket;
 	}
 
-	public Button getBtn_delete() {
-		return btn_delete;
+	public TextField getPrice() {
+		return price;
 	}
 
-	public void setBtn_delete(Button btn_delete) {
-		this.btn_delete = btn_delete;
-	}
-
-	public ListView<String> getListView() {
-		return listView;
-	}
-
-	public void setListView(ListView<String> listView) {
-		this.listView = listView;
-	}
-
-	public TextField getInput() {
-		return input;
-	}
-
-	public void setInput(TextField input) {
-		this.input = input;
+	public void setPrice(TextField price) {
+		this.price = price;
 	}
 
 	public static void main(String[] args) {

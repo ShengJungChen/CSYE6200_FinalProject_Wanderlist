@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="eatPane" prefHeight="240.0" prefWidth="860.0" vgap="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane prefHeight="240.0" prefWidth="860.0" vgap="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.playPane_Controller">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.33333333333334" minWidth="10.0" prefWidth="132.5555419921875" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.2222035725912" minWidth="10.0" prefWidth="240.77779134114587" />
@@ -50,37 +50,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <CheckBox mnemonicParsing="false" text="Monday">
+            <CheckBox fx:id="mon" mnemonicParsing="false" text="Monday">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Tuesday" GridPane.rowIndex="1">
+            <CheckBox fx:id="tue" mnemonicParsing="false" text="Tuesday" GridPane.rowIndex="1">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Wednesday" GridPane.rowIndex="2">
+            <CheckBox fx:id="wed" mnemonicParsing="false" text="Wednesday" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Thursday" GridPane.rowIndex="3">
+            <CheckBox fx:id="thur" mnemonicParsing="false" text="Thursday" GridPane.rowIndex="3">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Friday" GridPane.columnIndex="1">
+            <CheckBox fx:id="fri" mnemonicParsing="false" text="Friday" GridPane.columnIndex="1">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="131.0" layoutY="10.0" mnemonicParsing="false" text="Saturday" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <CheckBox fx:id="sat" layoutX="131.0" layoutY="10.0" mnemonicParsing="false" text="Saturday" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="131.0" layoutY="27.0" mnemonicParsing="false" text="Sunday" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <CheckBox fx:id="sun" layoutX="131.0" layoutY="27.0" mnemonicParsing="false" text="Sunday" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -97,13 +97,13 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="23.0" prefWidth="67.0" />
+            <ComboBox fx:id="from" prefHeight="23.0" prefWidth="67.0" promptText="0" />
             <Label text="to">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="23.0" prefWidth="67.0" />
+            <ComboBox fx:id="to" prefHeight="23.0" prefWidth="67.0" promptText="0" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -112,7 +112,7 @@
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <CheckBox fx:id="ticket" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -125,7 +125,7 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <TextField prefHeight="25.0" prefWidth="249.0" promptText="Enter the price" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="price" prefHeight="25.0" prefWidth="249.0" promptText="Enter the price" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

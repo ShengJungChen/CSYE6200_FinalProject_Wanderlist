@@ -55,10 +55,4 @@ public class Play extends Item {
 		this.price = price;
 	}
 
-	@Override
-	public void updateItem() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

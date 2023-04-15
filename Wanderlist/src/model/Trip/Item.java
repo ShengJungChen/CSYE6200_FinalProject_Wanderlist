@@ -1,15 +1,17 @@
 package model.Trip;
 
-import java.util.List;
+import java.io.Serializable;
 
-public abstract class Item {
+import javafx.scene.input.DataFormat;
+
+public abstract class Item implements Serializable {
+
+	public static final DataFormat DATA_FORMAT = new DataFormat("Item");
 
 	private Type type;
 
 	public enum Type {
-
 		Eat, Play, See, Buy
-
 	}
 
 	private Trip trip;
@@ -66,9 +68,10 @@ public abstract class Item {
 	public void setItemNote(String itemNote) {
 		this.itemNote = itemNote;
 	}
-	
 
-	// update item
-	public abstract void updateItem();
+	@Override
+	public String toString() {
+		return this.itemName;
+	}
 
 }

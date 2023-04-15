@@ -9,18 +9,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
    <children>
       <Label text="Wishlist">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font></Label>
-      <ListView fx:id="lvWishlist" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="lvWishlist" onDragDetected="#dragDetected" prefHeight="200.0" prefWidth="200.0" />
       <HBox alignment="CENTER_RIGHT" spacing="20.0">
          <children>
             <Button fx:id="btnNewItem" mnemonicParsing="false" onAction="#newItemAction" text="New Item" />
-            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="View" />
+            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewAction" text="View" />
             <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteSelectedItem" text="Delete" />
          </children>
          <VBox.margin>

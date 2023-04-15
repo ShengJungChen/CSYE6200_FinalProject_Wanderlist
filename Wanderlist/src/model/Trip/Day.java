@@ -1,11 +1,12 @@
 package model.Trip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Day {
+public class Day implements Serializable {
 	private DayList days;
 	private Date date;
 	private String weekDay;
@@ -40,8 +41,8 @@ public class Day {
 		return schedule;
 	}
 
-	// remove the item from the day
-
-	// view item
+	public void removeItemFromSchedule(Item item) {
+		schedule.remove(item);
+	}
 
 }

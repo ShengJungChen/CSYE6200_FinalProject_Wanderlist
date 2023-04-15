@@ -47,10 +47,4 @@ public class Eat extends Item {
 		this.reservation = reservation;
 	}
 
-	@Override
-	public void updateItem() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

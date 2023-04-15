@@ -17,10 +17,4 @@ public class See extends Item {
 		this.trafficMean = trafficMean;
 	}
 
-	@Override
-	public void updateItem() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

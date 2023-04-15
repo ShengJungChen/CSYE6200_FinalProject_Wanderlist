@@ -1,9 +1,10 @@
 package model.Trip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DayList {
+public class DayList implements Serializable {
 
 	private Trip trip;
 	private ArrayList<Day> days;
