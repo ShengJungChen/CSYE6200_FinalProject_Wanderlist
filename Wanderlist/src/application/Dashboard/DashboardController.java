@@ -20,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,6 +45,12 @@ public class DashboardController {
 
 	@FXML
 	private VBox vboxPast;
+
+	@FXML
+	private FlowPane flowUpcomings;
+
+	@FXML
+	private FlowPane flowPast;
 
 	// Load and Display all trips
 	public void loadPage(User user) {
@@ -77,10 +84,12 @@ public class DashboardController {
 				tripItemController.setData(trip);
 				if (trip.getStartDate().after(new Date())) {
 					// upcoming trip
-					vboxUpcomings.getChildren().add(hBox);
+//					vboxUpcomings.getChildren().add(hBox);
+					flowUpcomings.getChildren().add(hBox);
 				} else {
 					// past trip
-					vboxPast.getChildren().add(hBox);
+//					vboxPast.getChildren().add(hBox);
+					flowPast.getChildren().add(hBox);
 				}
 
 			} catch (IOException e) {
