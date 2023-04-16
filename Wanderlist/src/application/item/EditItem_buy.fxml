@@ -81,7 +81,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                      </rowConstraints>
                      <children>
-                        <Label text="Operating Days TEST" textAlignment="RIGHT" GridPane.rowIndex="1">
+                        <Label text="Operating Days" textAlignment="RIGHT" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>

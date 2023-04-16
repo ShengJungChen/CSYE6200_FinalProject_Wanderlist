@@ -1,5 +1,9 @@
 package application.Trip;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,8 +17,11 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import model.System.ApplicationSystem;
+import model.Trip.Buy;
 import model.Trip.Day;
+import model.Trip.Eat;
 import model.Trip.Item;
+import model.Trip.Play;
 import model.Trip.Trip;
 
 public class DayViewController {
@@ -41,6 +48,10 @@ public class DayViewController {
 	private Button btn_remove;
 	@FXML
 	private Button btn_view;
+	@FXML
+	private Button btn_up;
+	@FXML
+	private Button btn_down;
 
 	private static DayViewController orgViewController;
 	private static Item dragItem;
@@ -104,7 +115,41 @@ public class DayViewController {
 	}
 
 	public void dragDropped(DragEvent dragEvent) {
+
+		boolean canDrop = true;
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(day.getDate());
+
+		int weekdayInt = calendar.get(Calendar.DAY_OF_WEEK);
+		System.out.println("THIS DAY" + weekdayInt);
+
 		Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
+
+		// check operating hours
+		switch (player.getType()) {
+		case "Eat":
+			Eat eat = (Eat) player;
+			if (!eat.getOperatingDays().contains(weekdayInt))
+				canDrop = false;
+			break;
+		case "Play":
+			player = (Play) player;
+			break;
+		case "Buy":
+			player = (Buy) player;
+			break;
+		}
+
+		if (canDrop == false) {
+			System.out.println("NOT OPEN THID DAY");
+			canDrop = true;
+			dragEvent.consume();
+			return;
+		}
+
+		System.out.println("THIS WILL NOT RUN");
+
 		olDay.addAll(player);
 		lvDay.setItems(olDay);
 		dragEvent.setDropCompleted(true);
@@ -138,6 +183,54 @@ public class DayViewController {
 
 	public ObservableList<Item> getOlDay() {
 		return olDay;
+	}
+
+	public void upAction(ActionEvent event) {
+		// change data
+		int selectedIndex = lvDay.getSelectionModel().getSelectedIndex();
+
+		ArrayList<Item> schedule = day.getSchedule();
+		if (selectedIndex == 0) {
+			event.consume();
+			return;
+		}
+
+		Collections.swap(schedule, selectedIndex, selectedIndex - 1);
+
+		// change display
+
+		olDay.clear();
+		olDay.addAll(day.getSchedule());
+		lvDay.setItems(olDay);
+		lvDay.getSelectionModel().select(selectedIndex);
+		lvDay.getSelectionModel().select(selectedIndex - 1);
+
+		// save change
+		database.store();
+	}
+
+	public void downAction(ActionEvent event) {
+		// change data
+		int selectedIndex = lvDay.getSelectionModel().getSelectedIndex();
+
+		ArrayList<Item> schedule = day.getSchedule();
+		if (selectedIndex == schedule.size() - 1) {
+			event.consume();
+			return;
+		}
+
+		Collections.swap(schedule, selectedIndex, selectedIndex + 1);
+
+		// change display
+
+		olDay.clear();
+		olDay.addAll(day.getSchedule());
+		lvDay.setItems(olDay);
+		lvDay.getSelectionModel().select(selectedIndex);
+		lvDay.getSelectionModel().select(selectedIndex + 1);
+
+		// save change
+		database.store();
 	}
 
 }
