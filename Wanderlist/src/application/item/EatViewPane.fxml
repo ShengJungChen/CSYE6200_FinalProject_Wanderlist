@@ -167,7 +167,7 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btn_back" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Back">
+            <Button fx:id="btn_back" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="60.0" text="Back">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
