@@ -30,7 +30,7 @@
                               <Font name="Arial Bold" size="24.0" />
                            </font>
                         </Label>
-                        <VBox fx:id="vboxUpcomings1" layoutX="10.0" layoutY="103.0" prefHeight="200.0" prefWidth="100.0" />
+                        <VBox fx:id="vboxPast" layoutX="10.0" layoutY="103.0" prefHeight="200.0" prefWidth="100.0" />
                      </children>
                   </VBox>
                </content>

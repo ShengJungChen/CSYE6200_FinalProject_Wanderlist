@@ -1,6 +1,11 @@
 package application.Dashboard;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Optional;
 
 import application.Trip.AddTripController;
@@ -18,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Trip.Trip;
 import model.User.User;
 
 public class DashboardController {
@@ -36,22 +42,46 @@ public class DashboardController {
 	@FXML
 	private VBox vboxUpcomings;
 
+	@FXML
+	private VBox vboxPast;
+
 	// Load and Display all trips
 	public void loadPage(User user) {
 
+		// set basic data
 		this.user = user;
-
 		labelGreet.setText("Hello, " + user.getUserEmail() + "!");
 
-		for (int i = 0; i < user.getTrips().getTrips().size(); i++) {
+		// sort trips by date
+		ArrayList<Trip> trips = user.getTrips().getTrips();
+
+		Collections.sort(trips, new Comparator<Trip>() {
+			@Override
+			public int compare(Trip t1, Trip t2) {
+				return t1.getStartDate().compareTo(t2.getStartDate());
+			}
+		});
+
+		// fill in the dashboard with trips
+		Iterator<Trip> tripIterator = trips.iterator();
+
+		while (tripIterator.hasNext()) {
+			Trip trip = tripIterator.next();
+
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("tripItem.fxml"));
 
 			try {
 				HBox hBox = fxmlLoader.load();
 				TripItemController tripItemController = fxmlLoader.getController();
-				tripItemController.setData(user.getTrips().getTrips().get(i));
-				vboxUpcomings.getChildren().add(hBox);
+				tripItemController.setData(trip);
+				if (trip.getStartDate().after(new Date())) {
+					// upcoming trip
+					vboxUpcomings.getChildren().add(hBox);
+				} else {
+					// past trip
+					vboxPast.getChildren().add(hBox);
+				}
 
 			} catch (IOException e) {
 				e.printStackTrace();
