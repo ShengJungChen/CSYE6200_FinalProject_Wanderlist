@@ -76,13 +76,13 @@
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_address" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="lbl_address" prefHeight="16.0" prefWidth="337.0" textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
                         <Label text="Operating Days" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_operatingDays" prefHeight="48.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_operatingDays" prefHeight="44.0" prefWidth="347.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Opening Hours" GridPane.rowIndex="6" />
                         <Label text="Ticket" GridPane.rowIndex="7" />
