@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
-import application.item.ViewItemController;
 import application.item.AddNewItemController;
 import application.item.BuyViewController;
 import application.item.EatViewController;
@@ -35,8 +34,6 @@ import model.System.ApplicationSystem;
 import model.Trip.Day;
 import model.Trip.Item;
 import model.Trip.Trip;
-
-
 
 public class WishlistController {
 
@@ -79,7 +76,7 @@ public class WishlistController {
 		lvWishlist.setItems(olWishlist);
 
 	}
-	//view action, ��type->page
+	// view action, ��type->page
 
 	public void populateDayList() {
 
@@ -125,14 +122,13 @@ public class WishlistController {
 		stage.setScene(new Scene(root));
 
 	}
-	
-	//view item
+
+	// view item
 	@FXML
-	public void handleViewButtonClick()
-	{
+	public void handleViewButtonClick() {
 		Item selectedItem = lvWishlist.getSelectionModel().getSelectedItem();
 		if (selectedItem != null) {
-            navigateToItemView(selectedItem);
+			navigateToItemView(selectedItem);
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -141,52 +137,52 @@ public class WishlistController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	public void navigateToItemView(Item item) {
-			String itemType = item.getType();
-			
-			try {
-	            FXMLLoader loader = new FXMLLoader();
-	            Parent root;
-	            switch (itemType) {
-	                case "Eat":
-	                    loader.setLocation(getClass().getResource("../../application/item/EatViewPane.fxml"));
-	                    break;
-	                case "Play":
-	                    loader.setLocation(getClass().getResource("../../application/item/PlayViewPane.fxml"));
-	                    break;
-	                case "See":
-	                    loader.setLocation(getClass().getResource("../../application/item/SeeViewPane.fxml"));
-	                    break;
-	                case "Buy":
-	                    loader.setLocation(getClass().getResource("../../application/item/BuyViewPane.fxml"));
-	                    break;
-	                default:
-	                    throw new IllegalStateException("Invalid item type: " + itemType);
-	            }
-	            root = loader.load();
-	            
-	         // Get the controller instance and call setItem method
-	            Object controller = loader.getController();
-	            if (controller instanceof SeeViewController) {
-	                ((SeeViewController) controller).SetItemDetails(item,trip);
-	            } else if (controller instanceof EatViewController) {
-	                ((EatViewController) controller).SetItemDetails(item, trip);
-	            } else if (controller instanceof PlayViewController) {
-	                ((PlayViewController) controller).SetItemDetails(item,trip);
-	            } else if (controller instanceof BuyViewController) {
-	                ((BuyViewController) controller).SetItemDetails(item,trip);
-	            }
-	            Scene scene = new Scene(root);
-	            Stage stage = (Stage) btnDelete.getScene().getWindow();
-	            
-	            stage.setScene(scene);
-	            stage.show();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+		String itemType = item.getType();
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			Parent root;
+			switch (itemType) {
+			case "Eat":
+				loader.setLocation(getClass().getResource("../../application/item/EatViewPane.fxml"));
+				break;
+			case "Play":
+				loader.setLocation(getClass().getResource("../../application/item/PlayViewPane.fxml"));
+				break;
+			case "See":
+				loader.setLocation(getClass().getResource("../../application/item/SeeViewPane.fxml"));
+				break;
+			case "Buy":
+				loader.setLocation(getClass().getResource("../../application/item/BuyViewPane.fxml"));
+				break;
+			default:
+				throw new IllegalStateException("Invalid item type: " + itemType);
+			}
+			root = loader.load();
+
+			// Get the controller instance and call setItem method
+			Object controller = loader.getController();
+			if (controller instanceof SeeViewController) {
+				((SeeViewController) controller).SetItemDetails(item, trip);
+			} else if (controller instanceof EatViewController) {
+				((EatViewController) controller).SetItemDetails(item, trip);
+			} else if (controller instanceof PlayViewController) {
+				((PlayViewController) controller).SetItemDetails(item, trip);
+			} else if (controller instanceof BuyViewController) {
+				((BuyViewController) controller).SetItemDetails(item, trip);
+			}
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) btnDelete.getScene().getWindow();
+
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-			
+	}
+
 //		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/item/ViewItemPage.fxml"));
 //		Parent root = loader.load();
 //		ViewItemController viewItemController = loader.getController();
@@ -230,7 +226,7 @@ public class WishlistController {
 		} else {
 			// if no item is selected
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
+			alert.setTitle("ERROR");
 			alert.setHeaderText("No item selected");
 			alert.setContentText("Please select an item to delete");
 			alert.showAndWait();
