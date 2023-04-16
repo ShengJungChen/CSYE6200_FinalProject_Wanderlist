@@ -125,25 +125,25 @@ public class AddNewItemController extends Application {
 			Type type = Type.Eat;
 			ArrayList<Integer> operatingDays = new ArrayList<Integer>();
 			if(eatController.getMon().isSelected()) {
-				operatingDays.add(1);
-			}
-			if(eatController.getTue().isSelected()) {
 				operatingDays.add(2);
 			}
-			if(eatController.getWed().isSelected()) {
+			if(eatController.getTue().isSelected()) {
 				operatingDays.add(3);
 			}
-			if(eatController.getThur().isSelected()) {
+			if(eatController.getWed().isSelected()) {
 				operatingDays.add(4);
 			}
-			if(eatController.getFri().isSelected()) {
+			if(eatController.getThur().isSelected()) {
 				operatingDays.add(5);
 			}
-			if(eatController.getSat().isSelected()) {
+			if(eatController.getFri().isSelected()) {
 				operatingDays.add(6);
 			}
-			if(eatController.getSun().isSelected()) {
+			if(eatController.getSat().isSelected()) {
 				operatingDays.add(7);
+			}
+			if(eatController.getSun().isSelected()) {
+				operatingDays.add(1);
 			}
 			
 			int startHour = eatController.getFrom().getValue();

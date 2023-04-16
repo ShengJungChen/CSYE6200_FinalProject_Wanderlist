@@ -145,9 +145,9 @@ public class EditItemController_eat extends Application {
 		return updateDays;
 	}
 	
-	public void saveChange(ActionEvent event, Item item) throws IOException {
+	public void saveChange(ActionEvent event) throws IOException {
 		
-		Eat eat = (Eat) item;
+		Eat eat = (Eat) this.item;
 
 		String name = inputName.getText();
 		String url = inputUrl.getText();
@@ -161,6 +161,7 @@ public class EditItemController_eat extends Application {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
+		alert.setContentText("test");
 		alert.setContentText("Are you sure you want to update this schedule?");
 		Optional<ButtonType> result = alert.showAndWait();
 
@@ -176,7 +177,7 @@ public class EditItemController_eat extends Application {
 			
 			database.store();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
 			Parent root = loader.load();
 			TripPageController tripPageController = loader.getController();
 			tripPageController.setData(trip);
@@ -216,7 +217,7 @@ public class EditItemController_eat extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
 		Parent root = loader.load();
 		TripPageController tripPageController = loader.getController();
 		tripPageController.setData(trip);
