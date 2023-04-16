@@ -2,7 +2,9 @@ package application.item;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
+import application.Trip.TripPageController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,15 +13,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.System.ApplicationSystem;
+import model.Trip.*;
 
 public class EditItemController_buy extends Application {
 	//button
@@ -53,6 +60,11 @@ public class EditItemController_buy extends Application {
 	@FXML private ListView<String> listView;
 	@FXML private TextField input;
 
+	Trip trip;
+	Item item;
+	
+	ApplicationSystem database = ApplicationSystem.getInstance();
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("EditItem_buy.fxml"));
@@ -71,6 +83,155 @@ public class EditItemController_buy extends Application {
 		to.getSelectionModel().select(0);
 
 	}
+	public void setData(Trip trip, Item item) {
+		this.trip = trip;
+		this.item = item;
+		
+		Buy buy = (Buy) item;
+		
+		inputName.setText(item.getItemName());
+		inputUrl.setText(item.getUrl());
+		inputAddress.setText(item.getAddress());
+		inputNote.setText(item.getItemNote());
+		if(buy.getOperatingDays().contains(2)) { //Monday is 2 in Calendar.DAY_OF_WEAK
+			mon.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(3)) {
+			tue.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(4)) {
+			wed.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(5)) {
+			thur.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(6)) {
+			fri.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(7)) {
+			sat.setSelected(true);
+			}
+		if(buy.getOperatingDays().contains(1)) { //Sunday is 1 in Calendar.DAY_OF_WEAK
+			sun.setSelected(true);
+			}
+		
+		from.setValue(buy.getStartHour());
+		to.setValue(buy.getEndHour());
+		
+		ArrayList<String> array =  buy.getShoppingList();
+		ObservableList<String> observableList = FXCollections.observableArrayList(array);
+		listView.setItems(observableList);
+		
+	}
+	
+	private ArrayList<Integer> createNewOperatingDays() {
+		ArrayList<Integer> updateDays = new ArrayList<>();
+		if(mon.isSelected())
+			updateDays.add(2);
+		if(tue.isSelected())
+			updateDays.add(3);
+		if(wed.isSelected())
+			updateDays.add(4);
+		if(thur.isSelected())
+			updateDays.add(5);
+		if(fri.isSelected())
+			updateDays.add(6);
+		if(sat.isSelected())
+			updateDays.add(7);
+		if(sun.isSelected())
+			updateDays.add(1);
+		
+		return updateDays;
+	}
+	
+	public void saveChange(ActionEvent event) throws IOException {
+		
+		Buy buy = (Buy) this.item;
+
+		String name = inputName.getText();
+		String url = inputUrl.getText();
+		String address = inputAddress.getText();
+		String note = inputNote.getText();
+		ObservableList<String> observableList = listView.getItems();
+		ArrayList<String> arrayList = new ArrayList<>(observableList);
+
+		
+//		ArrayList<String> shoppingList = ((Buy) item).getShoppingList();
+//		ObservableList<String> observableList = FXCollections.observableArrayList(shoppingList);
+		
+		int startHour = from.getValue();
+		int endHour = to.getValue();
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("CONFRIMATION");
+		alert.setContentText("test");
+		alert.setContentText("Are you sure you want to update this schedule?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+			buy.setItemName(name);
+			buy.setUrl(url);
+			buy.setAddress(address);
+			buy.setItemNote(note);
+			buy.setOperatingDays(createNewOperatingDays());
+			buy.setStartHour(startHour);
+			buy.setEndHour(endHour);
+			buy.setShoppingList(arrayList);
+			
+			database.store();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
+			Parent root = loader.load();
+			BuyViewController buyViewController = loader.getController();
+			buyViewController.SetItemDetails(buy, trip);
+
+
+			Stage stage = (Stage) btnBack.getScene().getWindow();
+			stage.setScene(new Scene(root));
+		}
+	}
+	
+
+	
+	@FXML
+	private void backToTripAction(ActionEvent event) throws IOException {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("BACK");
+		alert.setHeaderText("Changes you made will not be saved.");
+		alert.setContentText("Are you sure you want to leave editing schedule?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+		Parent root = loader.load();
+		TripPageController tripPageController = loader.getController();
+		tripPageController.setData(trip);
+
+		Stage stage = (Stage) btnBack.getScene().getWindow();
+		stage.setScene(new Scene(root));
+		}
+	}
+	
+	@FXML
+	private void cancelAction(ActionEvent event) throws IOException {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("WARNING");
+		alert.setHeaderText("Changes you made will not be saved.");
+		alert.setContentText("Are you sure you want to cancel editing schedule?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
+			Parent root = loader.load();
+			BuyViewController buyViewController = loader.getController();
+			buyViewController.SetItemDetails(item, trip);
+
+		Stage stage = (Stage) btnBack.getScene().getWindow();
+		stage.setScene(new Scene(root));
+		}
+	}
+	
+	//adjust shopping list
 	
 	@FXML
 	private void addItem(ActionEvent event) {

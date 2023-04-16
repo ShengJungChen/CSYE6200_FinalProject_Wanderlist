@@ -82,7 +82,7 @@ public class EditItemController_see extends Application {
 		
 	}
 	
-	public void saveChange(ActionEvent event, Item item) throws IOException {
+	public void saveChange(ActionEvent event) throws IOException {
 		
 		See see = (See) item;
 		String name = inputName.getText();
@@ -106,10 +106,10 @@ public class EditItemController_see extends Application {
 			
 			database.store();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SeeViewPane.fxml"));
 			Parent root = loader.load();
-			TripPageController tripPageController = loader.getController();
-			tripPageController.setData(trip);
+			SeeViewController seeViewController = loader.getController();
+			seeViewController.SetItemDetails(see, trip);
 
 			Stage stage = (Stage) btnBack.getScene().getWindow();
 			stage.setScene(new Scene(root));
@@ -125,10 +125,10 @@ public class EditItemController_see extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SeeViewPane.fxml"));
+			Parent root = loader.load();
+			SeeViewController seeViewController = loader.getController();
+			seeViewController.SetItemDetails(item, trip);
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));
@@ -144,10 +144,10 @@ public class EditItemController_see extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("SeeViewPane.fxml"));
+			Parent root = loader.load();
+			SeeViewController seeViewController = loader.getController();
+			seeViewController.SetItemDetails(item, trip);
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));

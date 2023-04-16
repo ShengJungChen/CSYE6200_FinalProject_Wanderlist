@@ -25,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.System.ApplicationSystem;
 import model.Trip.Eat;
 import model.Trip.Item;
 import model.Trip.Trip;
@@ -62,6 +63,7 @@ public class EditItemController_play extends Application {
 	
 	private Trip trip;
 	private Item item;
+	ApplicationSystem database = ApplicationSystem.getInstance();
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -122,8 +124,7 @@ public class EditItemController_play extends Application {
 		to.setValue(play.getEndHour());
 		
 		needTicket.setSelected(true);
-//		inputPrice.setText(play.get);
-//		reservation.setSelected(eat.isReservation());
+		inputPrice.setText(play.getPrice().toString());
 		
 	}
 	
@@ -147,9 +148,9 @@ public class EditItemController_play extends Application {
 		return updateDays;
 	}
 	
-	public void saveChange(ActionEvent event, Item item) throws IOException {
+	public void saveChange(ActionEvent event) throws IOException {
 		
-		Eat eat = (Eat) item;
+		Play play = (Play) item;
 
 		String name = inputName.getText();
 		String url = inputUrl.getText();
@@ -159,7 +160,8 @@ public class EditItemController_play extends Application {
 		int startHour = from.getValue();
 		int endHour = to.getValue();
 		
-	//	boolean reservation = this.reservation.isSelected();
+		boolean ticket = this.needTicket.isSelected();
+		double price = Double.parseDouble(inputPrice.getText());
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFRIMATION");
@@ -167,21 +169,23 @@ public class EditItemController_play extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-			eat.setItemName(name);
-			eat.setUrl(url);
-			eat.setAddress(address);
-			eat.setItemNote(note);
-			eat.setOperatingDays(createNewOperatingDays());
-			eat.setStartHour(startHour);
-			eat.setEndHour(endHour);
-		//	eat.setReservation(reservation);
+			play.setItemName(name);
+			play.setUrl(url);
+			play.setAddress(address);
+			play.setItemNote(note);
+			play.setOperatingDays(createNewOperatingDays());
+			play.setStartHour(startHour);
+			play.setEndHour(endHour);
+			play.setTicket(ticket);
+			play.setPrice(price);
 			
-		//	database.store();
+			database.store();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
 			Parent root = loader.load();
-			TripPageController tripPageController = loader.getController();
-			tripPageController.setData(trip);
+			PlayViewController playViewController = loader.getController();
+			playViewController.SetItemDetails(play, trip);
+
 
 			Stage stage = (Stage) btnBack.getScene().getWindow();
 			stage.setScene(new Scene(root));
@@ -218,10 +222,11 @@ public class EditItemController_play extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
+			Parent root = loader.load();
+			PlayViewController playViewController = loader.getController();
+			playViewController.SetItemDetails(item, trip);
+
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));

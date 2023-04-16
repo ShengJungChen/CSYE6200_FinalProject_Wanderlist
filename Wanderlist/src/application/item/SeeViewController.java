@@ -21,7 +21,8 @@ import model.Trip.Trip;
 import model.Trip.Item.Type;
 
 public class SeeViewController {
-	Trip trip;
+	private Trip trip;
+	private Item item;
 	
 	ApplicationSystem database = ApplicationSystem.getInstance();
 
@@ -48,8 +49,11 @@ public class SeeViewController {
 	private Button btn_edit;
 	
 	
-	public void SetItemDetails(Item item)
+	public void SetItemDetails(Item item, Trip trip)
 	{
+		this.item = item;
+		this.trip = trip;
+
 		lbl_name.setText(item.getItemName());
 		lbl_url.setText(item.getUrl());
 		lbl_address.setText(item.getAddress());
@@ -57,32 +61,28 @@ public class SeeViewController {
 		lbl_mean.setText(((See) item).getTrafficMean());
 	}
 	
+	@FXML
+	private void editItemAction (ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditItem_see.fxml"));
+		Parent root = loader.load();
+		EditItemController_see editSee = loader.getController();
+		editSee.setData(trip, item);
+		Stage stage = (Stage) btnBack.getScene().getWindow();
+		stage.setScene(new Scene(root));
+	}
 	
-	
-	
-//	@FXML
-//	private void backButtonAction(ActionEvent event) throws IOException {
-//		
-//		
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-//
-//		Parent root = loader.load();
-//		TripPageController tripPageController = loader.getController();
-//		tripPageController.setData(trip);
-//
-//		Stage stage = (Stage) btnBack.getScene().getWindow();
-//		stage.setScene(new Scene(root));
-//	}	
-}
-		
-		// org
-		
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-//		Parent root = loader.load();
-//		TripPageController tripPageController = loader.getController();
-//		tripPageController.setData(trip);
-//
-//		Stage stage = (Stage) btn_back.getScene().getWindow();
-//		stage.setScene(new Scene(root));
-//	}
+	@FXML
+	public void backAction(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
 
+		Parent root = loader.load();
+		TripPageController tripPageController = loader.getController();
+		tripPageController.setData(trip);
+
+		Stage stage = (Stage) btnBack.getScene().getWindow();
+		stage.setScene(new Scene(root));
+	}
+}
+	
+	
+	

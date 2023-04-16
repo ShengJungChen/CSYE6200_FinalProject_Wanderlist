@@ -60,7 +60,7 @@
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="inputNote" editable="false" prefHeight="89.0" prefWidth="279.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextArea fx:id="inputNote" prefHeight="89.0" prefWidth="279.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="inputName" prefHeight="30.0" prefWidth="184.0" promptText="name the schedule" GridPane.columnIndex="1" />
                         <TextField fx:id="inputAddress" prefHeight="30.0" prefWidth="184.0" promptText="street name, city ....." GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="inputUrl" prefHeight="30.0" prefWidth="276.0" promptText="https://" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -211,12 +211,12 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="btnCancel" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel">
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelAction" prefHeight="35.0" prefWidth="70.0" text="Cancel">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnSave" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Save">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveChange" prefHeight="35.0" prefWidth="70.0" text="Save">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -238,7 +238,7 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Back">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backToTripAction" prefHeight="30.0" prefWidth="60.0" text="Back">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import application.item.ViewItemController;
 import application.item.AddNewItemController;
+import application.item.BuyViewController;
 import application.item.EatViewController;
 import application.item.PlayViewController;
 import application.item.SeeViewController;
@@ -168,15 +169,14 @@ public class WishlistController {
 	         // Get the controller instance and call setItem method
 	            Object controller = loader.getController();
 	            if (controller instanceof SeeViewController) {
-	                ((SeeViewController) controller).SetItemDetails(item);
+	                ((SeeViewController) controller).SetItemDetails(item,trip);
 	            } else if (controller instanceof EatViewController) {
 	                ((EatViewController) controller).SetItemDetails(item, trip);
 	            } else if (controller instanceof PlayViewController) {
-	                ((PlayViewController) controller).SetItemDetails(item);
-	            } 
-//	                else if (controller instanceof BuyViewController) {
-//	                ((BuyViewController) controller).setItem(item);
-//	            }
+	                ((PlayViewController) controller).SetItemDetails(item,trip);
+	            } else if (controller instanceof BuyViewController) {
+	                ((BuyViewController) controller).SetItemDetails(item,trip);
+	            }
 	            Scene scene = new Scene(root);
 	            Stage stage = (Stage) btnDelete.getScene().getWindow();
 	            
