@@ -82,7 +82,7 @@ public class EditItemController_see extends Application {
 		
 	}
 	
-	public void saveChange(ActionEvent event, Item item) throws IOException {
+	public void saveChange(ActionEvent event) throws IOException {
 		
 		See see = (See) item;
 		String name = inputName.getText();

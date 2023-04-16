@@ -80,25 +80,25 @@ public class EatViewController {
 	    List<String> daysOfWeek = new ArrayList<>();
 	    for (Integer day : operatingDays) {
 	        switch (day) {
-	            case 1:
+	            case 2:
 	                daysOfWeek.add("Monday");
 	                break;
-	            case 2:
+	            case 3:
 	                daysOfWeek.add("Tuesday");
 	                break;
-	            case 3:
+	            case 4:
 	                daysOfWeek.add("Wednesday");
 	                break;
-	            case 4:
+	            case 5:
 	                daysOfWeek.add("Thursday");
 	                break;
-	            case 5:
+	            case 6:
 	                daysOfWeek.add("Friday");
 	                break;
-	            case 6:
+	            case 7:
 	                daysOfWeek.add("Saturday");
 	                break;
-	            case 7:
+	            case 1:
 	                daysOfWeek.add("Sunday");
 	                break;
 	            default:
