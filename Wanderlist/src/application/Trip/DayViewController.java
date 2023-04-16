@@ -169,6 +169,12 @@ public class DayViewController {
 
 	public void dragDropped(DragEvent dragEvent) {
 
+		// if drag and drop at same day, cancel event
+		if (orgViewController == this) {
+			orgViewController = null;
+			return;
+		}
+
 		boolean canDrop = true;
 
 		Calendar calendar = Calendar.getInstance();
@@ -209,26 +215,39 @@ public class DayViewController {
 			return;
 		}
 
-		olDay.addAll(player);
-		lvDay.setItems(olDay);
-		dragEvent.setDropCompleted(true);
-
 		if (orgViewController != null) {
-			// update daylist
+			// dragged from other day
+
+			// update new daylist
+			olDay.addAll(dragItem);
+			lvDay.setItems(olDay);
+			dragEvent.setDropCompleted(true);
+
+			// update old daylist
 			orgViewController.getOlDay().remove(dragItem);
 			orgViewController.getLvDay().setItems(orgViewController.getOlDay());
+
 			// update object
 			orgViewController.getDay().removeItemFromSchedule(dragItem);
 			day.getSchedule().add(dragItem);
 			// reset reference
+
 			orgViewController = null;
+			dragItem = null;
 		} else {
+			// dragged from wishlist
+
+			// update new daylist
+			olDay.addAll(player);
+			lvDay.setItems(olDay);
+			dragEvent.setDropCompleted(true);
+
 			// update wishlist controller
 			wishlistController.removeDragedOutItem();
 			day.getSchedule().add(player);
 		}
 
-		// update day's schedule and save
+		// save change
 		database.store();
 	}
 

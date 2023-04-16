@@ -1,5 +1,6 @@
 package application.Trip;
 
+import java.awt.ScrollPane;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class WishlistController {
 
 	@FXML
 	private Button btnView;
+
+	@FXML
+	private ScrollPane scrollPane;
 
 	@FXML
 	private HBox dayHolder;
@@ -243,6 +247,24 @@ public class WishlistController {
 		ClipboardContent content = new ClipboardContent();
 		content.put(Item.DATA_FORMAT, player);
 		dragBoard.setContent(content);
+	}
+
+	public void scrollWhenMouseAtEdge(MouseEvent event) {
+		// get the position of the mouse relative to the scroll pane
+		double x = event.getX();
+		double y = event.getY();
+
+		// check if the mouse is near the left edge of the scroll pane
+		if (x <= 20) {
+			double vvalue = scrollPane.getVvalue();
+			scrollPane.setVvalue(vvalue - 0.1); // scroll up
+		}
+
+		// check if the mouse is near the right edge of the scroll pane
+		if (x >= scrollPane.getWidth() - 20) {
+			double vvalue = scrollPane.getVvalue();
+			scrollPane.setVvalue(vvalue + 0.1); // scroll down
+		}
 	}
 
 	public ListView<Item> getLvWishlist() {
