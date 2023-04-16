@@ -115,7 +115,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_edit" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Edit">
+            <Button fx:id="btn_edit" mnemonicParsing="false" onAction="#editItemAction" prefHeight="35.0" prefWidth="70.0" text="Edit">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -132,7 +132,7 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Back">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="60.0" text="Back">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>

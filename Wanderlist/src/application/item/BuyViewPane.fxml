@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.ViewItemController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.BuyViewController">
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="843.0" BorderPane.alignment="CENTER">
          <content>
@@ -60,33 +60,54 @@
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="name" text="name of shcedule" textAlignment="RIGHT" GridPane.columnIndex="1">
+                        <Label fx:id="lbl_name" textAlignment="RIGHT" GridPane.columnIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="type" text="type" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="lbl_type" text="Buy" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="url" text="url" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="lbl_url" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="address" text="address" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="lbl_address" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
                         <Label text="Operating Days TEST" GridPane.rowIndex="5" />
-                        <Label prefHeight="48.0" prefWidth="120.0" text="monday" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label prefHeight="57.0" prefWidth="115.0" text="notes" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="lbl_operatingDays" prefHeight="48.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Opening Hours" GridPane.rowIndex="6" />
-                        <Label text="time" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="Shopping List" GridPane.rowIndex="7" />
-                        <ListView prefHeight="133.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ListView fx:id="listview" prefHeight="133.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <children>
+                              <Label text="from">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_starthour" />
+                              <Label text="to">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_endhour" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>
@@ -112,17 +133,17 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="btn_cancel" disable="true" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="35.0" prefWidth="70.0" text="Cancel">
+            <Button fx:id="btn_cancel" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_save" disable="true" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="35.0" prefWidth="70.0" text="Save">
+            <Button fx:id="btn_save" disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Save">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_edit" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="35.0" prefWidth="70.0" text="Edit">
+            <Button fx:id="btn_edit" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Edit">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -139,12 +160,12 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btn_back" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="30.0" prefWidth="60.0" text="Back">
+            <Button fx:id="btn_back" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="60.0" text="Back">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Button>
-            <Label contentDisplay="CENTER" text="View See Schedule Details" textAlignment="CENTER">
+            <Label contentDisplay="CENTER" text="View Buy Schedule Details" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
