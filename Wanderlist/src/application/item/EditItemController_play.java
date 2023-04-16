@@ -181,10 +181,11 @@ public class EditItemController_play extends Application {
 			
 			database.store();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
 			Parent root = loader.load();
-			TripPageController tripPageController = loader.getController();
-			tripPageController.setData(trip);
+			PlayViewController playViewController = loader.getController();
+			playViewController.SetItemDetails(play, trip);
+
 
 			Stage stage = (Stage) btnBack.getScene().getWindow();
 			stage.setScene(new Scene(root));
@@ -221,10 +222,11 @@ public class EditItemController_play extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../application/Trip/TripPage.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
+			Parent root = loader.load();
+			PlayViewController playViewController = loader.getController();
+			playViewController.SetItemDetails(item, trip);
+
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));

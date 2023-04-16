@@ -118,7 +118,9 @@ public class EditItemController_buy extends Application {
 		from.setValue(buy.getStartHour());
 		to.setValue(buy.getEndHour());
 		
-		listView.setItems((ObservableList<String>) buy.getShoppingList());
+		ArrayList<String> array =  buy.getShoppingList();
+		ObservableList<String> observableList = FXCollections.observableArrayList(array);
+		listView.setItems(observableList);
 		
 	}
 	
@@ -150,7 +152,12 @@ public class EditItemController_buy extends Application {
 		String url = inputUrl.getText();
 		String address = inputAddress.getText();
 		String note = inputNote.getText();
-		ArrayList<String> shoppinglist = (ArrayList<String>) listView.getItems();
+		ObservableList<String> observableList = listView.getItems();
+		ArrayList<String> arrayList = new ArrayList<>(observableList);
+
+		
+//		ArrayList<String> shoppingList = ((Buy) item).getShoppingList();
+//		ObservableList<String> observableList = FXCollections.observableArrayList(shoppingList);
 		
 		int startHour = from.getValue();
 		int endHour = to.getValue();
@@ -169,14 +176,15 @@ public class EditItemController_buy extends Application {
 			buy.setOperatingDays(createNewOperatingDays());
 			buy.setStartHour(startHour);
 			buy.setEndHour(endHour);
-			buy.setShoppingList(shoppinglist);
+			buy.setShoppingList(arrayList);
 			
 			database.store();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
 			Parent root = loader.load();
-			TripPageController tripPageController = loader.getController();
-			tripPageController.setData(trip);
+			BuyViewController buyViewController = loader.getController();
+			buyViewController.SetItemDetails(buy, trip);
+
 
 			Stage stage = (Stage) btnBack.getScene().getWindow();
 			stage.setScene(new Scene(root));
@@ -213,10 +221,10 @@ public class EditItemController_buy extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
+			Parent root = loader.load();
+			BuyViewController buyViewController = loader.getController();
+			buyViewController.SetItemDetails(item, trip);
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));

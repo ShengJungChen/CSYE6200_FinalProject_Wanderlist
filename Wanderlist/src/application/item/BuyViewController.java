@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Trip.TripPageController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,6 +75,8 @@ public class BuyViewController {
 		List<String> daysOfWeekStrings = convertOperatingDaysToStrings(((Buy) item).getOperatingDays());
 		lbl_operatingDays.setText(String.join(", ", daysOfWeekStrings));
 		ArrayList<String> shoppingList = ((Buy) item).getShoppingList();
+		ObservableList<String> observableList = FXCollections.observableArrayList(shoppingList);
+
 		listview.getItems().addAll(shoppingList);
 
 	}
@@ -109,15 +113,15 @@ public class BuyViewController {
 	    return daysOfWeek;
 	}
 	
-//	@FXML
-//	private void editItemAction (ActionEvent event) throws IOException {
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditItem_buy.fxml"));
-//		Parent root = loader.load();
-//		EditItemController_buy editBuy = loader.getController();
-//		editBuy.setData(trip, item);
-//		Stage stage = (Stage) btn_back.getScene().getWindow();
-//		stage.setScene(new Scene(root));
-//	}
+	@FXML
+	private void editItemAction (ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EditItem_buy.fxml"));
+		Parent root = loader.load();
+		EditItemController_buy editBuy = loader.getController();
+		editBuy.setData(trip, item);
+		Stage stage = (Stage) btn_back.getScene().getWindow();
+		stage.setScene(new Scene(root));
+	}
 	
 	@FXML
 	public void backAction(ActionEvent event) throws IOException {

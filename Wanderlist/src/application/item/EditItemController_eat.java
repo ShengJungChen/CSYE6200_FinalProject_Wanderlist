@@ -179,8 +179,8 @@ public class EditItemController_eat extends Application {
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
 			Parent root = loader.load();
-			TripPageController tripPageController = loader.getController();
-			tripPageController.setData(trip);
+			EatViewController eatViewController = loader.getController();
+			eatViewController.SetItemDetails(eat, trip);
 
 			Stage stage = (Stage) btnBack.getScene().getWindow();
 			stage.setScene(new Scene(root));
@@ -217,10 +217,10 @@ public class EditItemController_eat extends Application {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
-		Parent root = loader.load();
-		TripPageController tripPageController = loader.getController();
-		tripPageController.setData(trip);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
+			Parent root = loader.load();
+			EatViewController eatViewController = loader.getController();
+			eatViewController.SetItemDetails(item, trip);
 
 		Stage stage = (Stage) btnBack.getScene().getWindow();
 		stage.setScene(new Scene(root));
