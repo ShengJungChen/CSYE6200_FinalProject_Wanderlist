@@ -40,7 +40,7 @@
                         <Font name="Arial Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ScrollPane fx:id="scrollPane" fitToHeight="true" prefHeight="445.0" prefWidth="600.0">
+                  <ScrollPane fitToHeight="true" prefHeight="445.0" prefWidth="600.0">
                      <content>
                         <HBox fx:id="dayHolder" maxHeight="430.0" spacing="10.0">
                            <padding>
