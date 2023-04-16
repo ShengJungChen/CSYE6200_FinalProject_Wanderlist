@@ -1,5 +1,8 @@
 package application.Trip;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +44,10 @@ public class DayViewController {
 	private Button btn_remove;
 	@FXML
 	private Button btn_view;
+	@FXML
+	private Button btn_up;
+	@FXML
+	private Button btn_down;
 
 	private static DayViewController orgViewController;
 	private static Item dragItem;
@@ -138,6 +145,54 @@ public class DayViewController {
 
 	public ObservableList<Item> getOlDay() {
 		return olDay;
+	}
+
+	public void upAction(ActionEvent event) {
+		// change data
+		int selectedIndex = lvDay.getSelectionModel().getSelectedIndex();
+
+		ArrayList<Item> schedule = day.getSchedule();
+		if (selectedIndex == 0) {
+			event.consume();
+			return;
+		}
+
+		Collections.swap(schedule, selectedIndex, selectedIndex - 1);
+
+		// change display
+
+		olDay.clear();
+		olDay.addAll(day.getSchedule());
+		lvDay.setItems(olDay);
+		lvDay.getSelectionModel().select(selectedIndex);
+		lvDay.getSelectionModel().select(selectedIndex - 1);
+
+		// save change
+		database.store();
+	}
+
+	public void downAction(ActionEvent event) {
+		// change data
+		int selectedIndex = lvDay.getSelectionModel().getSelectedIndex();
+
+		ArrayList<Item> schedule = day.getSchedule();
+		if (selectedIndex == schedule.size() - 1) {
+			event.consume();
+			return;
+		}
+
+		Collections.swap(schedule, selectedIndex, selectedIndex + 1);
+
+		// change display
+
+		olDay.clear();
+		olDay.addAll(day.getSchedule());
+		lvDay.setItems(olDay);
+		lvDay.getSelectionModel().select(selectedIndex);
+		lvDay.getSelectionModel().select(selectedIndex + 1);
+
+		// save change
+		database.store();
 	}
 
 }

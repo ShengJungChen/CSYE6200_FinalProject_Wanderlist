@@ -27,8 +27,10 @@
          </children>
       </VBox>
       <ListView fx:id="lvDay" onDragDetected="#dragDetected" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="353.0" prefWidth="279.0" />
-      <HBox alignment="CENTER_RIGHT" prefWidth="600.0" spacing="20.0">
+      <HBox alignment="CENTER_RIGHT" prefWidth="600.0" spacing="10.0">
          <children>
+            <Button fx:id="btn_up" layoutX="151.0" layoutY="12.0" mnemonicParsing="false" onAction="#upAction" prefHeight="26.0" prefWidth="42.0" text="UP" />
+            <Button fx:id="btn_down" layoutX="220.0" layoutY="12.0" mnemonicParsing="false" onAction="#downAction" prefHeight="26.0" prefWidth="65.0" text="DOWN" />
             <Button fx:id="btn_remove" mnemonicParsing="false" onAction="#moveButtonAction" prefHeight="12.0" prefWidth="15.0">
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
