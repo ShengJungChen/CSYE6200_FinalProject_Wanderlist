@@ -80,9 +80,9 @@
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Operating Days TEST" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_operatingDays" prefHeight="48.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Operating Days" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_operatingDays" prefHeight="75.0" prefWidth="340.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Opening Hours" GridPane.rowIndex="6" />
                         <Label text="Shopping List" GridPane.rowIndex="7" />
                         <ListView fx:id="listview" prefHeight="133.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
