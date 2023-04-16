@@ -1,6 +1,7 @@
 package application.Trip;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -111,10 +112,36 @@ public class DayViewController {
 	}
 
 	public void dragDropped(DragEvent dragEvent) {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(day.getDate());
+
+		int weekdayInt = calendar.get(Calendar.DAY_OF_WEEK);
+		System.out.println("THIS DAY" + weekdayInt);
+
 		Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
 		olDay.addAll(player);
 		lvDay.setItems(olDay);
 		dragEvent.setDropCompleted(true);
+
+		// check operating hours
+//		switch (player.getType()) {
+//		case "Eat":
+//			Eat eat = (Eat) player;
+////			if (eat.getOperatingDays().contains(weekdayInt))
+////				System.out.println("contains");
+//
+//			for (int i : eat.getOperatingDays()) {
+//				System.out.println(i);
+//			}
+//			break;
+//		case "Play":
+//			player = (Play) player;
+//			break;
+//		case "Buy":
+//			player = (Buy) player;
+//			break;
+//		}
 
 		if (orgViewController != null) {
 			// update daylist
