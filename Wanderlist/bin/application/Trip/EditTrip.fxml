@@ -29,17 +29,17 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="inputTripName" GridPane.columnIndex="1">
+      <TextField fx:id="inputTripName" prefHeight="30.0" GridPane.columnIndex="1">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="inputCountry" layoutX="178.0" layoutY="12.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="inputCountry" layoutX="178.0" layoutY="12.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="inputCity" layoutX="178.0" layoutY="72.0" prefHeight="26.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="inputCity" layoutX="178.0" layoutY="72.0" prefHeight="30.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -51,9 +51,9 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cmbStartYear" layoutX="160.0" layoutY="12.0" onAction="#startYearSet" prefWidth="90.0" promptText="Year" />
-            <ComboBox fx:id="cmbStartMonth" onAction="#startMonthSet" prefWidth="90.0" promptText="Month" />
-            <ComboBox fx:id="cmbStartDate" layoutX="170.0" layoutY="10.0" prefWidth="90.0" promptText="Date" />
+            <ComboBox fx:id="cmbStartYear" layoutX="160.0" layoutY="12.0" onAction="#startYearSet" prefHeight="30.0" prefWidth="90.0" promptText="Year" />
+            <ComboBox fx:id="cmbStartMonth" onAction="#startMonthSet" prefHeight="30.0" prefWidth="90.0" promptText="Month" />
+            <ComboBox fx:id="cmbStartDate" layoutX="170.0" layoutY="10.0" prefHeight="30.0" prefWidth="90.0" promptText="Date" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" layoutX="80.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -63,9 +63,9 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cmbEndYear" onAction="#endYearSet" prefWidth="90.0" promptText="Year" />
-            <ComboBox fx:id="cmbEndMonth" onAction="#endMonthSet" prefWidth="90.0" promptText="Month" />
-            <ComboBox fx:id="cmbEndDate" layoutX="170.0" layoutY="10.0" prefWidth="90.0" promptText="Date" />
+            <ComboBox fx:id="cmbEndYear" onAction="#endYearSet" prefHeight="30.0" prefWidth="90.0" promptText="Year" />
+            <ComboBox fx:id="cmbEndMonth" onAction="#endMonthSet" prefHeight="30.0" prefWidth="90.0" promptText="Month" />
+            <ComboBox fx:id="cmbEndDate" layoutX="170.0" layoutY="10.0" prefHeight="30.0" prefWidth="90.0" promptText="Date" />
          </children>
       </HBox>
       <TextArea fx:id="InputNote" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
