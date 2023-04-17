@@ -25,13 +25,13 @@
                      </font>
                   </Label>
                   <VBox fx:id="paneTripDetailHolder" prefHeight="250.0" prefWidth="100.0" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editAction" prefHeight="30.0" prefWidth="80.0" text="Edit">
+                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ec626f;" text="Edit" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Button>
-                        <Button fx:id="btnSave" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="30.0" prefWidth="80.0" text="Save">
+                        <Button fx:id="btnSave" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #191824;" text="Save" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font></Button>
