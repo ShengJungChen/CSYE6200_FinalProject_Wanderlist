@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -58,7 +59,16 @@ public class buyPane_Controller extends Application {
 	
 	@FXML
 	private void addItem(ActionEvent event) {
-		listView.getItems().add(input.getText());
+		if (input.getText().isBlank()) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Cannot enter empty item.");
+			alert.showAndWait();
+			input.setText("");
+			event.consume();
+		} else {
+			listView.getItems().add(input.getText());
+			input.setText("");
+		}
 	}
 	
 	@FXML

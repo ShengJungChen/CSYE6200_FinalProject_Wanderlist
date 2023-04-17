@@ -158,32 +158,47 @@ public class EditItemController_eat extends Application {
 		int endHour = to.getValue();
 		
 		boolean reservation = this.reservation.isSelected();
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("CONFRIMATION");
-		alert.setContentText("test");
-		alert.setContentText("Are you sure you want to update this schedule?");
-		Optional<ButtonType> result = alert.showAndWait();
 
-		if (result.get() == ButtonType.OK) {
-			eat.setItemName(name);
-			eat.setUrl(url);
-			eat.setAddress(address);
-			eat.setItemNote(note);
-			eat.setOperatingDays(createNewOperatingDays());
-			eat.setStartHour(startHour);
-			eat.setEndHour(endHour);
-			eat.setReservation(reservation);
+		if (startHour >= endHour) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Operating Hour is invalid");
+			alert.setContentText("Start time cannot be greater than end time.");
+			alert.showAndWait();
+			event.consume();
 			
-			database.store();
+		} else if (name.isBlank()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Please enter the schedule name.");
+			alert.showAndWait();
+			event.consume();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
-			Parent root = loader.load();
-			EatViewController eatViewController = loader.getController();
-			eatViewController.SetItemDetails(eat, trip);
+		} else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFRIMATION");
+			alert.setContentText("test");
+			alert.setContentText("Are you sure you want to update this schedule?");
+			Optional<ButtonType> result = alert.showAndWait();
 
-			Stage stage = (Stage) btnBack.getScene().getWindow();
-			stage.setScene(new Scene(root));
+			if (result.get() == ButtonType.OK) {
+				eat.setItemName(name);
+				eat.setUrl(url);
+				eat.setAddress(address);
+				eat.setItemNote(note);
+				eat.setOperatingDays(createNewOperatingDays());
+				eat.setStartHour(startHour);
+				eat.setEndHour(endHour);
+				eat.setReservation(reservation);
+
+				database.store();
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("EatViewPane.fxml"));
+				Parent root = loader.load();
+				EatViewController eatViewController = loader.getController();
+				eatViewController.SetItemDetails(eat, trip);
+
+				Stage stage = (Stage) btnBack.getScene().getWindow();
+				stage.setScene(new Scene(root));
+			}
 		}
 	}
 	

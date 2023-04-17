@@ -155,39 +155,48 @@ public class EditItemController_buy extends Application {
 		ObservableList<String> observableList = listView.getItems();
 		ArrayList<String> arrayList = new ArrayList<>(observableList);
 
-		
-//		ArrayList<String> shoppingList = ((Buy) item).getShoppingList();
-//		ObservableList<String> observableList = FXCollections.observableArrayList(shoppingList);
-		
 		int startHour = from.getValue();
 		int endHour = to.getValue();
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("CONFRIMATION");
-		alert.setContentText("test");
-		alert.setContentText("Are you sure you want to update this schedule?");
-		Optional<ButtonType> result = alert.showAndWait();
 
-		if (result.get() == ButtonType.OK) {
-			buy.setItemName(name);
-			buy.setUrl(url);
-			buy.setAddress(address);
-			buy.setItemNote(note);
-			buy.setOperatingDays(createNewOperatingDays());
-			buy.setStartHour(startHour);
-			buy.setEndHour(endHour);
-			buy.setShoppingList(arrayList);
-			
-			database.store();
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
-			Parent root = loader.load();
-			BuyViewController buyViewController = loader.getController();
-			buyViewController.SetItemDetails(buy, trip);
+		if (startHour >= endHour) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Operating Hour is invalid");
+			alert.setContentText("Start time cannot be greater than end time.");
+			alert.showAndWait();
+			event.consume();
+		} else if (name.isBlank()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Please enter the schedule name.");
+			alert.showAndWait();
+			event.consume();
+		} else {
 
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFRIMATION");
+			alert.setContentText("test");
+			alert.setContentText("Are you sure you want to update this schedule?");
+			Optional<ButtonType> result = alert.showAndWait();
 
-			Stage stage = (Stage) btnBack.getScene().getWindow();
-			stage.setScene(new Scene(root));
+			if (result.get() == ButtonType.OK) {
+				buy.setItemName(name);
+				buy.setUrl(url);
+				buy.setAddress(address);
+				buy.setItemNote(note);
+				buy.setOperatingDays(createNewOperatingDays());
+				buy.setStartHour(startHour);
+				buy.setEndHour(endHour);
+				buy.setShoppingList(arrayList);
+
+				database.store();
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("BuyViewPane.fxml"));
+				Parent root = loader.load();
+				BuyViewController buyViewController = loader.getController();
+				buyViewController.SetItemDetails(buy, trip);
+
+				Stage stage = (Stage) btnBack.getScene().getWindow();
+				stage.setScene(new Scene(root));
+			}
 		}
 	}
 	
@@ -235,7 +244,17 @@ public class EditItemController_buy extends Application {
 	
 	@FXML
 	private void addItem(ActionEvent event) {
-		listView.getItems().add(input.getText());
+	
+		if (input.getText().isBlank()) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Cannot enter empty item.");
+			alert.showAndWait();
+			input.setText("");
+			event.consume();
+		} else {
+			listView.getItems().add(input.getText());
+			input.setText("");
+		}
 	}
 	
 	@FXML
