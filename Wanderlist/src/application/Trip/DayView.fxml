@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="240.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.DayViewController">
+<VBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="240.0" spacing="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.DayViewController">
    <children>
       <VBox alignment="CENTER" prefHeight="75.0" prefWidth="250.0">
          <children>
@@ -32,22 +32,42 @@
       <ListView fx:id="lvDay" onDragDetected="#dragDetected" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="353.0" prefWidth="279.0" />
       <HBox alignment="CENTER_RIGHT" spacing="10.0">
          <children>
-            <Button fx:id="btn_up" layoutX="151.0" layoutY="12.0" mnemonicParsing="false" onAction="#upAction" prefHeight="30.0" prefWidth="42.0" text="UP" />
-            <Button fx:id="btn_down" layoutX="220.0" layoutY="12.0" mnemonicParsing="false" onAction="#downAction" prefHeight="30.0" prefWidth="65.0" text="DOWN" />
-            <Button fx:id="btn_remove" mnemonicParsing="false" onAction="#moveButtonAction" prefHeight="30.0" prefWidth="15.0">
+            <Button fx:id="btn_up" layoutX="151.0" layoutY="12.0" mnemonicParsing="false" onAction="#upAction" prefHeight="25.0">
                <graphic>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/btn_delete.png" />
+                        <Image url="@../../images/up.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btn_down" layoutX="220.0" layoutY="12.0" mnemonicParsing="false" onAction="#downAction" prefHeight="25.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/down.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btn_view" mnemonicParsing="false" onAction="#viewButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #191824;" text="View" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="btn_remove" mnemonicParsing="false" onAction="#moveButtonAction" prefHeight="25.0" prefWidth="30.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/remove.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btn_view" mnemonicParsing="false" onAction="#viewButtonAction" prefHeight="30.0" prefWidth="49.0" text="View">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
          </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="5.0" />
+   </padding>
 </VBox>

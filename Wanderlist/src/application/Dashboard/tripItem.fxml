@@ -32,7 +32,7 @@
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Button>
-            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteAction" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #484848;" text="Delete" textFill="WHITE">
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteAction" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #191824;" text="Delete" textFill="WHITE">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Button>
