@@ -15,105 +15,123 @@
 
 <BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.item.EatViewController">
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="843.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" prefWidth="843.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="vBox" alignment="TOP_CENTER" prefHeight="656.0" prefWidth="877.0" spacing="20.0">
+            <VBox fx:id="vBox" alignment="TOP_CENTER" spacing="20.0">
                <children>
-                  <GridPane fx:id="gridPane" prefHeight="406.0" prefWidth="857.0" vgap="20.0">
+                  <GridPane fx:id="gridPane" prefHeight="400.0" vgap="20.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.33333333333334" minWidth="10.0" prefWidth="89.4444580078125" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.2222035725912" minWidth="10.0" prefWidth="253.22220865885419" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <Label text="Name" textAlignment="RIGHT">
                            <font>
-                              <Font name="Arial" size="14.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label text="Type" textAlignment="RIGHT" GridPane.rowIndex="1">
                            <font>
-                              <Font name="Arial" size="14.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label text="URL" textAlignment="RIGHT" GridPane.rowIndex="2">
                            <font>
-                              <Font name="Arial" size="14.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefWidth="52.0" text="Address" textAlignment="RIGHT" GridPane.rowIndex="3">
+                        <Label text="Address" textAlignment="RIGHT" GridPane.rowIndex="3">
                            <font>
-                              <Font name="Arial" size="14.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Label>
                         <Label text="Note" textAlignment="RIGHT" GridPane.rowIndex="4">
                            <font>
-                              <Font name="Arial" size="14.0" />
+                              <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_name" textAlignment="RIGHT" GridPane.columnIndex="1">
+                        <Label fx:id="lbl_name" prefHeight="30.0" textAlignment="RIGHT" GridPane.columnIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="type" text="Eat" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="type" prefHeight="30.0" text="Eat" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_url" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="lbl_url" prefHeight="30.0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_address" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="lbl_address" prefHeight="30.0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Operating Days " GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_operatingDays" prefHeight="64.0" prefWidth="333.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Opening Hours" GridPane.rowIndex="6" />
-                        <Label text="Reservation" GridPane.rowIndex="7" />
-                        <CheckBox fx:id="cb_reservation" disable="true" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Label text="Operating Days " GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="lbl_operatingDays" prefHeight="30.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="lbl_note" prefHeight="30.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font></Label>
+                        <Label text="Opening Hours" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font></Label>
+                        <Label text="Reservation" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cb_reservation" disable="true" mnemonicParsing="false" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
                         </CheckBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <children>
-                              <Label text="from">
+                              <Label text="From">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lbl_starthour" />
+                              <Label fx:id="lbl_starthour">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font></Label>
                               <Label text="to">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lbl_endhour" />
+                              <Label fx:id="lbl_endhour">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font></Label>
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
                         </HBox>
                      </children>
                   </GridPane>
@@ -122,23 +140,20 @@
                   <Insets left="10.0" top="10.0" />
                </opaqueInsets>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </padding>
             </VBox>
          </content>
          <BorderPane.margin>
-            <Insets top="10.0" />
+            <Insets />
          </BorderPane.margin>
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </opaqueInsets>
       </ScrollPane>
    </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
    <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="TOP_RIGHT" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel">
                <font>
@@ -160,12 +175,15 @@
             <Insets />
          </opaqueInsets>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" top="20.0" />
          </padding>
+         <BorderPane.margin>
+            <Insets right="60.0" />
+         </BorderPane.margin>
       </HBox>
    </bottom>
    <top>
-      <HBox prefHeight="30.0" prefWidth="940.0" spacing="100.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="30.0" prefWidth="940.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btn_back" mnemonicParsing="false" onAction="#backAction" prefHeight="30.0" prefWidth="60.0" text="Back">
                <font>
@@ -178,6 +196,9 @@
                </font>
             </Label>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
       </HBox>
    </top>
 </BorderPane>
