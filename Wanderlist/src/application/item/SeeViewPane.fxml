@@ -79,7 +79,7 @@
                         </Label>
                         <Label text="TrafficMean" GridPane.rowIndex="5" />
                         <Label fx:id="lbl_mean" prefHeight="48.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="lbl_note" prefHeight="81.0" prefWidth="344.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </children>

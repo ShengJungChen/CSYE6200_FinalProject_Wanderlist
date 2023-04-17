@@ -81,8 +81,8 @@
                            </font>
                         </Label>
                         <Label text="Operating Days " GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_operatingDays" prefHeight="48.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="lbl_operatingDays" prefHeight="64.0" prefWidth="333.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lbl_note" prefHeight="57.0" prefWidth="115.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Opening Hours" GridPane.rowIndex="6" />
                         <Label text="Reservation" GridPane.rowIndex="7" />
                         <CheckBox fx:id="cb_reservation" disable="true" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7">

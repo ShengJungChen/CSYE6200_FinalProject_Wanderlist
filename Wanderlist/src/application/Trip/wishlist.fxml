@@ -9,32 +9,49 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
+<VBox maxHeight="480.0" prefHeight="480.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Trip.WishlistController">
    <children>
-      <Label text="Wishlist">
-         <font>
-            <Font name="Arial Bold" size="24.0" />
-         </font></Label>
-      <ListView fx:id="lvWishlist" onDragDetected="#dragDetected" prefHeight="200.0" prefWidth="200.0" />
-      <HBox alignment="CENTER_RIGHT" spacing="20.0">
+      <HBox maxWidth="843.0" prefHeight="500.0" prefWidth="843.0" spacing="20.0">
          <children>
-            <Button fx:id="btnNewItem" mnemonicParsing="false" onAction="#newItemAction" text="New Item" />
-            <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleViewButtonClick" text="View" />
-            <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteSelectedItem" text="Delete" />
+            <VBox prefHeight="500.0" prefWidth="260.0" spacing="20.0">
+               <children>
+                  <Label text="Wishlist">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="lvWishlist" onDragDetected="#dragDetected" prefWidth="240.0" />
+                  <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnNewItem" mnemonicParsing="false" onAction="#newItemAction" text="New" />
+                        <Button fx:id="btnView" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleViewButtonClick" text="View" />
+                        <Button fx:id="btnDelete" layoutX="64.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteSelectedItem" text="Delete" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox spacing="20.0">
+               <children>
+                  <Label text="Schedule">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane fitToHeight="true" prefHeight="445.0" prefWidth="600.0">
+                     <content>
+                        <HBox fx:id="dayHolder" maxHeight="430.0" spacing="10.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
       </HBox>
-      <Label layoutX="10.0" layoutY="10.0" text="Schedule">
-         <font>
-            <Font name="Arial Bold" size="24.0" />
-         </font>
-      </Label>
-      <ScrollPane prefHeight="400.0" prefWidth="600.0">
-         <content>
-            <HBox fx:id="dayHolder" prefHeight="300.0" prefWidth="705.0" spacing="10.0" />
-         </content>
-      </ScrollPane>
    </children>
 </VBox>
