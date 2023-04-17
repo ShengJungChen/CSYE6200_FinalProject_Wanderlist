@@ -67,8 +67,9 @@ public class DayViewController {
 	private static DayViewController orgViewController;
 	private static Item dragItem;
 
-	public void setData(WishlistController wishlistController, Day day, String date, String weekday) {
+	public void setData(WishlistController wishlistController, Trip trip, Day day, String date, String weekday) {
 		this.wishlistController = wishlistController;
+		this.trip = trip;
 		this.lvWishlist = wishlistController.getLvWishlist();
 		this.olWishlist = wishlistController.getOlWisList();
 
@@ -181,7 +182,7 @@ public class DayViewController {
 		calendar.setTime(day.getDate());
 
 		int weekdayInt = calendar.get(Calendar.DAY_OF_WEEK);
-		System.out.println("THIS DAY" + weekdayInt);
+//		System.out.println("THIS DAY" + weekdayInt);
 
 		Item player = (Item) dragEvent.getDragboard().getContent(Item.DATA_FORMAT);
 
@@ -230,8 +231,8 @@ public class DayViewController {
 			// update object
 			orgViewController.getDay().removeItemFromSchedule(dragItem);
 			day.getSchedule().add(dragItem);
-			// reset reference
 
+			// reset reference
 			orgViewController = null;
 			dragItem = null;
 		} else {

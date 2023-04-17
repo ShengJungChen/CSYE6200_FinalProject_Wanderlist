@@ -100,7 +100,7 @@ public class WishlistController {
 				String dateString = simpleDateFormat.format(date);
 
 				// set
-				dayViewController.setData(this, day, dateString, dayList.get(i).getWeekDay());
+				dayViewController.setData(this, trip, day, dateString, dayList.get(i).getWeekDay());
 				dayHolder.getChildren().add(vBox);
 
 			} catch (IOException e) {
