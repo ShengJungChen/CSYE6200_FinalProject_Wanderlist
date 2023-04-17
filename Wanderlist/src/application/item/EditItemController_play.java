@@ -161,34 +161,59 @@ public class EditItemController_play extends Application {
 		int endHour = to.getValue();
 		
 		boolean ticket = this.needTicket.isSelected();
-		double price = Double.parseDouble(inputPrice.getText());
 		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("CONFRIMATION");
-		alert.setContentText("Are you sure you want to update this schedule?");
-		Optional<ButtonType> result = alert.showAndWait();
+		String inputNum = inputPrice.getText();
+		
+		
+		
 
-		if (result.get() == ButtonType.OK) {
-			play.setItemName(name);
-			play.setUrl(url);
-			play.setAddress(address);
-			play.setItemNote(note);
-			play.setOperatingDays(createNewOperatingDays());
-			play.setStartHour(startHour);
-			play.setEndHour(endHour);
-			play.setTicket(ticket);
-			play.setPrice(price);
+		if (startHour >= endHour) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Operating Hour is invalid");
+			alert.setContentText("Start time cannot be greater than end time.");
+			alert.showAndWait();
+			event.consume();
 			
-			database.store();
+		} else if (name.isBlank()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Please enter the schedule name.");
+			alert.showAndWait();
+			event.consume();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
-			Parent root = loader.load();
-			PlayViewController playViewController = loader.getController();
-			playViewController.SetItemDetails(play, trip);
+		} else if (!inputNum.matches("[0-9.]+")){
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Invalid price, please enter a number.");
+			alert.showAndWait();
+			event.consume();
+		}
+		else {
+		
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFRIMATION");
+			alert.setContentText("Are you sure you want to update this schedule?");
+			Optional<ButtonType> result = alert.showAndWait();
 
+			if (result.get() == ButtonType.OK) {
+				play.setItemName(name);
+				play.setUrl(url);
+				play.setAddress(address);
+				play.setItemNote(note);
+				play.setOperatingDays(createNewOperatingDays());
+				play.setStartHour(startHour);
+				play.setEndHour(endHour);
+				play.setTicket(ticket);
+				play.setPrice(Double.parseDouble(inputNum));
 
-			Stage stage = (Stage) btnBack.getScene().getWindow();
-			stage.setScene(new Scene(root));
+				database.store();
+
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayViewPane.fxml"));
+				Parent root = loader.load();
+				PlayViewController playViewController = loader.getController();
+				playViewController.SetItemDetails(play, trip);
+
+				Stage stage = (Stage) btnBack.getScene().getWindow();
+				stage.setScene(new Scene(root));
+			}
 		}
 	}
 	

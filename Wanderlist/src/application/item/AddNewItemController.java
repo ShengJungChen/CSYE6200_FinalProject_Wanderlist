@@ -64,6 +64,31 @@ public class AddNewItemController extends Application {
 	@FXML	private ComboBox<String> typeBox;
 	ObservableList<String> typeList = FXCollections.observableArrayList("Eat", "Buy", "Play", "See");
 	
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+
+		Parent root = FXMLLoader.load(getClass().getResource("AddNewItemPage.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("WanderList");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		// cannot add the set method of button
+	}
+
+	@FXML
+	private void initialize() throws IOException {
+	
+		typeBox.setItems(typeList);
+		typeBox.setOnAction(event -> {
+			try {
+				onTypeBoxChanged();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
 	//Type change: diff view & set diff controller
 	@FXML private void onTypeBoxChanged() throws IOException {
 		if(typeBox.getValue().equals("Eat")) {
@@ -76,9 +101,8 @@ public class AddNewItemController extends Application {
 			
 			this.eatController = loader.getController();
 			
-			
-			
-		} else if (typeBox.getValue().equals("Buy")) {
+		} 
+		else if (typeBox.getValue().equals("Buy")) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("AddNewItem_buyPane.fxml"));
 			
@@ -167,25 +191,25 @@ public class AddNewItemController extends Application {
 			Type type = Type.Buy;
 			ArrayList<Integer> operatingDays = new ArrayList<Integer>();
 				if(buyController.getMon().isSelected()) {
-					operatingDays.add(1);
-				}
-				if(buyController.getTue().isSelected()) {
 					operatingDays.add(2);
 				}
-				if(buyController.getWed().isSelected()) {
+				if(buyController.getTue().isSelected()) {
 					operatingDays.add(3);
 				}
-				if(buyController.getThur().isSelected()) {
+				if(buyController.getWed().isSelected()) {
 					operatingDays.add(4);
 				}
-				if(buyController.getFri().isSelected()) {
+				if(buyController.getThur().isSelected()) {
 					operatingDays.add(5);
 				}
-				if(buyController.getSat().isSelected()) {
+				if(buyController.getFri().isSelected()) {
 					operatingDays.add(6);
 				}
-				if(buyController.getSun().isSelected()) {
+				if(buyController.getSat().isSelected()) {
 					operatingDays.add(7);
+				}
+				if(buyController.getSun().isSelected()) {
+					operatingDays.add(1);
 				}
 				
 				int startHour = buyController.getFrom().getValue();
@@ -210,25 +234,25 @@ public class AddNewItemController extends Application {
 			Type type = Type.Play;
 			ArrayList<Integer> operatingDays = new ArrayList<Integer>();
 			if(playController.getMon().isSelected()) {
-				operatingDays.add(1);
-			}
-			if(playController.getTue().isSelected()) {
 				operatingDays.add(2);
 			}
-			if(playController.getWed().isSelected()) {
+			if(playController.getTue().isSelected()) {
 				operatingDays.add(3);
 			}
-			if(playController.getThur().isSelected()) {
+			if(playController.getWed().isSelected()) {
 				operatingDays.add(4);
 			}
-			if(playController.getFri().isSelected()) {
+			if(playController.getThur().isSelected()) {
 				operatingDays.add(5);
 			}
-			if(playController.getSat().isSelected()) {
+			if(playController.getFri().isSelected()) {
 				operatingDays.add(6);
 			}
-			if(playController.getSun().isSelected()) {
+			if(playController.getSat().isSelected()) {
 				operatingDays.add(7);
+			}
+			if(playController.getSun().isSelected()) {
+				operatingDays.add(1);
 			}
 			
 			int startHour = playController.getFrom().getValue();
@@ -261,59 +285,47 @@ public class AddNewItemController extends Application {
 			see.setItemNote(itemNote);
 			see.setTrafficMean(mean);
 		}
-
 		//save changes
 		database.store();
 			}
 	
-	@Override
-	public void start(Stage primaryStage) throws IOException {
-
-		Parent root = FXMLLoader.load(getClass().getResource("AddNewItemPage.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("WanderList");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		// cannot add the set method of button
-	}
-
-	@FXML
-	private void initialize() throws IOException {
 	
-		typeBox.setItems(typeList);
-		typeBox.setOnAction(event -> {
-			try {
-				onTypeBoxChanged();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-	}
-	
-	
-	
-	
-	
+	//save button
 	@FXML
 	public void saveButtonAction(ActionEvent event) throws IOException {
 		//check
 		String name = name_input.getText();
 		String type = typeBox.getValue();
 		
-		if(name.isEmpty()) {
+		if(name.isBlank()) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Please enter the schedule name.");
 			alert.showAndWait();
 			event.consume();
-		}
-		if(type == null) {
+			return;
+		} else if(type == null) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Please select a type.");
 			alert.showAndWait();
 			event.consume();
+			return;
 		}
-		if (!name.isEmpty() && type != null ) {
+		else if(isInvalidHour() == true) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Operating Hour is invalid");
+			alert.setContentText("Start time cannot be greater than end time.");
+			alert.showAndWait();
+			event.consume();
+			return;
+		}
+		else if(isInvalidPrice() == true) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Invalid price, please enter a number.");
+			alert.showAndWait();
+			event.consume();
+			return;
+		}
+		else {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText("Success");
 			alert.setContentText("Your schedule was saved.");
@@ -356,4 +368,42 @@ public class AddNewItemController extends Application {
 		stage.setScene(new Scene(root));
 	}
 
+	//check the validation of operating hour
+		public boolean isInvalidHour() {
+			int from, to;
+			if(typeBox.getValue().equals("Eat")) {
+				from = eatController.getFrom().getValue();
+				to = eatController.getTo().getValue();
+				if(from >= to) return true;
+			}
+			else if(typeBox.getValue().equals("Buy")) {
+				from = buyController.getFrom().getValue();
+				to = buyController.getTo().getValue();
+				if(from >= to) return true;
+				
+			} 
+			else if(typeBox.getValue().equals("Play")) {
+				from = playController.getFrom().getValue();
+				to = playController.getTo().getValue();
+				if(from >= to) return true;
+			}
+			else if(typeBox.getValue().equals("See")) {
+				 return false;
+			}
+			return false;
+		}
+		
+		public boolean isInvalidPrice() {
+			if (typeBox.getValue().equals("Play")) {
+				
+				String s = playController.getPrice().getText();
+				
+				if (!s.matches("[0-9.]+")) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		
 }
