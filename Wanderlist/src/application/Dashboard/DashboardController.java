@@ -51,6 +51,15 @@ public class DashboardController {
 
 	@FXML
 	private FlowPane flowPast;
+	
+	public void initialize() {
+		btnAdd.setOnMouseEntered(e -> {
+			btnAdd.setStyle("-fx-background-color: #ba4550;");
+        });
+		btnAdd.setOnMouseExited(e -> {
+			btnAdd.setStyle("-fx-background-color: #ec626f;");
+        });
+	}
 
 	// Load and Display all trips
 	public void loadPage(User user) {

@@ -16,19 +16,19 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="300.0" spacing="50.0" style="-fx-background-color: #FED700;">
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="300.0" spacing="50.0" style="-fx-background-color: #191824;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="210.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/pikachu_png_by_cmorigins_d56n5fg-fullview.png" />
+                  <Image url="@../images/logo.png" />
                </image>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </ImageView>
-            <Label alignment="CENTER" text="WanderList" textAlignment="CENTER">
+            <Label alignment="CENTER" text="WanderList" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="24.0" />
+                  <Font name="Arial Bold" size="40.0" />
                </font>
             </Label>
          </children>
@@ -69,7 +69,7 @@
                   </GridPane>
                </children>
             </HBox>
-            <Button fx:id="button_login" mnemonicParsing="false" onAction="#logIn" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #FED700;" text="Log In">
+            <Button fx:id="button_login" mnemonicParsing="false" onAction="#logIn" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ec626f;" text="Log In" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -81,7 +81,7 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="button_sign_up" graphicTextGap="0.0" mnemonicParsing="false" onAction="#switchToSignUpPage" prefHeight="35.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up here!" textFill="#0619f2" underline="true">
+                  <Button fx:id="button_sign_up" graphicTextGap="0.0" mnemonicParsing="false" onAction="#switchToSignUpPage" prefHeight="35.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up here!" textFill="#ec626f" underline="true">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>

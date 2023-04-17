@@ -27,7 +27,7 @@
                                     <Font name="Arial Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addAction" prefHeight="30.0" prefWidth="80.0" text="Add Trip">
+                              <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ec626f;" text="Add Trip" textFill="WHITE">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>
@@ -56,15 +56,15 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" style="-fx-background-color: #191824;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelGreet" text="Hi, UserName!">
+            <Label fx:id="labelGreet" text="Hi, UserName!" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleButtonLogout" prefHeight="30.0" prefWidth="80.0" text="Log Out">
+            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#handleButtonLogout" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ec626f;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Button>
