@@ -37,7 +37,6 @@ public class LoginController {
 	public void switchToSignUpPage(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("sign-up.fxml"));
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setTitle("Sign Up");
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
