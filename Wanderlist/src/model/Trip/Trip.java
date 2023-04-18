@@ -13,7 +13,6 @@ public class Trip implements Serializable {
 	private Date endDate;
 	private String country;
 	private String city;
-	private People people;
 	private String note;
 	private Wishlist wishlist;
 	private DayList days;
@@ -82,10 +81,6 @@ public class Trip implements Serializable {
 		this.city = city;
 	}
 
-	public People getPeople() {
-		return people;
-	}
-
 	public String getNote() {
 		return note;
 	}
@@ -135,19 +130,5 @@ public class Trip implements Serializable {
 
 		return num;
 	}
-
-	// add item to wishlist
-//	public void addItemToWishlist(Item.Type type, String itemName) {
-//		wishlist.addItem(type, itemName);
-//	}
-//
-//	public void addItemToWishlist(Item item) {
-//		wishlist.addItem(item);
-//	}
-//
-//	// delete item from wishlist
-//	public void removeItemFromWishlist(Item item) {
-//		wishlist.removeItemFromWishlist(item);
-//	}
 
 }
